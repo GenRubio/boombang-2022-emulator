@@ -1,0 +1,16 @@
+The logs file was created successfully.
+-----------------------------------------------------------------------------
+Date : 27/12/2021 19:42:49
+
+MySql.Data.MySqlClient.MySqlException
+Message : Unable to connect to any of the specified MySQL hosts.
+StackTrace :    en MySql.Data.MySqlClient.NativeDriver.Open()
+   en MySql.Data.MySqlClient.Driver.Open()
+   en MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   en MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   en MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   en MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   en MySql.Data.MySqlClient.MySqlConnection.Open()
+   en BurBian_ULTIMANTE.SqlManager.CreateClient() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\database\mysql\SqlManager.cs:línea 23
+   en BurBian_ULTIMANTE.SqlManager.GetClient() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\database\mysql\SqlManager.cs:línea 17
+   en Proyect_Base.app.DAO.PublicAreaDAO.getPublicAreas() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\DAO\PublicAreaDAO.cs:línea 20

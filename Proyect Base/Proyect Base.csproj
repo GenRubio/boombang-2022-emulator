@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{54E9417C-EE28-4A27-BBAA-32E4B68261AA}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Proyect_Base</RootNamespace>
+    <AssemblyName>Proyect Base</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.4.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\MySql.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="app\ApiControllers\ApiExempleController.cs" />
+    <Compile Include="app\Api\API.cs" />
+    <Compile Include="app\Collections\CollectionsController.cs" />
+    <Compile Include="app\Collections\PublicAreaCollection.cs" />
+    <Compile Include="app\Collections\SessionCollection.cs" />
+    <Compile Include="app\Connection\ClientMessage.cs" />
+    <Compile Include="app\Connection\Encryption.cs" />
+    <Compile Include="app\Connection\FlashSocket.cs" />
+    <Compile Include="app\Connection\ServerMessage.cs" />
+    <Compile Include="app\Connection\Session.cs" />
+    <Compile Include="app\DAO\AreaMapDAO.cs" />
+    <Compile Include="app\DAO\PublicAreaDAO.cs" />
+    <Compile Include="app\DAO\UserDAO.cs" />
+    <Compile Include="app\Handlers\AreaHandler.cs" />
+    <Compile Include="app\Handlers\BackpackHandler.cs" />
+    <Compile Include="app\Handlers\FlowerPowerHandler.cs" />
+    <Compile Include="app\Handlers\FriendsHandler.cs" />
+    <Compile Include="app\Handlers\HandlerController.cs" />
+    <Compile Include="app\Handlers\HandlerManager.cs" />
+    <Compile Include="app\Handlers\HouseHandler.cs" />
+    <Compile Include="app\Handlers\LoginHandler.cs" />
+    <Compile Include="app\Handlers\NavigationHandler.cs" />
+    <Compile Include="app\Handlers\PingHandler.cs" />
+    <Compile Include="app\Handlers\ShopHandler.cs" />
+    <Compile Include="app\Helpers\ConsoleHelper.cs" />
+    <Compile Include="app\Helpers\TimeHelper.cs" />
+    <Compile Include="app\Helpers\UserHelper.cs" />
+    <Compile Include="app\Middlewares\UserMiddleware.cs" />
+    <Compile Include="app\Models\ApiModelExemple.cs" />
+    <Compile Include="app\Models\Area.cs" />
+    <Compile Include="app\Models\AreaMap.cs" />
+    <Compile Include="app\Models\PreLocks.cs" />
+    <Compile Include="app\Models\PrivateArea.cs" />
+    <Compile Include="app\Models\PublicArea.cs" />
+    <Compile Include="app\Models\UltraLocks.cs" />
+    <Compile Include="app\Models\User.cs" />
+    <Compile Include="app\Pathfinding\A-Star\Node.cs" />
+    <Compile Include="app\Pathfinding\A-Star\NodeState.cs" />
+    <Compile Include="app\Pathfinding\A-Star\PathFinder.cs" />
+    <Compile Include="app\Pathfinding\A-Star\SearchParameters.cs" />
+    <Compile Include="app\Pathfinding\Formulas.cs" />
+    <Compile Include="app\Pathfinding\Posicion.cs" />
+    <Compile Include="app\Pathfinding\Trayectoria.cs" />
+    <Compile Include="app\Threads\PathfindingThread.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="database\mysql\SqlClient.cs" />
+    <Compile Include="database\mysql\SqlManager.cs" />
+    <Compile Include="database\sqlkata\SqlKata.cs" />
+    <Compile Include="EmbeddedAssembly.cs" />
+    <Compile Include="forms\App.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\App.Designer.cs">
+      <DependentUpon>App.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\AppInit.cs" />
+    <Compile Include="logs\Log.cs" />
+    <Compile Include="mails\mailtrap\Mailtrap.cs" />
+    <Compile Include="web_socket\SocketServer.cs" />
+    <Compile Include="web_socket\SocketController.cs" />
+    <Compile Include="web_socket\SocketData.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="app\Controllers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="forms\App.resx">
+      <DependentUpon>App.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="libs\MySql.Data.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="SqlKata">
+      <Version>2.3.7</Version>
+    </PackageReference>
+    <PackageReference Include="SqlKata.Execution">
+      <Version>2.3.7</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reviews.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

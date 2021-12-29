@@ -1,0 +1,28 @@
+C:\Users\Gen\source\repos\Proyect Base\Proyect Base\bin\Debug\Proyect Base.exe.config
+C:\Users\Gen\source\repos\Proyect Base\Proyect Base\bin\Debug\Proyect Base.exe
+C:\Users\Gen\source\repos\Proyect Base\Proyect Base\bin\Debug\Proyect Base.pdb
+C:\Users\Gen\source\repos\Proyect Base\Proyect Base\obj\Debug\Proyect Base.csprojAssemblyReference.cache
+C:\Users\Gen\source\repos\Proyect Base\Proyect Base\obj\Debug\Proyect Base.exe
+C:\Users\Gen\source\repos\Proyect Base\Proyect Base\obj\Debug\Proyect Base.pdb
+C:\Users\Gen\source\repos\Proyect Base\Proyect Base\obj\Debug\Proyect_Base.forms.App.resources
+C:\Users\Gen\source\repos\Proyect Base\Proyect Base\obj\Debug\Proyect Base.csproj.GenerateResource.cache
+C:\Users\Gen\source\repos\Proyect Base\Proyect Base\bin\Debug\Dapper.dll
+C:\Users\Gen\source\repos\Proyect Base\Proyect Base\bin\Debug\Humanizer.dll
+C:\Users\Gen\source\repos\Proyect Base\Proyect Base\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Gen\source\repos\Proyect Base\Proyect Base\bin\Debug\SqlKata.dll
+C:\Users\Gen\source\repos\Proyect Base\Proyect Base\bin\Debug\SqlKata.Execution.dll
+C:\Users\Gen\source\repos\Proyect Base\Proyect Base\obj\Debug\Proyect Base.csproj.CopyComplete
+C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\obj\Debug\Proyect Base.csprojAssemblyReference.cache
+C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\obj\Debug\Proyect_Base.forms.App.resources
+C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\obj\Debug\Proyect Base.csproj.GenerateResource.cache
+C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\obj\Debug\Proyect Base.exe
+C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\obj\Debug\Proyect Base.pdb
+C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\bin\Debug\Proyect Base.exe.config
+C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\bin\Debug\Proyect Base.exe
+C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\bin\Debug\Proyect Base.pdb
+C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\bin\Debug\Dapper.dll
+C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\bin\Debug\Humanizer.dll
+C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\bin\Debug\SqlKata.dll
+C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\bin\Debug\SqlKata.Execution.dll
+C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\obj\Debug\Proyect Base.csproj.CopyComplete
