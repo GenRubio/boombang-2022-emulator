@@ -4,6 +4,7 @@ using Proyect_Base.app.Middlewares;
 using Proyect_Base.app.Models;
 using Proyect_Base.app.Pathfinding;
 using Proyect_Base.forms;
+using Proyect_Base.logs;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -17,10 +18,35 @@ namespace Proyect_Base.app.Handlers
     {
         public static void init()
         {
-            HandlerManager.RegisterHandler(135, new ProcessHandler(MirarZ), true);
-            HandlerManager.RegisterHandler(182, new ProcessHandler(Caminar), true);
+            HandlerManager.RegisterHandler(135, new ProcessHandler(look), true);
+            HandlerManager.RegisterHandler(182, new ProcessHandler(walk), true);
+            HandlerManager.RegisterHandler(128124, new ProcessHandler(getOutArea), true);
+            HandlerManager.RegisterHandler(214, new ProcessHandler(gameRankingPanel));
         }
-        private static void MirarZ(Session Session, ClientMessage Message)
+        private static void gameRankingPanel(Session Session, ClientMessage Message)
+        {
+            try
+            {
+                int gameId = int.Parse(Message.Parameters[0, 0]);
+                if (UserMiddleware.userInArea(Session) && Session.User.Area is GameArea)
+                {
+                    GameArea gameArea = (GameArea)Session.User.Area;
+                    gameArea.loadRankingPanelHandler(Session, gameId);
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.error(ex);
+            }
+        }
+        private static void getOutArea(Session Session, ClientMessage Message)
+        {
+            if (UserMiddleware.userInArea(Session))
+            {
+                Session.User.Area.removeUserByCompassHandler(Session);
+            }
+        }
+        private static void look(Session Session, ClientMessage Message)
         {
             if (UserMiddleware.userInArea(Session))
             {
@@ -36,7 +62,7 @@ namespace Proyect_Base.app.Handlers
                 }
             }
         }
-        private static void Caminar(Session Session, ClientMessage Message)
+        private static void walk(Session Session, ClientMessage Message)
         {
             if (UserMiddleware.userInArea(Session))
             {

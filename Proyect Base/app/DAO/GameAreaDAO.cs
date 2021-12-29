@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace Proyect_Base.app.DAO
 {
-    class PublicAreaDAO
+    class GameAreaDAO
     {
-        public static List<PublicArea> getPublicAreas()
+        public static List<GameArea> getGameAreas()
         {
-            List<PublicArea> publicAreas = new List<PublicArea>();
+            List<GameArea> gameAreas = new List<GameArea>();
             try
             {
                 SqlClient client = SqlManager.GetClient();
-                client.SetParameter("category", 1);
+                client.SetParameter("category", 3);
                 client.SetParameter("Visible", 1);
                 string query = "SELECT * FROM escenarios_publicos " +
                     "WHERE categoria = @category " +
@@ -28,15 +28,15 @@ namespace Proyect_Base.app.DAO
                 {
                     if (row != null)
                     {
-                        publicAreas.Add(new PublicArea(row));
+                        gameAreas.Add(new GameArea(row));
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.error(ex);
             }
-            return publicAreas;
+            return gameAreas;
         }
     }
 }

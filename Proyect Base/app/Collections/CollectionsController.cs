@@ -11,6 +11,7 @@ namespace Proyect_Base.app.Collections
         public static void initCollections()
         {
             PublicAreaCollection.loadPublicAreas();
+            GameAreaCollection.loadGameAreas();
         }
     }
 }

@@ -53,6 +53,7 @@
     <Compile Include="app\ApiControllers\ApiExempleController.cs" />
     <Compile Include="app\Api\API.cs" />
     <Compile Include="app\Collections\CollectionsController.cs" />
+    <Compile Include="app\Collections\GameAreaCollection.cs" />
     <Compile Include="app\Collections\PublicAreaCollection.cs" />
     <Compile Include="app\Collections\SessionCollection.cs" />
     <Compile Include="app\Connection\ClientMessage.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="app\Connection\ServerMessage.cs" />
     <Compile Include="app\Connection\Session.cs" />
     <Compile Include="app\DAO\AreaMapDAO.cs" />
+    <Compile Include="app\DAO\GameAreaDAO.cs" />
     <Compile Include="app\DAO\PublicAreaDAO.cs" />
     <Compile Include="app\DAO\UserDAO.cs" />
     <Compile Include="app\Handlers\AreaHandler.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="app\Models\ApiModelExemple.cs" />
     <Compile Include="app\Models\Area.cs" />
     <Compile Include="app\Models\AreaMap.cs" />
+    <Compile Include="app\Models\GameArea.cs" />
     <Compile Include="app\Models\PreLocks.cs" />
     <Compile Include="app\Models\PrivateArea.cs" />
     <Compile Include="app\Models\PublicArea.cs" />

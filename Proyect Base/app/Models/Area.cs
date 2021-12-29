@@ -67,14 +67,32 @@ namespace Proyect_Base.app.Models
             }
             return key;
         }
-        public void removeUser(Session Session)
+        public void removeUserHandler(Session Session)
+        {
+            if (removeUser(Session))
+            {
+                Session.SendData(new ServerMessage(new byte[] { 153 }));
+            }
+        }
+        public void removeUserByCompassHandler(Session Session)
+        {
+            if (removeUser(Session))
+            {
+                Session.SendData(new ServerMessage(new byte[] { 128, 124 }));
+            }
+        }
+        private bool removeUser(Session Session)
         {
             if (this.users.ContainsKey(Session.User.areaKey))
             {
                 this.users.TryRemove(Session.User.areaKey, out Session);
+                ServerMessage server = new ServerMessage(new byte[] { 128, 123 }, new object[] { Session.User.areaKey });
+                SendData(server);
                 Session.User.Area = null;
                 Session.User.areaKey = -1;
+                return true;
             }
+            return false;
         }
         public Session getSession(int Key)
         {

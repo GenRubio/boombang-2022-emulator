@@ -14,3 +14,37 @@ StackTrace :    en MySql.Data.MySqlClient.NativeDriver.Open()
    en BurBian_ULTIMANTE.SqlManager.CreateClient() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\database\mysql\SqlManager.cs:línea 23
    en BurBian_ULTIMANTE.SqlManager.GetClient() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\database\mysql\SqlManager.cs:línea 17
    en Proyect_Base.app.DAO.PublicAreaDAO.getPublicAreas() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\DAO\PublicAreaDAO.cs:línea 20
+-----------------------------------------------------------------------------
+Date : 29/12/2021 20:45:50
+
+System.ObjectDisposedException
+Message : No se puede obtener acceso al objeto desechado.
+Nombre del objeto: 'System.Net.Sockets.Socket'.
+StackTrace :    en System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult, SocketError& errorCode)
+   en System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   en Proyect_Base.app.Connection.Session.RecivedInformation(IAsyncResult Result) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Connection\Session.cs:línea 56
+-----------------------------------------------------------------------------
+Date : 29/12/2021 20:45:51
+
+System.ObjectDisposedException
+Message : No se puede obtener acceso al objeto desechado.
+Nombre del objeto: 'System.Net.Sockets.Socket'.
+StackTrace :    en System.Net.Sockets.Socket.Shutdown(SocketShutdown how)
+   en Proyect_Base.app.Connection.Session.closeConnection() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Connection\Session.cs:línea 139
+-----------------------------------------------------------------------------
+Date : 29/12/2021 20:47:44
+
+System.ObjectDisposedException
+Message : No se puede obtener acceso al objeto desechado.
+Nombre del objeto: 'System.Net.Sockets.Socket'.
+StackTrace :    en System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult, SocketError& errorCode)
+   en System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   en Proyect_Base.app.Connection.Session.RecivedInformation(IAsyncResult Result) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Connection\Session.cs:línea 56
+-----------------------------------------------------------------------------
+Date : 29/12/2021 20:47:44
+
+System.ObjectDisposedException
+Message : No se puede obtener acceso al objeto desechado.
+Nombre del objeto: 'System.Net.Sockets.Socket'.
+StackTrace :    en System.Net.Sockets.Socket.Shutdown(SocketShutdown how)
+   en Proyect_Base.app.Connection.Session.closeConnection() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Connection\Session.cs:línea 139

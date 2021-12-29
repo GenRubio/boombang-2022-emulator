@@ -108,6 +108,8 @@ namespace Proyect_Base.forms
 
             string output = DateTime.Now.ToString("HH:mm:ss") + " -> " + text;
             console.AppendText(Environment.NewLine + output);
+            console.SelectionStart = console.Text.Length;
+            console.ScrollToCaret();
         }
 
         public void WriteLine(string text, string status)
