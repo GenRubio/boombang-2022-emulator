@@ -34,10 +34,7 @@ namespace Proyect_Base.app.Models
             this.tiempo_aparicion = (int)row["tiempo"];
             this.tiempo_desaparicion = 15;
         }
-        public ItemArea Clone()
-        {
-            return (ItemArea)this.MemberwiseClone();
-        }
+        //MODEL SETTERS
         public void setAreaPosition(Point position)
         {
             this.areaPosition = position;
@@ -46,6 +43,7 @@ namespace Proyect_Base.app.Models
         {
             this.keyInArea = key;
         }
+        //MODEL GETTERS
         public bool userOnItem(Session Session)
         {
             if (Session.User.Posicion.x == areaPosition.X && Session.User.Posicion.y == areaPosition.Y)
@@ -53,6 +51,10 @@ namespace Proyect_Base.app.Models
                 return true;
             }
             return false;
+        }
+        public ItemArea Clone()
+        {
+            return (ItemArea)this.MemberwiseClone();
         }
     }
 }

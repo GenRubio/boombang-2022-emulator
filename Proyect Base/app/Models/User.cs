@@ -139,19 +139,7 @@ namespace Proyect_Base.app.Models
             this.Bloqueos = new PreLocks();
             this.Ultra_Bloqueos = new UltraLocks();
         }
-        public int ObtenerUppertLevel()
-        {
-            if (rings_ganados >= 1 && rings_ganados <= 9) return 1;
-            if (rings_ganados >= 10 && rings_ganados <= 24) return 2;
-            if (rings_ganados >= 25 && rings_ganados <= 49) return 3;
-            if (rings_ganados >= 50 && rings_ganados <= 99) return 4;
-            if (rings_ganados >= 100 && rings_ganados <= 199) return 5;
-            if (rings_ganados >= 200 && rings_ganados <= 499) return 6;
-            if (rings_ganados >= 500 && rings_ganados <= 999) return 7;
-            if (rings_ganados >= 1000 && rings_ganados <= 1999) return 8;
-            if (rings_ganados >= 2000) return 9;
-            return 0;
-        }
+        //MODEL SETTERS
         public void CargarDatosNinja()
         {
             if (puntos_ninja >= 0 && puntos_ninja <= 199)
@@ -263,6 +251,64 @@ namespace Proyect_Base.app.Models
                 Cocos_FinishLevel = 300;
             }
         }
+        //MODEL GETTERS
+        public int ObtenerUppertLevel()
+        {
+            if (rings_ganados >= 1 && rings_ganados <= 9) return 1;
+            if (rings_ganados >= 10 && rings_ganados <= 24) return 2;
+            if (rings_ganados >= 25 && rings_ganados <= 49) return 3;
+            if (rings_ganados >= 50 && rings_ganados <= 99) return 4;
+            if (rings_ganados >= 100 && rings_ganados <= 199) return 5;
+            if (rings_ganados >= 200 && rings_ganados <= 499) return 6;
+            if (rings_ganados >= 500 && rings_ganados <= 999) return 7;
+            if (rings_ganados >= 1000 && rings_ganados <= 1999) return 8;
+            if (rings_ganados >= 2000) return 9;
+            return 0;
+        }
+        public void getItemAreaReward(Session Session, ItemArea itemArea)
+        {
+            switch (itemArea.modelo)
+            {
+                case 1:
+                    int goldCoins = 1000;
+                    this.Area.sendNotificationHandler(this.name + " " +
+                        "ha atrapado un cofre y obtiene: " + goldCoins + " créditos.");
+                    addGoldCoins(Session, goldCoins);
+                    break;
+                case 2:
+                    int silverCoins = 250;
+                    this.Area.sendNotificationHandler(this.name + " " +
+                        "ha atrapado un cofre y obtiene: " + silverCoins + " créditos de plata.");
+                    addSilverCoins(Session, silverCoins);
+                    break;
+            }
+        }
+        //FUNCTIONS
+        public void addGoldCoins(Session Session, int coins)
+        {
+            this.oro += coins;
+            addGoldCoinsHandler(Session, coins);
+            new Thread(() => UserDAO.addGoldCoins(this, coins)).Start();
+        }
+        public void removeGoldCoins(Session Session, int coins)
+        {
+            this.oro -= coins;
+            removeGoldCoinsHandler(Session, coins);
+            new Thread(() => UserDAO.removeGoldCoins(this, coins)).Start();
+        }
+        public void addSilverCoins(Session Session, int coins)
+        {
+            this.plata += coins;
+            addSilverCoinsHandler(Session, coins);
+            new Thread(() => UserDAO.addSilverCoins(this, coins)).Start();
+        }
+        public void removeSilverCoins(Session Session, int coins)
+        {
+            this.plata -= coins;
+            removeSilverCoinsHandler(Session, coins);
+            new Thread(() => UserDAO.removeSilverCoins(this, coins)).Start();
+        }
+        //HANDLERS
         public void initLoginHandler(Session Session)
         {
             ServerMessage server = new ServerMessage(new byte[] { 120, 121 });
@@ -299,48 +345,6 @@ namespace Proyect_Base.app.Models
             server.AppendParameter(0);
             server.AppendParameter(0);//cambioNombre(Session)
             Session.SendData(server);
-        }
-        public void getItemAreaReward(Session Session, ItemArea itemArea)
-        {
-            switch (itemArea.modelo)
-            {
-                case 1:
-                    int goldCoins = 1000;
-                    this.Area.sendNotificationHandler(this.name + " " +
-                        "ha atrapado un cofre y obtiene: " + goldCoins + " créditos.");
-                    addGoldCoins(Session, goldCoins);
-                    break;
-                case 2:
-                    int silverCoins = 250;
-                    this.Area.sendNotificationHandler(this.name + " " +
-                        "ha atrapado un cofre y obtiene: " + silverCoins + " créditos de plata.");
-                    addSilverCoins(Session, silverCoins);
-                    break;
-            }
-        }
-        public void addGoldCoins(Session Session, int coins)
-        {
-            this.oro += coins;
-            addGoldCoinsHandler(Session, coins);
-            new Thread(() => UserDAO.addGoldCoins(this, coins)).Start();
-        }
-        public void removeGoldCoins(Session Session, int coins)
-        {
-            this.oro -= coins;
-            removeGoldCoinsHandler(Session, coins);
-            new Thread(() => UserDAO.removeGoldCoins(this, coins)).Start();
-        }
-        public void addSilverCoins(Session Session, int coins)
-        {
-            this.plata += coins;
-            addSilverCoinsHandler(Session, coins);
-            new Thread(() => UserDAO.addSilverCoins(this, coins)).Start();
-        }
-        public void removeSilverCoins(Session Session, int coins)
-        {
-            this.plata -= coins;
-            removeSilverCoinsHandler(Session, coins);
-            new Thread(() => UserDAO.removeSilverCoins(this, coins)).Start();
         }
         private void addGoldCoinsHandler(Session Session, int coins)
         {

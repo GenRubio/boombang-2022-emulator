@@ -37,6 +37,7 @@ namespace Proyect_Base.app.Models
             this.MapSizeY = this.coordinates[0].Length;
             setNewBoolMap();
         }
+        //MODEL SETTERS
         private void setNewBoolMap()
         {
             for (int Y = 0; Y < this.coordinates.Length - 1; Y++)
@@ -46,10 +47,6 @@ namespace Proyect_Base.app.Models
                     this.BoolMap[Y, X] = (this.coordinates[Y][X] == '0') ? true : false;
                 }
             }
-        }
-        private string [] setCoordinates(string map)
-        {
-            return map.Split(Convert.ToChar("\n"));
         }
         private void setDimensionMap(int mapId)
         {
@@ -64,6 +61,11 @@ namespace Proyect_Base.app.Models
                 this.DIMENSION_Y = 40 * this.MATRIX_SCALE;
             }
         }
+        private string [] setCoordinates(string map)
+        {
+            return map.Split(Convert.ToChar("\n"));
+        }
+        //MODEL GETTERS
         public int GetSizeX()
         {
             return MapSizeX;
@@ -135,6 +137,7 @@ namespace Proyect_Base.app.Models
                 return false;
             }
         }
+        //FUNCTIONS
         public Posicion GeneratePosition()
         {
             int PosX = GetRandomPlace().X;

@@ -19,10 +19,10 @@ namespace Proyect_Base.app.Models
     public class PublicArea : Area
     {
         public int minUsersToSendItemTresureChestGold { get; set; }
-        public int timeToSendItemTresureChestGold { get; set; } //In seconds
+        public int timeToSendItemTresureChestGold { get; set; }
         public int timeToSendNextItemTresureChestGold { get; set; }
         public int minUsersToSendItemTresureChestSilver { get; set; }
-        public int timeToSendItemTresureChestSilver { get; set; } //In seconds
+        public int timeToSendItemTresureChestSilver { get; set; }
         public int timeToSendNextItemTresureChestSilver { get; set; }
         public Dictionary<int, ItemArea> items { get; set; }
         public PublicArea(DataRow row) : 
@@ -32,18 +32,39 @@ namespace Proyect_Base.app.Models
             setTresureChestSilver();
             this.items = new Dictionary<int, ItemArea>();
         }
+        //MODEL SETTERS
         private void setTresureChestGold()
         {
             this.minUsersToSendItemTresureChestGold = 1;
-            this.timeToSendItemTresureChestGold = 10;
+            this.timeToSendItemTresureChestGold = 10; //In seconds
             this.timeToSendNextItemTresureChestGold = this.timeToSendItemTresureChestGold;
         }
         private void setTresureChestSilver()
         {
             this.minUsersToSendItemTresureChestSilver = 1;
-            this.timeToSendItemTresureChestSilver = 15;
+            this.timeToSendItemTresureChestSilver = 15; //In seconds
             this.timeToSendNextItemTresureChestSilver = this.timeToSendItemTresureChestSilver;
         }
+        //MODEL GETTERS
+        private Point getLocationForItem()
+        {
+            Point itemLocation = this.MapaBytes.GetRandomPlace();
+            while (this.getSession(itemLocation.X, itemLocation.Y) != null)
+            {
+                itemLocation = this.MapaBytes.GetRandomPlace();
+            }
+            return itemLocation;
+        }
+        private int getKeyForItem()
+        {
+            int key = new Random().Next(1, 50000);
+            while (this.items.ContainsKey(key))
+            {
+                key = new Random().Next(1, 50000);
+            }
+            return key;
+        }
+        //FUNCTIONS
         public void addItem(ItemArea Item)
         {
             if (Item != null)
@@ -83,19 +104,6 @@ namespace Proyect_Base.app.Models
         {
             SendData(sendItemHandler(Item.keyInArea, Item));
         }
-        private ServerMessage sendItemHandler(int itemKey, ItemArea Item)
-        {
-            ServerMessage server = new ServerMessage(new byte[] { 200, 120 });
-            server.AppendParameter(itemKey);
-            server.AppendParameter(Item.id);
-            server.AppendParameter(Item.areaPosition.X);
-            server.AppendParameter(Item.areaPosition.Y);
-            server.AppendParameter(Item.modelo);
-            server.AppendParameter(Item.tipo_caida);
-            server.AppendParameter(Item.tipo_salida);//TipoApertura
-            server.AppendParameter(Item.tiempo_aparicion);//TiempoAparicion
-            return server;
-        }
         public bool removeItem(ItemArea Item)
         {
             if (itemInArea(Item.keyInArea))
@@ -126,13 +134,6 @@ namespace Proyect_Base.app.Models
                 Log.error(ex);
             }
         }
-        private void removeItemHandler(int itemKey)
-        {
-            ServerMessage server = new ServerMessage(new byte[] { 200, 123 });
-            server.AppendParameter(1);
-            server.AppendParameter(itemKey);
-            SendData(server);
-        }
         private bool itemInArea(int itemKey)
         {
             if (items.ContainsKey(itemKey))
@@ -140,24 +141,6 @@ namespace Proyect_Base.app.Models
                 return true;
             }
             return false;
-        }
-        private Point getLocationForItem()
-        {
-            Point itemLocation = this.MapaBytes.GetRandomPlace();
-            while (this.getSession(itemLocation.X, itemLocation.Y) != null)
-            {
-                itemLocation = this.MapaBytes.GetRandomPlace();
-            }
-            return itemLocation;
-        }
-        private int getKeyForItem()
-        {
-            int key = new Random().Next(1, 50000);
-            while (this.items.ContainsKey(key))
-            {
-                key = new Random().Next(1, 50000);
-            }
-            return key;
         }
         public void addUser(Session Session)
         {
@@ -169,6 +152,27 @@ namespace Proyect_Base.app.Models
             Session.User.Ultra_Bloqueos = new UltraLocks();
             Session.User.Movimientos = new Trayectoria(Session);
             Session.User.Posicion = new Posicion(this.MapaBytes.posX, this.MapaBytes.posY, 4);
+        }
+        //HANDLERS
+        private void removeItemHandler(int itemKey)
+        {
+            ServerMessage server = new ServerMessage(new byte[] { 200, 123 });
+            server.AppendParameter(1);
+            server.AppendParameter(itemKey);
+            SendData(server);
+        }
+        private ServerMessage sendItemHandler(int itemKey, ItemArea Item)
+        {
+            ServerMessage server = new ServerMessage(new byte[] { 200, 120 });
+            server.AppendParameter(itemKey);
+            server.AppendParameter(Item.id);
+            server.AppendParameter(Item.areaPosition.X);
+            server.AppendParameter(Item.areaPosition.Y);
+            server.AppendParameter(Item.modelo);
+            server.AppendParameter(Item.tipo_caida);
+            server.AppendParameter(Item.tipo_salida);//TipoApertura
+            server.AppendParameter(Item.tiempo_aparicion);//TiempoAparicion
+            return server;
         }
         public void loadAreaParametersHandler(Session Session)
         {

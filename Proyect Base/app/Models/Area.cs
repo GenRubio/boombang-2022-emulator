@@ -42,10 +42,21 @@ namespace Proyect_Base.app.Models
             this.users = new ConcurrentDictionary<int, Session>();
             this.MapaBytes = setAreaMap();
         }
-        public void sendNotificationHandler(string message)
+        //FUNCTIONS
+        private bool removeUser(Session Session)
         {
-            SendData(new ServerMessage(new byte[] { 186 }, new object[] { 0, message, 3 }));
+            if (this.users.ContainsKey(Session.User.areaKey))
+            {
+                this.users.TryRemove(Session.User.areaKey, out Session);
+                ServerMessage server = new ServerMessage(new byte[] { 128, 123 }, new object[] { Session.User.areaKey });
+                SendData(server);
+                Session.User.Area = null;
+                Session.User.areaKey = -1;
+                return true;
+            }
+            return false;
         }
+        //MODEL SETTERS
         private AreaMap setAreaMap()
         {
             if (this.category == 1 || this.category == 3)
@@ -62,6 +73,7 @@ namespace Proyect_Base.app.Models
             }
             return null;
         }
+        //MODEL GETTERS
         public int getAreaKeyForUser()
         {
             int key = 1;
@@ -70,33 +82,6 @@ namespace Proyect_Base.app.Models
                 key++;
             }
             return key;
-        }
-        public void removeUserHandler(Session Session)
-        {
-            if (removeUser(Session))
-            {
-                Session.SendData(new ServerMessage(new byte[] { 153 }));
-            }
-        }
-        public void removeUserByCompassHandler(Session Session)
-        {
-            if (removeUser(Session))
-            {
-                Session.SendData(new ServerMessage(new byte[] { 128, 124 }));
-            }
-        }
-        private bool removeUser(Session Session)
-        {
-            if (this.users.ContainsKey(Session.User.areaKey))
-            {
-                this.users.TryRemove(Session.User.areaKey, out Session);
-                ServerMessage server = new ServerMessage(new byte[] { 128, 123 }, new object[] { Session.User.areaKey });
-                SendData(server);
-                Session.User.Area = null;
-                Session.User.areaKey = -1;
-                return true;
-            }
-            return false;
         }
         public Session getSession(int Key)
         {
@@ -116,12 +101,6 @@ namespace Proyect_Base.app.Models
                 }
             }
             return null;
-        }
-        public void loadUserHandler(Session Session)
-        {
-            ServerMessage server = new ServerMessage(new byte[] { 128, 122 });
-            getUserDataPackage(Session, server);
-            Session.SendData(server);
         }
         private ServerMessage getUserDataPackage(Session Session, ServerMessage server)
         {
@@ -154,6 +133,31 @@ namespace Proyect_Base.app.Models
             server.AppendParameter(Session.User.id);
 
             return server;
+        }
+        //HANDLERS
+        public void removeUserByCompassHandler(Session Session)
+        {
+            if (removeUser(Session))
+            {
+                Session.SendData(new ServerMessage(new byte[] { 128, 124 }));
+            }
+        }
+        public void sendNotificationHandler(string message)
+        {
+            SendData(new ServerMessage(new byte[] { 186 }, new object[] { 0, message, 3 }));
+        }
+        public void removeUserHandler(Session Session)
+        {
+            if (removeUser(Session))
+            {
+                Session.SendData(new ServerMessage(new byte[] { 153 }));
+            }
+        }
+        public void loadUserHandler(Session Session)
+        {
+            ServerMessage server = new ServerMessage(new byte[] { 128, 122 });
+            getUserDataPackage(Session, server);
+            Session.SendData(server);
         }
         public ServerMessage loadUsersInAreaHandler(ServerMessage server)
         {

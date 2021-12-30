@@ -15,6 +15,7 @@ namespace Proyect_Base.app.Models
         {
 
         }
+        //HANDLERS
         public void loadRankingPanelHandler(Session Session, int gameId)
         {
             ServerMessage server = new ServerMessage(new byte[] { 214 });
