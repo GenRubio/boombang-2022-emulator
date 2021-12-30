@@ -42,6 +42,10 @@ namespace Proyect_Base.app.Models
             this.users = new ConcurrentDictionary<int, Session>();
             this.MapaBytes = setAreaMap();
         }
+        public void sendNotificationHandler(string message)
+        {
+            SendData(new ServerMessage(new byte[] { 186 }, new object[] { 0, message, 3 }));
+        }
         private AreaMap setAreaMap()
         {
             if (this.category == 1 || this.category == 3)

@@ -29,12 +29,14 @@ namespace Proyect_Base.app.Handlers
                     PublicArea publicArea = (PublicArea)Session.User.Area;
                     publicArea.loadAreaObjectsHandler(Session);
                     publicArea.loadAreaParametersHandler(Session);
+                    publicArea.loadItems(Session);
                 }
                 else if(Session.User.Area is GameArea)
                 {
                     GameArea gameArea = (GameArea)Session.User.Area;
                     gameArea.loadAreaObjectsHandler(Session);
                     gameArea.loadAreaParametersHandler(Session);
+                    gameArea.loadItems(Session);
                 }
             }
         }

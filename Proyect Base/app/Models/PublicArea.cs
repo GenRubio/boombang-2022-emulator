@@ -49,10 +49,15 @@ namespace Proyect_Base.app.Models
             if (Item != null)
             {
                 int itemKey = getKeyForItem();
-                this.items.Add(itemKey, Item);
-                resetTimeNextItem(Item.modelo);
-                sendItemHandler(itemKey, Item, getLocationForItem());
-                new Thread(() => removeItemByTime(itemKey, Item)).Start();
+                ItemArea newItemArea = Item.Clone();
+                newItemArea.setAreaPosition(getLocationForItem());
+                newItemArea.setKeyInArea(itemKey);
+                this.items.Add(itemKey, newItemArea);
+
+                resetTimeNextItem(newItemArea.modelo);
+                sendItem(newItemArea);
+
+                new Thread(() => removeItemByTime(newItemArea)).Start();
             }
         }
         private void resetTimeNextItem(int itemModel)
@@ -67,33 +72,53 @@ namespace Proyect_Base.app.Models
                     break;
             }
         }
-        private void sendItemHandler(int itemKey, ItemArea Item, Point Position)
+        public void loadItems(Session Session)
+        {
+            foreach(ItemArea itemArea in this.items.Values.ToList())
+            {
+                Session.SendData(sendItemHandler(itemArea.keyInArea, itemArea));
+            }
+        }
+        private void sendItem(ItemArea Item)
+        {
+            SendData(sendItemHandler(Item.keyInArea, Item));
+        }
+        private ServerMessage sendItemHandler(int itemKey, ItemArea Item)
         {
             ServerMessage server = new ServerMessage(new byte[] { 200, 120 });
             server.AppendParameter(itemKey);
             server.AppendParameter(Item.id);
-            server.AppendParameter(Position.X);
-            server.AppendParameter(Position.Y);
+            server.AppendParameter(Item.areaPosition.X);
+            server.AppendParameter(Item.areaPosition.Y);
             server.AppendParameter(Item.modelo);
             server.AppendParameter(Item.tipo_caida);
             server.AppendParameter(Item.tipo_salida);//TipoApertura
             server.AppendParameter(Item.tiempo_aparicion);//TiempoAparicion
-            SendData(server);
+            return server;
         }
-        private void removeItemByTime(int itemKey, ItemArea Item)
+        public bool removeItem(ItemArea Item)
+        {
+            if (itemInArea(Item.keyInArea))
+            {
+                this.items.Remove(Item.keyInArea);
+                removeItemHandler(Item.keyInArea);
+                return true;
+            }
+            return false;
+        }
+        private void removeItemByTime(ItemArea Item)
         {
             try
             {
-                int timeToRemoveItem = Item.tiempo_desaparicion;
-                while (timeToRemoveItem > 0 && itemInArea(itemKey))
+                while (Item.tiempo_desaparicion > 0 && itemInArea(Item.keyInArea))
                 {
-                    timeToRemoveItem--;
+                    Item.tiempo_desaparicion--;
                     Thread.Sleep(new TimeSpan(0, 0, 1));
                 }
-                if (itemInArea(itemKey))
+                if (itemInArea(Item.keyInArea))
                 {
-                    this.items.Remove(itemKey);
-                    removeItemHandler(itemKey);
+                    this.items.Remove(Item.keyInArea);
+                    removeItemHandler(Item.keyInArea);
                 }
             }
             catch (Exception ex)

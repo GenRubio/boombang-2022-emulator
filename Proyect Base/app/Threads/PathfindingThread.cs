@@ -39,6 +39,7 @@ namespace Proyect_Base.app.Threads
                                 {
                                     setNextPositionUser(Session, NewPoint);
                                     Session.User.Area.userWalkHandler(Session);
+                                    new Thread(() => checkUserOnItemArea(Session)).Start();
                                 }
                                 else
                                 {
@@ -53,6 +54,41 @@ namespace Proyect_Base.app.Threads
                     Log.error(ex);
                 }
                 Thread.Sleep(1);
+            }
+        }
+        private static void checkUserOnItemArea(Session Session)
+        {
+            if (Session.User.Area is PublicArea)
+            {
+                checkUserOnItemPublicArea(Session);
+            }
+            else if (Session.User.Area is GameArea)
+            {
+                checkUserOnItemGameArea(Session);
+            }
+        }
+        private static void checkUserOnItemGameArea(Session Session)
+        {
+            GameArea gameArea = (GameArea)Session.User.Area;
+            foreach (ItemArea itemArea in gameArea.items.Values.ToList())
+            {
+                if (itemArea.userOnItem(Session) && gameArea.removeItem(itemArea))
+                {
+                    Session.User.getItemAreaReward(Session, itemArea);
+                    break;
+                }
+            }
+        }
+        private static void checkUserOnItemPublicArea(Session Session)
+        {
+            PublicArea publicArea = (PublicArea)Session.User.Area;
+            foreach (ItemArea itemArea in publicArea.items.Values.ToList())
+            {
+                if (itemArea.userOnItem(Session) && publicArea.removeItem(itemArea))
+                {
+                    Session.User.getItemAreaReward(Session, itemArea);
+                    break;
+                }
             }
         }
         private static bool validateNextMoviment(Session Session, Posicion NewPoint)

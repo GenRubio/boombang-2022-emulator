@@ -1,4 +1,5 @@
 ﻿using Proyect_Base.app.Connection;
+using Proyect_Base.app.DAO;
 using Proyect_Base.app.Pathfinding;
 using Proyect_Base.app.Pathfinding.A_Star;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Proyect_Base.app.Models
@@ -297,6 +299,64 @@ namespace Proyect_Base.app.Models
             server.AppendParameter(0);
             server.AppendParameter(0);//cambioNombre(Session)
             Session.SendData(server);
+        }
+        public void getItemAreaReward(Session Session, ItemArea itemArea)
+        {
+            switch (itemArea.modelo)
+            {
+                case 1:
+                    int goldCoins = 1000;
+                    this.Area.sendNotificationHandler(this.name + " " +
+                        "ha atrapado un cofre y obtiene: " + goldCoins + " créditos.");
+                    addGoldCoins(Session, goldCoins);
+                    break;
+                case 2:
+                    int silverCoins = 250;
+                    this.Area.sendNotificationHandler(this.name + " " +
+                        "ha atrapado un cofre y obtiene: " + silverCoins + " créditos de plata.");
+                    addSilverCoins(Session, silverCoins);
+                    break;
+            }
+        }
+        public void addGoldCoins(Session Session, int coins)
+        {
+            this.oro += coins;
+            addGoldCoinsHandler(Session, coins);
+            new Thread(() => UserDAO.addGoldCoins(this, coins)).Start();
+        }
+        public void removeGoldCoins(Session Session, int coins)
+        {
+            this.oro -= coins;
+            removeGoldCoinsHandler(Session, coins);
+            new Thread(() => UserDAO.removeGoldCoins(this, coins)).Start();
+        }
+        public void addSilverCoins(Session Session, int coins)
+        {
+            this.plata += coins;
+            addSilverCoinsHandler(Session, coins);
+            new Thread(() => UserDAO.addSilverCoins(this, coins)).Start();
+        }
+        public void removeSilverCoins(Session Session, int coins)
+        {
+            this.plata -= coins;
+            removeSilverCoinsHandler(Session, coins);
+            new Thread(() => UserDAO.removeSilverCoins(this, coins)).Start();
+        }
+        private void addGoldCoinsHandler(Session Session, int coins)
+        {
+            Session.SendData(new ServerMessage(new byte[] { 162 }, new object[] { coins }));
+        }
+        private void removeGoldCoinsHandler(Session Session, int coins)
+        {
+            Session.SendData(new ServerMessage(new byte[] { 161 }, new object[] { coins }));
+        }
+        private void addSilverCoinsHandler(Session Session, int coins)
+        {
+            Session.SendData(new ServerMessage(new byte[] { 166 }, new object[] { coins }));
+        }
+        private void removeSilverCoinsHandler(Session Session, int coins)
+        {
+            Session.SendData(new ServerMessage(new byte[] { 168 }, new object[] { coins }));
         }
     }
 }
