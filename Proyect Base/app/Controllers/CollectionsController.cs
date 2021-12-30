@@ -10,8 +10,9 @@ namespace Proyect_Base.app.Collections
     {
         public static void initCollections()
         {
-            PublicAreaCollection.loadPublicAreas();
-            GameAreaCollection.loadGameAreas();
+            PublicAreaCollection.init();
+            GameAreaCollection.init();
+            ItemAreaCollection.init();
         }
     }
 }

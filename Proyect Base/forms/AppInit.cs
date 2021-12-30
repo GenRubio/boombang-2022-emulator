@@ -1,5 +1,6 @@
 ﻿using Proyect_Base.app.Collections;
 using Proyect_Base.app.Connection;
+using Proyect_Base.app.Controllers;
 using Proyect_Base.app.Handlers;
 using Proyect_Base.app.Threads;
 using System;
@@ -16,8 +17,8 @@ namespace Proyect_Base.forms
         {
             FlashSocket.Initialize();
             HandlerManager.Initialize();
-            PathfindingThread.Initialize();
             CollectionsController.initCollections();
+            ThreadsController.initThreads();
         }
         public static void appStarted(DateTime now)
         {

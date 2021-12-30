@@ -11,7 +11,7 @@ namespace Proyect_Base.app.Collections
     class GameAreaCollection
     {
         public static Dictionary<int, GameArea> gameAreas = new Dictionary<int, GameArea>();
-        public static void loadGameAreas()
+        public static void init()
         {
             foreach (GameArea gameArea in GameAreaDAO.getGameAreas())
             {

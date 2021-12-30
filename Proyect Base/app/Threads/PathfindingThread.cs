@@ -17,6 +17,7 @@ namespace Proyect_Base.app.Threads
 {
     public class PathfindingThread
     {
+        private static int timeMsNextMoviment = 680;
         public static void Initialize()
         {
             new Thread(Pathfinding).Start();
@@ -74,7 +75,7 @@ namespace Proyect_Base.app.Threads
         }
         private static void setNextPositionUser(Session Session, Posicion NewPoint)
         {
-            Session.User.Bloqueos.SetLock(Bloqueo.Caminando, TimeHelper.GetCurrentAndAdd(AddType.Milisegundos, 680));
+            Session.User.Bloqueos.SetLock(Bloqueo.Caminando, TimeHelper.GetCurrentAndAdd(AddType.Milisegundos, timeMsNextMoviment));
             Session.User.Posicion = NewPoint;
             Session.User.LastPoint = NewPoint;
             Session.User.Movimientos.Movimientos.Remove(Session.User.Posicion);

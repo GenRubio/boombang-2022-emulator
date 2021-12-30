@@ -52,7 +52,8 @@
   <ItemGroup>
     <Compile Include="app\ApiControllers\ApiExempleController.cs" />
     <Compile Include="app\Api\API.cs" />
-    <Compile Include="app\Collections\CollectionsController.cs" />
+    <Compile Include="app\Collections\ItemAreaCollection.cs" />
+    <Compile Include="app\Controllers\CollectionsController.cs" />
     <Compile Include="app\Collections\GameAreaCollection.cs" />
     <Compile Include="app\Collections\PublicAreaCollection.cs" />
     <Compile Include="app\Collections\SessionCollection.cs" />
@@ -61,15 +62,17 @@
     <Compile Include="app\Connection\FlashSocket.cs" />
     <Compile Include="app\Connection\ServerMessage.cs" />
     <Compile Include="app\Connection\Session.cs" />
+    <Compile Include="app\Controllers\ThreadsController.cs" />
     <Compile Include="app\DAO\AreaMapDAO.cs" />
     <Compile Include="app\DAO\GameAreaDAO.cs" />
+    <Compile Include="app\DAO\ItemAreaDAO.cs" />
     <Compile Include="app\DAO\PublicAreaDAO.cs" />
     <Compile Include="app\DAO\UserDAO.cs" />
     <Compile Include="app\Handlers\AreaHandler.cs" />
     <Compile Include="app\Handlers\BackpackHandler.cs" />
     <Compile Include="app\Handlers\FlowerPowerHandler.cs" />
     <Compile Include="app\Handlers\FriendsHandler.cs" />
-    <Compile Include="app\Handlers\HandlerController.cs" />
+    <Compile Include="app\Controllers\HandlerController.cs" />
     <Compile Include="app\Handlers\HandlerManager.cs" />
     <Compile Include="app\Handlers\HouseHandler.cs" />
     <Compile Include="app\Handlers\LoginHandler.cs" />
@@ -84,6 +87,7 @@
     <Compile Include="app\Models\Area.cs" />
     <Compile Include="app\Models\AreaMap.cs" />
     <Compile Include="app\Models\GameArea.cs" />
+    <Compile Include="app\Models\ItemArea.cs" />
     <Compile Include="app\Models\PreLocks.cs" />
     <Compile Include="app\Models\PrivateArea.cs" />
     <Compile Include="app\Models\PublicArea.cs" />
@@ -96,6 +100,7 @@
     <Compile Include="app\Pathfinding\Formulas.cs" />
     <Compile Include="app\Pathfinding\Posicion.cs" />
     <Compile Include="app\Pathfinding\Trayectoria.cs" />
+    <Compile Include="app\Threads\ItemAreaThread.cs" />
     <Compile Include="app\Threads\PathfindingThread.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="database\mysql\SqlClient.cs" />
@@ -121,7 +126,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\Controllers\" />
+    <Folder Include="app\Events\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="forms\App.resx">

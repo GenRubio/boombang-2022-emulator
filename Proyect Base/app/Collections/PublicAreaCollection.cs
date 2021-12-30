@@ -11,7 +11,7 @@ namespace Proyect_Base.app.Collections
     class PublicAreaCollection
     {
         public static Dictionary<int, PublicArea> publicAreas = new Dictionary<int, PublicArea>();
-        public static void loadPublicAreas()
+        public static void init()
         {
             foreach(PublicArea publicArea in PublicAreaDAO.getPublicAreas())
             {
