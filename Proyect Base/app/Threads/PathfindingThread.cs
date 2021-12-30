@@ -18,7 +18,7 @@ namespace Proyect_Base.app.Threads
     public class PathfindingThread
     {
         private static int timeMsNextMoviment = 680;
-        public static void Initialize()
+        public static void init()
         {
             new Thread(Pathfinding).Start();
         }

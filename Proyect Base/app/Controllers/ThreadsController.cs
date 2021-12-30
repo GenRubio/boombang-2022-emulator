@@ -11,8 +11,8 @@ namespace Proyect_Base.app.Controllers
     {
         public static void initThreads()
         {
-            PathfindingThread.Initialize();
-            ItemAreaThread.Initialize();
+            PathfindingThread.init();
+            ItemAreaThread.init();
         }
     }
 }

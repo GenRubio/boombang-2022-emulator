@@ -13,7 +13,7 @@ namespace Proyect_Base.app.Threads
 {
     class ItemAreaThread
     {
-        public static void Initialize()
+        public static void init()
         {
             new Thread(ItemArea).Start();
         }
