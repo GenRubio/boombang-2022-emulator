@@ -53,6 +53,7 @@
     <Compile Include="app\ApiControllers\ApiExempleController.cs" />
     <Compile Include="app\Api\API.cs" />
     <Compile Include="app\Collections\ItemAreaCollection.cs" />
+    <Compile Include="app\Collections\ShopObjectCollection.cs" />
     <Compile Include="app\Controllers\CollectionsController.cs" />
     <Compile Include="app\Collections\GameAreaCollection.cs" />
     <Compile Include="app\Collections\PublicAreaCollection.cs" />
@@ -67,6 +68,8 @@
     <Compile Include="app\DAO\GameAreaDAO.cs" />
     <Compile Include="app\DAO\ItemAreaDAO.cs" />
     <Compile Include="app\DAO\PublicAreaDAO.cs" />
+    <Compile Include="app\DAO\ShopObjectDAO.cs" />
+    <Compile Include="app\DAO\UserBackpackObjectDAO.cs" />
     <Compile Include="app\DAO\UserDAO.cs" />
     <Compile Include="app\Handlers\AreaHandler.cs" />
     <Compile Include="app\Handlers\BackpackHandler.cs" />
@@ -91,8 +94,11 @@
     <Compile Include="app\Models\PreLocks.cs" />
     <Compile Include="app\Models\PrivateArea.cs" />
     <Compile Include="app\Models\PublicArea.cs" />
+    <Compile Include="app\Models\ShopObject.cs" />
     <Compile Include="app\Models\UltraLocks.cs" />
     <Compile Include="app\Models\User.cs" />
+    <Compile Include="app\Models\UserBackpackObject.cs" />
+    <Compile Include="app\Models\UserObject.cs" />
     <Compile Include="app\Pathfinding\A-Star\Node.cs" />
     <Compile Include="app\Pathfinding\A-Star\NodeState.cs" />
     <Compile Include="app\Pathfinding\A-Star\PathFinder.cs" />

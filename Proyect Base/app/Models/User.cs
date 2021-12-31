@@ -81,6 +81,7 @@ namespace Proyect_Base.app.Models
         public PreLocks Bloqueos { get; set; }
         public UltraLocks Ultra_Bloqueos { get; set; }
         #endregion
+        public List<UserBackpackObject> backpackObjects { get; set; }
         public User(DataRow Row)
         {
             this.id = int.Parse(Row["id"].ToString());
@@ -138,6 +139,7 @@ namespace Proyect_Base.app.Models
             this.areaKey = -1;
             this.Bloqueos = new PreLocks();
             this.Ultra_Bloqueos = new UltraLocks();
+            this.backpackObjects = new List<UserBackpackObject>();
         }
         //MODEL SETTERS
         public void CargarDatosNinja()
@@ -251,6 +253,10 @@ namespace Proyect_Base.app.Models
                 Cocos_FinishLevel = 300;
             }
         }
+        public void setBackpackObjects(List<UserBackpackObject> backpackObjects)
+        {
+            this.backpackObjects = backpackObjects;
+        }
         //MODEL GETTERS
         public int ObtenerUppertLevel()
         {
@@ -361,6 +367,17 @@ namespace Proyect_Base.app.Models
         private void removeSilverCoinsHandler(Session Session, int coins)
         {
             Session.SendData(new ServerMessage(new byte[] { 168 }, new object[] { coins }));
+        }
+        public void loadBackpackObjectsHandler(Session Session)
+        {
+            setBackpackObjects(UserBackpackObjectDAO.getUserBackpackObjects(this));
+            ServerMessage server = new ServerMessage(new byte[] { 189, 180 });
+            foreach(UserBackpackObject userBackpackObject in this.backpackObjects)
+            {
+                server.AppendParameter(userBackpackObject.itemId);
+                server.AppendParameter(userBackpackObject.count);
+            }
+            Session.SendData(server);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Proyect_Base.forms;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace Proyect_Base.logs
                 writer.WriteLine("StackTrace : " + ex.StackTrace);
                 ex = ex.InnerException;
             }
+            App.Form.WriteLine("Se ha producido un error.", "error");
         }
     }
 }

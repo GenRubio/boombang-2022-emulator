@@ -1,4 +1,5 @@
 ﻿using Proyect_Base.app.Connection;
+using Proyect_Base.app.Middlewares;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,10 @@ namespace Proyect_Base.app.Handlers
         }
         private static void loadBackpack(Session Session, ClientMessage Message)
         {
-            ServerMessage server = new ServerMessage(new byte[] { 189, 180 });
-            server.AppendParameter(-1);
-            Session.SendData(server);
+            if (UserMiddleware.userLogged(Session))
+            {
+                Session.User.loadBackpackObjectsHandler(Session);
+            }
         }
     }
 }

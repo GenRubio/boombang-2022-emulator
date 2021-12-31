@@ -48,3 +48,45 @@ Message : No se puede obtener acceso al objeto desechado.
 Nombre del objeto: 'System.Net.Sockets.Socket'.
 StackTrace :    en System.Net.Sockets.Socket.Shutdown(SocketShutdown how)
    en Proyect_Base.app.Connection.Session.closeConnection() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Connection\Session.cs:línea 139
+-----------------------------------------------------------------------------
+Date : 31/12/2021 9:32:18
+
+System.InvalidCastException
+Message : La conversión especificada no es válida.
+StackTrace :    en Proyect_Base.app.Models.ShopObject..ctor(DataRow row) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Models\ShopObject.cs:línea 47
+   en Proyect_Base.app.DAO.ShopObjectDAO.getShopObjects() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\DAO\ShopObjectDAO.cs:línea 29
+-----------------------------------------------------------------------------
+Date : 31/12/2021 9:34:47
+
+System.InvalidCastException
+Message : La conversión especificada no es válida.
+StackTrace :    en Proyect_Base.app.Models.ShopObject..ctor(DataRow row) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Models\ShopObject.cs:línea 47
+   en Proyect_Base.app.DAO.ShopObjectDAO.getShopObjects() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\DAO\ShopObjectDAO.cs:línea 29
+-----------------------------------------------------------------------------
+Date : 31/12/2021 9:35:30
+
+System.InvalidCastException
+Message : La conversión especificada no es válida.
+StackTrace :    en Proyect_Base.app.Models.ShopObject..ctor(DataRow row) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Models\ShopObject.cs:línea 47
+   en Proyect_Base.app.DAO.ShopObjectDAO.getShopObjects() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\DAO\ShopObjectDAO.cs:línea 29
+-----------------------------------------------------------------------------
+Date : 31/12/2021 9:37:13
+
+System.InvalidCastException
+Message : La conversión especificada no es válida.
+StackTrace :    en Proyect_Base.app.Models.ShopObject..ctor(DataRow row) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Models\ShopObject.cs:línea 47
+   en Proyect_Base.app.DAO.ShopObjectDAO.getShopObjects() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\DAO\ShopObjectDAO.cs:línea 29
+-----------------------------------------------------------------------------
+Date : 31/12/2021 9:38:25
+
+System.InvalidCastException
+Message : La conversión especificada no es válida.
+StackTrace :    en Proyect_Base.app.Models.ShopObject..ctor(DataRow row) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Models\ShopObject.cs:línea 45
+   en Proyect_Base.app.DAO.ShopObjectDAO.getShopObjects() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\DAO\ShopObjectDAO.cs:línea 29
+-----------------------------------------------------------------------------
+Date : 31/12/2021 10:24:37
+
+System.InvalidCastException
+Message : La conversión especificada no es válida.
+StackTrace :    en Proyect_Base.app.Models.UserBackpackObject..ctor(DataRow row) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Models\UserBackpackObject.cs:línea 17
+   en Proyect_Base.app.DAO.UserBackpackObjectDAO.getUserBackpackObjects(User User) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\DAO\UserBackpackObjectDAO.cs:línea 31

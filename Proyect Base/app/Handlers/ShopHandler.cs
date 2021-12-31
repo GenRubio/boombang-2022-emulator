@@ -1,4 +1,6 @@
-﻿using Proyect_Base.app.Connection;
+﻿using Proyect_Base.app.Collections;
+using Proyect_Base.app.Connection;
+using Proyect_Base.app.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +18,11 @@ namespace Proyect_Base.app.Handlers
         private static void loadShop(Session Session, ClientMessage Message)
         {
             ServerMessage server = new ServerMessage(new byte[] { 189, 133 });
-            server.AppendParameter(-1);
+            server.AppendParameter(ShopObjectCollection.shopObjects.Count());
+            foreach(ShopObject shopObject in ShopObjectCollection.shopObjects.Values.ToList())
+            {
+                shopObject.getObjectParametersHandler(server);
+            }
             Session.SendData(server);
         }
     }

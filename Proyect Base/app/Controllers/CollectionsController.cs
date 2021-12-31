@@ -13,6 +13,7 @@ namespace Proyect_Base.app.Collections
             PublicAreaCollection.init();
             GameAreaCollection.init();
             ItemAreaCollection.init();
+            ShopObjectCollection.init();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Proyect_Base.app.DAO;
 using Proyect_Base.app.Models;
+using Proyect_Base.forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace Proyect_Base.app.Collections
             {
                 itemAreas.Add(itemArea.modelo, itemArea);
             }
+            App.Form.WriteLine("Se han cargado: " + itemAreas.Count() + " items de area.");
         }
         public static ItemArea getItemAreaByModel(int model)
         {

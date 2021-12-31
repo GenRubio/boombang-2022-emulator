@@ -15,5 +15,12 @@ namespace Proyect_Base.app.Models
             this.username = api.username;
             this.password = api.password;
         }
+        //FUNCTIONS
+
+        //MODEL SETTERS
+
+        //MODEL GETTERS
+
+        //HANDLERS
     }
 }
