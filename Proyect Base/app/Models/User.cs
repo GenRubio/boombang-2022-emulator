@@ -82,6 +82,7 @@ namespace Proyect_Base.app.Models
         public UltraLocks Ultra_Bloqueos { get; set; }
         #endregion
         public List<UserBackpackObject> backpackObjects { get; set; }
+        public Dictionary<int, UserObject> objects { get; set; }
         public User(DataRow Row)
         {
             this.id = int.Parse(Row["id"].ToString());
@@ -140,6 +141,7 @@ namespace Proyect_Base.app.Models
             this.Bloqueos = new PreLocks();
             this.Ultra_Bloqueos = new UltraLocks();
             this.backpackObjects = new List<UserBackpackObject>();
+            this.objects = setObjects();
         }
         //MODEL SETTERS
         public void CargarDatosNinja()
@@ -257,6 +259,10 @@ namespace Proyect_Base.app.Models
         {
             this.backpackObjects = backpackObjects;
         }
+        private Dictionary<int, UserObject> setObjects()
+        {
+            return UserObjectDAO.getUserObjects(this);
+        }
         //MODEL GETTERS
         public int ObtenerUppertLevel()
         {
@@ -290,6 +296,13 @@ namespace Proyect_Base.app.Models
             }
         }
         //FUNCTIONS
+        public void addObject(UserObject userObject)
+        {
+            if (!this.objects.ContainsKey(userObject.id))
+            {
+                this.objects.Add(userObject.id, userObject);
+            }
+        }
         public void addGoldCoins(Session Session, int coins)
         {
             this.oro += coins;
@@ -378,6 +391,20 @@ namespace Proyect_Base.app.Models
                 server.AppendParameter(userBackpackObject.count);
             }
             Session.SendData(server);
+        }
+        public void addObjectToBackpackHandler(Session Session, UserObject userObject)
+        {
+            Session.SendData(new ServerMessage(new byte[] { 189, 139 }, new object[] {
+                                    userObject.id,
+                                    userObject.ObjetoID,
+                                    userObject.Color_1,
+                                    userObject.Color_2,
+                                    userObject.size,
+                                    0,
+                                    false,
+                                    false,
+                                    1
+                                }));
         }
     }
 }

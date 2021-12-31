@@ -23,6 +23,7 @@ namespace Proyect_Base.app.Models
         public int MapSizeY { get; set; }
         public bool[,] BoolMap { get; set; }
         public string [] coordinates { get; set; }
+        private Random random { get; set; }
         public AreaMap(DataRow row)
         {
             this.MATRIX_X = -814;
@@ -36,6 +37,7 @@ namespace Proyect_Base.app.Models
             this.MapSizeX = this.coordinates.Length;
             this.MapSizeY = this.coordinates[0].Length;
             setNewBoolMap();
+            this.random = new Random();
         }
         //MODEL SETTERS
         private void setNewBoolMap()
@@ -124,7 +126,7 @@ namespace Proyect_Base.app.Models
                 }
             }
 
-            return (Output.Count > 0) ? Output[new Random().Next(0, Output.Count - 1)] : new Point(-1, -1);
+            return (Output.Count > 0) ? Output[random.Next(0, Output.Count - 1)] : new Point(-1, -1);
         }
         public bool IsWalkable(int X, int Y)
         {

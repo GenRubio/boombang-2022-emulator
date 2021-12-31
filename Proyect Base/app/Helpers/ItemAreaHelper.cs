@@ -8,12 +8,12 @@ namespace Proyect_Base.app.Helpers
 {
     class ItemAreaHelper
     {
+        private static Random Random = new Random();
         public static int getRandomTimeNextItem()
         {
             int minMinutes = 1;
             int maxMinutes = 7;
-            Random random = new Random();
-            return random.Next(minMinutes, maxMinutes + 1) * 60;
+            return Random.Next(minMinutes, maxMinutes + 1) * 60;
         }
     }
 }

@@ -90,3 +90,12 @@ System.InvalidCastException
 Message : La conversión especificada no es válida.
 StackTrace :    en Proyect_Base.app.Models.UserBackpackObject..ctor(DataRow row) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Models\UserBackpackObject.cs:línea 17
    en Proyect_Base.app.DAO.UserBackpackObjectDAO.getUserBackpackObjects(User User) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\DAO\UserBackpackObjectDAO.cs:línea 31
+-----------------------------------------------------------------------------
+Date : 31/12/2021 15:29:52
+
+System.NullReferenceException
+Message : Referencia a objeto no establecida como instancia de un objeto.
+StackTrace :    en Proyect_Base.app.Models.PublicArea.getLocationForItem() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Models\PublicArea.cs:línea 62
+   en Proyect_Base.app.Models.PublicArea.addItem(ItemArea Item) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Models\PublicArea.cs:línea 91
+   en Proyect_Base.app.Threads.ItemAreaThread.sendTresureChestSilver(PublicArea area) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Threads\ItemAreaThread.cs:línea 47
+   en Proyect_Base.app.Threads.ItemAreaThread.ItemArea() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Threads\ItemAreaThread.cs:línea 30

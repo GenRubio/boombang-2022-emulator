@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Proyect_Base.app.Models
 {
-    class UserObject
+    public class UserObject
     {
         public int id { get; set; }
         public int ObjetoID { get; set; }
