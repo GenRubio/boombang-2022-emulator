@@ -36,13 +36,13 @@ namespace Proyect_Base.app.Models
         private void setTresureChestGold()
         {
             this.minUsersToSendItemTresureChestGold = 1;
-            this.timeToSendItemTresureChestGold = 10; //In seconds
+            this.timeToSendItemTresureChestGold = ItemAreaHelper.getRandomTimeNextItem();//In seconds
             this.timeToSendNextItemTresureChestGold = this.timeToSendItemTresureChestGold;
         }
         private void setTresureChestSilver()
         {
             this.minUsersToSendItemTresureChestSilver = 1;
-            this.timeToSendItemTresureChestSilver = 15; //In seconds
+            this.timeToSendItemTresureChestSilver = ItemAreaHelper.getRandomTimeNextItem(); //In seconds
             this.timeToSendNextItemTresureChestSilver = this.timeToSendItemTresureChestSilver;
         }
         //MODEL GETTERS
@@ -86,10 +86,10 @@ namespace Proyect_Base.app.Models
             switch (itemModel)
             {
                 case 1:
-                    this.timeToSendNextItemTresureChestGold = this.timeToSendItemTresureChestGold;
+                    setTresureChestGold();
                     break;
                 case 2:
-                    this.timeToSendNextItemTresureChestSilver = this.timeToSendItemTresureChestSilver;
+                    setTresureChestSilver();
                     break;
             }
         }

@@ -83,6 +83,7 @@
     <Compile Include="app\Handlers\PingHandler.cs" />
     <Compile Include="app\Handlers\ShopHandler.cs" />
     <Compile Include="app\Helpers\ConsoleHelper.cs" />
+    <Compile Include="app\Helpers\ItemAreaHelper.cs" />
     <Compile Include="app\Helpers\TimeHelper.cs" />
     <Compile Include="app\Helpers\UserHelper.cs" />
     <Compile Include="app\Middlewares\UserMiddleware.cs" />
