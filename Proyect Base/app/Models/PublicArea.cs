@@ -97,12 +97,12 @@ namespace Proyect_Base.app.Models
         {
             foreach(ItemArea itemArea in this.items.Values.ToList())
             {
-                Session.SendData(sendItemHandler(itemArea.keyInArea, itemArea));
+                Session.SendData(sendItemHandler(itemArea));
             }
         }
         private void sendItem(ItemArea Item)
         {
-            SendData(sendItemHandler(Item.keyInArea, Item));
+            SendData(sendItemHandler(Item));
         }
         public bool removeItem(ItemArea Item)
         {
@@ -125,8 +125,9 @@ namespace Proyect_Base.app.Models
                 }
                 if (itemInArea(Item.keyInArea))
                 {
-                    this.items.Remove(Item.keyInArea);
                     removeItemHandler(Item.keyInArea);
+                    Thread.Sleep(new TimeSpan(0, 0, 0, 0, 3000));
+                    this.items.Remove(Item.keyInArea);
                 }
             }
             catch (Exception ex)
@@ -161,10 +162,10 @@ namespace Proyect_Base.app.Models
             server.AppendParameter(itemKey);
             SendData(server);
         }
-        private ServerMessage sendItemHandler(int itemKey, ItemArea Item)
+        private ServerMessage sendItemHandler(ItemArea Item)
         {
             ServerMessage server = new ServerMessage(new byte[] { 200, 120 });
-            server.AppendParameter(itemKey);
+            server.AppendParameter(Item.keyInArea);
             server.AppendParameter(Item.id);
             server.AppendParameter(Item.areaPosition.X);
             server.AppendParameter(Item.areaPosition.Y);
