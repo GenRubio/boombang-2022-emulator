@@ -30,7 +30,7 @@ namespace Proyect_Base.app.Models
         {
             return UserDAO.getUserById(this.userCreatorId);
         }
-        public Island getIslad()
+        public Island getIsland()
         {
             return IslandDAO.getIslandById(this.islandId);
         }
@@ -89,7 +89,7 @@ namespace Proyect_Base.app.Models
             server.AppendParameter(new object[] { 2, 0, 0 });
             server.AppendParameter(new object[] { 3, 0, 0 });
 
-            Island island = getIslad();
+            Island island = getIsland();
             if (island != null)
             {
                 server.AppendParameter(new object[] { 4, (island.uppertActive == 0 ? -1 : 0), 0 });
