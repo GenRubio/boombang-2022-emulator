@@ -13,6 +13,31 @@ namespace Proyect_Base.app.DAO
 {
     class UserObjectDAO
     {
+        public static Dictionary<int, UserObject> getUserBackpackObjects(User User)
+        {
+            Dictionary<int, UserObject> userObjects = new Dictionary<int, UserObject>();
+            try
+            {
+                SqlClient client = SqlManager.GetClient();
+                client.SetParameter("UserID", User.id);
+                client.SetParameter("sala_id", 0);
+                string query = "SELECT * FROM boombang_buyitems " +
+                    "WHERE UserID = @UserID " +
+                    "AND sala_id = @sala_id";
+                foreach (DataRow row in client.ExecuteQueryTable(query).Rows)
+                {
+                    if (row != null)
+                    {
+                        userObjects.Add((int)row["id"], new UserObject(row));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.error(ex);
+            }
+            return userObjects;
+        }
         public static Dictionary<int, UserObject> getUserObjects(User User)
         {
             Dictionary<int, UserObject> userObjects = new Dictionary<int, UserObject>();

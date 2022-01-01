@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Proyect_Base.app.DAO;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -16,5 +17,12 @@ namespace Proyect_Base.app.Models
             this.itemId = (int)row["ItemID"];
             this.count = Convert.ToInt32(row["total"]);
         }
+        //FUNCTIONS
+
+        //MODEL SETTERS
+
+        //MODEL GETTERS
+
+        //HANDLERS
     }
 }

@@ -41,7 +41,7 @@ namespace Proyect_Base.forms
                 Directory.CreateDirectory(Path.GetDirectoryName(@"Logs\"));
                 using (FileStream fs = File.Create(logsPath))
                 {
-                    byte[] info = new UTF8Encoding(true).GetBytes("The logs file was created successfully.\n");
+                    byte[] info = new UTF8Encoding(true).GetBytes("\nThe logs file was created successfully.\n");
                     fs.Write(info, 0, info.Length);
                 }
             }
@@ -133,6 +133,13 @@ namespace Proyect_Base.forms
             string output = DateTime.Now.ToString("HH:mm:ss") + " -> " + text;
             console.AppendText(Environment.NewLine + output);
             console.SelectionColor = Color.White;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Directory.Delete(Path.GetDirectoryName(@"Logs\"), true);
+            makeLogsFile();
+            loadLogsHandler();
         }
     }
 }

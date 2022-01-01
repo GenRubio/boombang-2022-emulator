@@ -1,4 +1,5 @@
-﻿using Proyect_Base.app.Pathfinding;
+﻿using Proyect_Base.app.Connection;
+using Proyect_Base.app.Pathfinding;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -51,5 +52,18 @@ namespace Proyect_Base.app.Models
         //MODEL GETTERS
 
         //HANDLERS
+        public ServerMessage loadBackpackObjectParametersHandler(ServerMessage server)
+        {
+            server.AppendParameter(this.id);
+            server.AppendParameter(this.ObjetoID);
+            server.AppendParameter(this.Color_1);
+            server.AppendParameter(this.Color_2);
+            server.AppendParameter(this.size);
+            server.AppendParameter(this.rotation);
+            server.AppendParameter(false);//top numero, nombre
+            server.AppendParameter(false);
+            server.AppendParameter(1);
+            return server;
+        }
     }
 }

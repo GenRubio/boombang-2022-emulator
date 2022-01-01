@@ -85,6 +85,20 @@ namespace Proyect_Base.app.Models
         {
             List<UserObject> objects = User.islandAreaObjects(this.id);
             server.AppendParameter(objects.Count());
+            foreach(UserObject userObject in objects)
+            {
+                server.AppendParameter(userObject.id);
+                server.AppendParameter(userObject.ObjetoID);
+                server.AppendParameter(userObject.Posicion.x);
+                server.AppendParameter(userObject.Posicion.y);
+                server.AppendParameter(userObject.rotation);
+                server.AppendParameter(userObject.size);
+                server.AppendParameter("");//TOP O TEXTO EN OTROS OBJETOS.
+                server.AppendParameter(userObject.ocupe);
+                server.AppendParameter(userObject.Color_1);
+                server.AppendParameter(userObject.Color_2);
+                server.AppendParameter(Convert.ToInt32(userObject.height) > 0 ? userObject.height : userObject.data);
+            }
             return server;
         }
         public void loadAreaParametersHandler(Session Session)
