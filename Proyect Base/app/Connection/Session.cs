@@ -16,15 +16,15 @@ namespace Proyect_Base.app.Connection
 {
     public class Session
     {
-        public int ID;
-        public string IP;
-        public Socket Client;
-        private byte[] buffer;
-        private AsyncCallback CallBack;
-        public HandlerManager Invoker;
-        public User User;
-        public Encryption Encryption;
-        public double ping;
+        public int ID { get; set; }
+        public string IP { get; set; }
+        public Socket Client { get; set; }
+        private byte[] buffer { get; set; }
+        private AsyncCallback CallBack { get; set; }
+        public HandlerManager Invoker { get; set; }
+        public User User { get; set; }
+        public Encryption Encryption { get; set; }
+        public double ping { get; set; }
         public Session(int key, Socket client)
         {
             this.ID = key;
