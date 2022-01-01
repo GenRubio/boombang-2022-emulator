@@ -51,35 +51,40 @@ namespace Proyect_Base.app.Models
         }
         private ServerMessage getAreaParametersHandler(ServerMessage server)
         {
-            server.AppendParameter(0);
-            server.AppendParameter(this.islandId);
-            server.AppendParameter(this.id);
-            server.AppendParameter(this.id);
-            server.AppendParameter(this.color_1);
-            server.AppendParameter(this.color_2);
-            server.AppendParameter(0);
-            server.AppendParameter(getUser().id);
-            server.AppendParameter(-1);
-            server.AppendParameter(-1);
-            server.AppendParameter(-1);
-            server.AppendParameter(-1);
-            server.AppendParameter(-1);
-            server.AppendParameter(-1);
-            server.AppendParameter(0);
-            server.AppendParameter(-1);
-            server.AppendParameter(-1);
-            server.AppendParameter(-1);
-            server.AppendParameter(-1);
-            server.AppendParameter(-1);
-            server.AppendParameter(-1);
-            getAreaObjectsParametersHandler(server);
-            server.AppendParameter(0);
-            server.AppendParameter(this.users.Count());
+            User userCreator = getUser();
+            if (userCreator != null)
+            {
+                server.AppendParameter(0);
+                server.AppendParameter(this.islandId);
+                server.AppendParameter(this.id);
+                server.AppendParameter(this.id);
+                server.AppendParameter(this.color_1);
+                server.AppendParameter(this.color_2);
+                server.AppendParameter(0);
+                server.AppendParameter(userCreator.id);
+                server.AppendParameter(-1);
+                server.AppendParameter(-1);
+                server.AppendParameter(-1);
+                server.AppendParameter(-1);
+                server.AppendParameter(-1);
+                server.AppendParameter(-1);
+                server.AppendParameter(0);
+                server.AppendParameter(-1);
+                server.AppendParameter(-1);
+                server.AppendParameter(-1);
+                server.AppendParameter(-1);
+                server.AppendParameter(-1);
+                server.AppendParameter(-1);
+                getAreaObjectsParametersHandler(userCreator, server);
+                server.AppendParameter(0);
+                server.AppendParameter(this.users.Count());
+            }
             return server;
         }
-        private ServerMessage getAreaObjectsParametersHandler(ServerMessage server)
+        private ServerMessage getAreaObjectsParametersHandler(User User, ServerMessage server)
         {
-            server.AppendParameter(0);//Objetos comprado
+            List<UserObject> objects = User.islandAreaObjects(this.id);
+            server.AppendParameter(objects.Count());
             return server;
         }
         public void loadAreaParametersHandler(Session Session)

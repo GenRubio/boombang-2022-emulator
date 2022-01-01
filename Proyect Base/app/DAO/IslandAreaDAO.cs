@@ -45,18 +45,24 @@ namespace Proyect_Base.app.DAO
                 "(`categoria`, `nombre`, `modelo`, `IslaID`, `color_1`, `color_2`, `CreadorID`) " +
                 "VALUES (@categoria, @Nombre, @Modelo, @IslaID, @color_1, @color_2, @CreadorID)") == 1)
             {
-                client.SetParameter("CreadorID", User.id);
-                client.SetParameter("IslaID", Island.id);
-                client.SetParameter("categoria", 2);
-                DataRow row = client.ExecuteQueryRow("SELECT * FROM escenarios_privados " +
-                    "WHERE CreadorID = @CreadorID " +
-                    "AND IslaID = @IslaID " +
-                    "AND categoria = @categoria " +
-                    "ORDER BY id DESC LIMIT 1");
-                if (row != null)
-                {
-                    return new IslandArea(row);
-                }
+                return getMakeIslandArea(User, Island);
+            }
+            return null;
+        }
+        private static IslandArea getMakeIslandArea(User User, Island Island)
+        {
+            SqlClient client = SqlManager.GetClient();
+            client.SetParameter("CreadorID", User.id);
+            client.SetParameter("IslaID", Island.id);
+            client.SetParameter("categoria", 2);
+            DataRow row = client.ExecuteQueryRow("SELECT * FROM escenarios_privados " +
+                "WHERE CreadorID = @CreadorID " +
+                "AND IslaID = @IslaID " +
+                "AND categoria = @categoria " +
+                "ORDER BY id DESC LIMIT 1");
+            if (row != null)
+            {
+                return new IslandArea(row);
             }
             return null;
         }

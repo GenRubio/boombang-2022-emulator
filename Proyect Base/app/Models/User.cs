@@ -309,6 +309,10 @@ namespace Proyect_Base.app.Models
             }
             return null;
         }
+        public List<UserObject> islandAreaObjects(int islandAreaId)
+        {
+            return this.objects.Values.ToList().Where(i => i.ZonaID == islandAreaId).ToList();
+        }
         //FUNCTIONS
         public bool removeIsland(int id)
         {

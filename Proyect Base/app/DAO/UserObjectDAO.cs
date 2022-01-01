@@ -36,6 +36,19 @@ namespace Proyect_Base.app.DAO
             }
             return userObjects;
         }
+        public static UserObject getUserObjectByItemAndUserIds(int userId, int itemId)
+        {
+            SqlClient client = SqlManager.GetClient();
+            client.SetParameter("ItemID", itemId);
+            client.SetParameter("UserID", userId);
+            DataRow row = client.ExecuteQueryRow("SELECT * FROM boombang_buyitems " +
+                "WHERE ItemID = @ItemID AND UserID = @UserID ORDER BY id DESC LIMIT 1");
+            if (row != null)
+            {
+                return new UserObject(row);
+            }
+            return null;
+        }
         public static UserObject createObjectUser(User User, ShopObject shopObject, string tam)
         {
             try
@@ -53,14 +66,7 @@ namespace Proyect_Base.app.DAO
                     "(ItemID,swf,color,rgb_ratio,size,rotation,something_4,UserID,ocupe,data) " +
                     "VALUES (@ItemID, @swf, @color, @rgb_ratio, @size, @rotation, @something_4, @UserIDe,'','');");
 
-                client.SetParameter("ItemID", shopObject.id);
-                client.SetParameter("UserID", User.id);
-                DataRow row = client.ExecuteQueryRow("SELECT * FROM boombang_buyitems " +
-                    "WHERE ItemID = @ItemID AND UserID = @UserID ORDER BY id DESC LIMIT 1");
-                if (row != null)
-                {
-                    return new UserObject(row);
-                }
+                return getUserObjectByItemAndUserIds(User.id, shopObject.id);
             }
             catch (Exception ex)
             {
