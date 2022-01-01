@@ -66,6 +66,7 @@
     <Compile Include="app\Controllers\ThreadsController.cs" />
     <Compile Include="app\DAO\AreaMapDAO.cs" />
     <Compile Include="app\DAO\GameAreaDAO.cs" />
+    <Compile Include="app\DAO\IslandDAO.cs" />
     <Compile Include="app\DAO\ItemAreaDAO.cs" />
     <Compile Include="app\DAO\PublicAreaDAO.cs" />
     <Compile Include="app\DAO\ShopObjectDAO.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="app\Controllers\HandlerController.cs" />
     <Compile Include="app\Handlers\HandlerManager.cs" />
     <Compile Include="app\Handlers\HouseHandler.cs" />
+    <Compile Include="app\Handlers\IslandHandler.cs" />
     <Compile Include="app\Handlers\LoginHandler.cs" />
     <Compile Include="app\Handlers\NavigationHandler.cs" />
     <Compile Include="app\Handlers\PingHandler.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="app\Models\Area.cs" />
     <Compile Include="app\Models\AreaMap.cs" />
     <Compile Include="app\Models\GameArea.cs" />
+    <Compile Include="app\Models\Island.cs" />
     <Compile Include="app\Models\ItemArea.cs" />
     <Compile Include="app\Models\PreLocks.cs" />
     <Compile Include="app\Models\PrivateArea.cs" />

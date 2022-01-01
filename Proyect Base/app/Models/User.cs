@@ -83,6 +83,7 @@ namespace Proyect_Base.app.Models
         #endregion
         public List<UserBackpackObject> backpackObjects { get; set; }
         public Dictionary<int, UserObject> objects { get; set; }
+        public Dictionary<int, Island> islands { get; set; }
         public User(DataRow Row)
         {
             this.id = int.Parse(Row["id"].ToString());
@@ -142,6 +143,7 @@ namespace Proyect_Base.app.Models
             this.Ultra_Bloqueos = new UltraLocks();
             this.backpackObjects = new List<UserBackpackObject>();
             this.objects = setObjects();
+            this.islands = setIslands();
         }
         //MODEL SETTERS
         public void CargarDatosNinja()
@@ -259,6 +261,10 @@ namespace Proyect_Base.app.Models
         {
             this.backpackObjects = backpackObjects;
         }
+        private Dictionary<int, Island> setIslands()
+        {
+            return IslandDAO.getUserIslands(this);
+        }
         private Dictionary<int, UserObject> setObjects()
         {
             return UserObjectDAO.getUserObjects(this);
@@ -296,6 +302,22 @@ namespace Proyect_Base.app.Models
             }
         }
         //FUNCTIONS
+        public bool removeIsland(int id)
+        {
+            if (this.islands.ContainsKey(id))
+            {
+                this.islands.Remove(id);
+                return true;
+            }
+            return false;
+        }
+        public void addIsland(Island island)
+        {
+            if (!this.islands.ContainsKey(island.id))
+            {
+                this.islands.Add(island.id, island);
+            }
+        }
         public void addObject(UserObject userObject)
         {
             if (!this.objects.ContainsKey(userObject.id))

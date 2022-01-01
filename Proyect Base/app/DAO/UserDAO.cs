@@ -26,6 +26,24 @@ namespace Proyect_Base.app.DAO
             }
             return null;
         }
+        public static User getUserById(int id)
+        {
+            try
+            {
+                SqlClient client = SqlManager.GetClient();
+                client.SetParameter("id", id);
+                DataRow row = client.ExecuteQueryRow("SELECT * FROM users WHERE id = @id");
+                if (row != null)
+                {
+                    return new User(row);
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.error(ex);
+            }
+            return null;
+        }
         public static void addGoldCoins(User User, int coins)
         {
             try

@@ -20,6 +20,30 @@ namespace Proyect_Base.app.Handlers
             HandlerManager.RegisterHandler(15432, new ProcessHandler(loadNavBar), true);
             HandlerManager.RegisterHandler(128125, new ProcessHandler(goToArea), true);
             HandlerManager.RegisterHandler(128121, new ProcessHandler(loadArea), true);
+            HandlerManager.RegisterHandler(193, new ProcessHandler(loadUserIslands), true);
+        }
+        private static void loadUserIslands(Session Session, ClientMessage Message)
+        {
+            if (UserMiddleware.userOutOfArea(Session))
+            {
+                ServerMessage server = new ServerMessage(new byte[] { 193 }, new object[] { 2 });
+                foreach(Island island in Session.User.islands.Values.ToList())
+                {
+                    server.AppendParameter(new object[] { 
+                        0, 
+                        0, 
+                        1,
+                        island.name, 
+                        0,
+                        island.id, 
+                        0, 
+                        0, 
+                        0, 
+                        0 
+                    });
+                }
+                Session.SendData(server);
+            }
         }
         private static void loadArea(Session Session, ClientMessage Message)
         {
@@ -132,6 +156,7 @@ namespace Proyect_Base.app.Handlers
                         loadPublicAreas(Session);
                         break;
                     case 2:
+                        loadIslands(Session);
                         break;
                     case 3:
                         loadGameAreas(Session);
@@ -144,6 +169,12 @@ namespace Proyect_Base.app.Handlers
             {
                 Log.error(ex);
             }
+        }
+        private static void loadIslands(Session Session)
+        {
+            ServerMessage server = new ServerMessage(new byte[] { 154, 32 });
+            server.AppendParameter(2);
+            Session.SendData(server);
         }
         private static void loadGameAreas(Session Session)
         {

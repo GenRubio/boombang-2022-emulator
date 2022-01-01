@@ -22,6 +22,7 @@ namespace Proyect_Base.app.Handlers
                 HouseHandler.init();
                 NavigationHandler.init();
                 AreaHandler.init();
+                IslandHandler.init();
             }
             catch (Exception ex)
             {
