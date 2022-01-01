@@ -60,26 +60,32 @@ namespace Proyect_Base.app.DAO
             }
             return null;
         }
-        public static void deleteIslandAreaByIslandId(int id)
+        public static void deleteIslandAreaByIslandId(User User, int id)
         {
             try
             {
                 SqlClient client = SqlManager.GetClient();
                 client.SetParameter("islandId", id);
-                client.ExecuteNonQuery("DELETE FROM escenarios_privados WHERE IslaID = @islandId");
+                client.SetParameter("CreadorID", User.id);
+                client.ExecuteNonQuery("DELETE FROM escenarios_privados " +
+                    "WHERE IslaID = @islandId " +
+                    "AND CreadorID = @CreadorID");
             }
             catch (Exception ex)
             {
                 Log.error(ex);
             }
         }
-        public static void deleteIslandAreaById(int id)
+        public static void deleteIslandAreaById(User User, int id)
         {
             try
             {
                 SqlClient client = SqlManager.GetClient();
                 client.SetParameter("id", id);
-                client.ExecuteNonQuery("DELETE FROM escenarios_privados WHERE id = @id");
+                client.SetParameter("CreadorID", User.id);
+                client.ExecuteNonQuery("DELETE FROM escenarios_privados " +
+                    "WHERE id = @id " +
+                    "AND CreadorID = @CreadorID");
             }
             catch (Exception ex)
             {

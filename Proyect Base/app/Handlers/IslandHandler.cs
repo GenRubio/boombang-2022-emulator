@@ -19,6 +19,22 @@ namespace Proyect_Base.app.Handlers
             HandlerManager.RegisterHandler(189124, new ProcessHandler(loadIsland), true);
             HandlerManager.RegisterHandler(189149, new ProcessHandler(deleteIsland), true);
             HandlerManager.RegisterHandler(189121, new ProcessHandler(makeIslandArea), true);
+            HandlerManager.RegisterHandler(189132, new ProcessHandler(deleteIslandArea), true);
+        }
+        private static void deleteIslandArea(Session Session, ClientMessage Message)
+        {
+            try
+            {
+                int id = int.Parse(Message.Parameters[0, 0]);
+                if (UserMiddleware.userOutOfArea(Session))
+                {
+                    IslandAreaDAO.deleteIslandAreaById(Session.User, id);
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.error(ex);
+            }
         }
         private static void makeIslandArea(Session Session, ClientMessage Message)
         {
@@ -63,7 +79,7 @@ namespace Proyect_Base.app.Handlers
                     if (Session.User.removeIsland(id))
                     {
                         IslandDAO.deleteIslandById(id);
-                        IslandAreaDAO.deleteIslandAreaByIslandId(id);
+                        IslandAreaDAO.deleteIslandAreaByIslandId(Session.User, id);
                     }
                 }
             }
