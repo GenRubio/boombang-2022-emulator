@@ -41,7 +41,7 @@ namespace Proyect_Base.forms
                 Directory.CreateDirectory(Path.GetDirectoryName(@"Logs\"));
                 using (FileStream fs = File.Create(logsPath))
                 {
-                    byte[] info = new UTF8Encoding(true).GetBytes("The logs file was created successfully.");
+                    byte[] info = new UTF8Encoding(true).GetBytes("The logs file was created successfully.\n");
                     fs.Write(info, 0, info.Length);
                 }
             }

@@ -1,6 +1,7 @@
 ﻿using Proyect_Base.app.Collections;
 using Proyect_Base.app.Handlers;
 using Proyect_Base.app.Helpers;
+using Proyect_Base.app.Middlewares;
 using Proyect_Base.app.Models;
 using Proyect_Base.forms;
 using Proyect_Base.logs;
@@ -130,19 +131,35 @@ namespace Proyect_Base.app.Connection
         {
             try
             {
-                if (this.User != null)
-                {
-                    SessionCollection.removeOnlineUser(User);
-                }
-                if (this.Client != null)
-                {
-                    this.Client.Shutdown(SocketShutdown.Both);
-                    this.Client.Close();
-                }
+                removeOnlineUser();
+                removeUserFromArea();
+                closeClient();
             }
             catch (Exception ex)
             {
                 Log.error(ex);
+            }
+        }
+        private void removeOnlineUser()
+        {
+            if (UserMiddleware.userLogged(this))
+            {
+                SessionCollection.removeOnlineUser(User);
+            }
+        }
+        private void removeUserFromArea()
+        {
+            if (UserMiddleware.userInArea(this))
+            {
+                this.User.Area.removeUserHandler(this);
+            }
+        }
+        private void closeClient()
+        {
+            if (this.Client != null)
+            {
+                this.Client.Shutdown(SocketShutdown.Both);
+                this.Client.Close();
             }
         }
     }

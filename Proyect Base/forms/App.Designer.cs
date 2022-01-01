@@ -47,6 +47,7 @@
             this.console.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.console.Location = new System.Drawing.Point(0, 0);
             this.console.Name = "console";
+            this.console.ReadOnly = true;
             this.console.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.console.Size = new System.Drawing.Size(876, 525);
             this.console.TabIndex = 1;
@@ -95,6 +96,7 @@
             this.richTextBox1.ForeColor = System.Drawing.Color.White;
             this.richTextBox1.Location = new System.Drawing.Point(-1, 0);
             this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(877, 525);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
