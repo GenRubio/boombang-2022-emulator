@@ -61,6 +61,20 @@ namespace Proyect_Base.app.DAO
             }
             return userObjects;
         }
+        public static void putUserObjectToArea(User User, UserObject userObject)
+        {
+            SqlClient client = SqlManager.GetClient();
+            client.SetParameter("id", userObject.id);
+            client.SetParameter("ds", User.Area.id);
+            client.SetParameter("sd", userObject.Posicion.x);
+            client.SetParameter("y", userObject.Posicion.y);
+            client.SetParameter("height", userObject.height);
+            client.SetParameter("userid", User.id);
+            client.SetParameter("ocupe", userObject.ocupe);
+            client.ExecuteNonQuery("UPDATE boombang_buyitems " +
+                "SET sala_id = @ds, x = @sd, y = @y, height = @height, UserID = @userid, ocupe = @ocupe  " +
+                "WHERE id = @id");
+        }
         public static UserObject getUserObjectByItemAndUserIds(int userId, int itemId)
         {
             SqlClient client = SqlManager.GetClient();

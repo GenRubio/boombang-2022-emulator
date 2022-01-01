@@ -317,6 +317,14 @@ namespace Proyect_Base.app.Models
         {
             return this.objects.Values.ToList().Where(i => i.ObjetoID == id).ToList();
         }
+        public UserObject getObjectById(int id)
+        {
+            if (this.objects.ContainsKey(id))
+            {
+                return this.objects[id];
+            }
+            return null;
+        }
         //FUNCTIONS
         public bool removeIsland(int id)
         {
@@ -366,6 +374,10 @@ namespace Proyect_Base.app.Models
             new Thread(() => UserDAO.removeSilverCoins(this, coins)).Start();
         }
         //HANDLERS
+        public void removeObjectBackpackHandler(Session Session, UserObject userObject)
+        {
+            Session.SendData(new ServerMessage(new byte[] { 189, 169 }, new object[] { userObject.id, userObject.ObjetoID, 1 }));
+        }
         public void initLoginHandler(Session Session)
         {
             ServerMessage server = new ServerMessage(new byte[] { 120, 121 });

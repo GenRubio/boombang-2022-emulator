@@ -23,6 +23,7 @@ namespace Proyect_Base.app.Handlers
                 NavigationHandler.init();
                 AreaHandler.init();
                 IslandHandler.init();
+                IslandAreaHandler.init();
             }
             catch (Exception ex)
             {

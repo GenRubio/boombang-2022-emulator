@@ -1,4 +1,5 @@
 ﻿using Proyect_Base.app.Connection;
+using Proyect_Base.app.Models;
 using Proyect_Base.app.Pathfinding.A_Star;
 using System;
 using System.Collections.Generic;
@@ -85,9 +86,22 @@ namespace Proyect_Base.app.Pathfinding
             Posicion NextStep = Movimientos[0];
             if (!Session.User.Area.MapaBytes.IsWalkable(NextStep.x, NextStep.y) || Session.User.Area.getSession(NextStep.x, NextStep.y) != null)
             {
-                if (Movimientos.Count >= 1) Movimientos.Clear();
-                IniciarCaminado();
-                NextStep = Movimientos[0];
+                if (Session.User.Area is IslandArea)
+                {
+                    IslandArea islandArea = (IslandArea)Session.User.Area;
+                    if (!islandArea.WalkByObjects(NextStep.x, NextStep.y))
+                    {
+                        if (Movimientos.Count >= 1) Movimientos.Clear();
+                        IniciarCaminado();
+                        NextStep = Movimientos[0];
+                    }
+                }
+                else
+                {
+                    if (Movimientos.Count >= 1) Movimientos.Clear();
+                    IniciarCaminado();
+                    NextStep = Movimientos[0];
+                }
             }
             IsMovementCorrupt(NextStep);
             return NextStep;

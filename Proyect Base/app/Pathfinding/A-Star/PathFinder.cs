@@ -100,6 +100,13 @@ namespace Proyect_Base.app.Pathfinding.A_Star
                 if (Sala.getSession(node.Location.X, node.Location.Y) != null)
                     continue;
 
+                if (Sala is IslandArea)
+                {
+                    IslandArea islandArea = (IslandArea)Sala;
+                    if (!islandArea.WalkByObjects(node.Location.X, node.Location.Y))
+                        continue;
+                }
+
                 if (node.State == NodeState.Closed)
                     continue;
 

@@ -82,6 +82,7 @@
     <Compile Include="app\Controllers\HandlerController.cs" />
     <Compile Include="app\Handlers\HandlerManager.cs" />
     <Compile Include="app\Handlers\HouseHandler.cs" />
+    <Compile Include="app\Handlers\IslandAreaHandler.cs" />
     <Compile Include="app\Handlers\IslandHandler.cs" />
     <Compile Include="app\Handlers\LoginHandler.cs" />
     <Compile Include="app\Handlers\NavigationHandler.cs" />
