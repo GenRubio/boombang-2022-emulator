@@ -1,1 +1,37 @@
 The logs file was created successfully.
+-----------------------------------------------------------------------------
+Date : 01/01/2022 12:31:29
+
+System.NullReferenceException
+Message : Referencia a objeto no establecida como instancia de un objeto.
+StackTrace :    en Proyect_Base.app.Models.SpecialArea.addUser(Session Session) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Models\SpecialArea.cs:línea 31
+   en Proyect_Base.app.Handlers.NavigationHandler.initLaodSpecialArea(Session Session, SpecialArea specialArea) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Handlers\NavigationHandler.cs:línea 153
+   en Proyect_Base.app.Handlers.NavigationHandler.loadSpecialArea(Int32 id, Session Session) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Handlers\NavigationHandler.cs:línea 169
+   en Proyect_Base.app.Handlers.NavigationHandler.goToArea(Session Session, ClientMessage Message) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Handlers\NavigationHandler.cs:línea 87
+-----------------------------------------------------------------------------
+Date : 01/01/2022 12:36:16
+
+System.NullReferenceException
+Message : Referencia a objeto no establecida como instancia de un objeto.
+StackTrace :    en Proyect_Base.app.Models.SpecialArea.addUser(Session Session) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Models\SpecialArea.cs:línea 31
+   en Proyect_Base.app.Handlers.NavigationHandler.initLoadSpecialArea(Session Session, SpecialArea specialArea) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Handlers\NavigationHandler.cs:línea 153
+   en Proyect_Base.app.Handlers.NavigationHandler.loadSpecialArea(Int32 id, Session Session) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Handlers\NavigationHandler.cs:línea 169
+   en Proyect_Base.app.Handlers.NavigationHandler.goToArea(Session Session, ClientMessage Message) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Handlers\NavigationHandler.cs:línea 87
+-----------------------------------------------------------------------------
+Date : 01/01/2022 12:39:31
+
+System.NullReferenceException
+Message : Referencia a objeto no establecida como instancia de un objeto.
+StackTrace :    en Proyect_Base.app.Models.SpecialArea.addUser(Session Session) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Models\SpecialArea.cs:línea 34
+   en Proyect_Base.app.Handlers.NavigationHandler.initLoadSpecialArea(Session Session, SpecialArea specialArea) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Handlers\NavigationHandler.cs:línea 153
+   en Proyect_Base.app.Handlers.NavigationHandler.loadSpecialArea(Int32 id, Session Session) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Handlers\NavigationHandler.cs:línea 169
+   en Proyect_Base.app.Handlers.NavigationHandler.goToArea(Session Session, ClientMessage Message) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Handlers\NavigationHandler.cs:línea 87
+-----------------------------------------------------------------------------
+Date : 01/01/2022 12:41:14
+
+System.NullReferenceException
+Message : Referencia a objeto no establecida como instancia de un objeto.
+StackTrace :    en Proyect_Base.app.Models.SpecialArea.addUser(Session Session) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Models\SpecialArea.cs:línea 34
+   en Proyect_Base.app.Handlers.NavigationHandler.initLoadSpecialArea(Session Session, SpecialArea specialArea) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Handlers\NavigationHandler.cs:línea 153
+   en Proyect_Base.app.Handlers.NavigationHandler.loadSpecialArea(Int32 id, Session Session) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Handlers\NavigationHandler.cs:línea 169
+   en Proyect_Base.app.Handlers.NavigationHandler.goToArea(Session Session, ClientMessage Message) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Handlers\NavigationHandler.cs:línea 87

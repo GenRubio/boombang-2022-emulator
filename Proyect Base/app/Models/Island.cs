@@ -38,6 +38,10 @@ namespace Proyect_Base.app.Models
         {
             return UserDAO.getUserById(this.userCreatorId);
         }
+        public List<IslandArea> getAreas()
+        {
+            return IslandAreaDAO.getIslandAreasByIslandId(this.id);
+        }
         //HANDLERS
         public void loadIslandHandler(Session Session)
         {
@@ -70,10 +74,30 @@ namespace Proyect_Base.app.Models
                 server.AppendParameter(null);
                 server.AppendParameter(null);
                 server.AppendParameter(null);
-                server.AppendParameter(0);//Zonas
-
+                getIslandAreasParametersHandler(server);
                 Session.SendData(server);
             }
+        }
+        private ServerMessage getIslandAreasParametersHandler(ServerMessage server)
+        {
+            List<IslandArea> islandAreas = getAreas();
+            server.AppendParameter(islandAreas.Count());
+            foreach(IslandArea islandArea in islandAreas)
+            {
+                server.AppendParameter(0);
+                server.AppendParameter(islandArea.es_category);
+                server.AppendParameter(islandArea.id);
+                server.AppendParameter(islandArea.id);
+                server.AppendParameter(islandArea.name);
+                server.AppendParameter(islandArea.model);
+                server.AppendParameter(0);
+                server.AppendParameter(0);
+                server.AppendParameter(0);
+                server.AppendParameter(islandArea.users.Count());
+                server.AppendParameter(0);
+                server.AppendParameter((string.IsNullOrEmpty(islandArea.password) ? 0 : 1));
+            }
+            return server;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Proyect_Base.app.Handlers
         {
             HandlerManager.RegisterHandler(15432, new ProcessHandler(loadNavBar), true);
             HandlerManager.RegisterHandler(128125, new ProcessHandler(goToArea), true);
+            HandlerManager.RegisterHandler(128120, new ProcessHandler(goToArea), true);
             HandlerManager.RegisterHandler(128121, new ProcessHandler(loadArea), true);
             HandlerManager.RegisterHandler(193, new ProcessHandler(loadUserIslands), true);
         }
@@ -62,6 +63,12 @@ namespace Proyect_Base.app.Handlers
                     gameArea.loadAreaParametersHandler(Session);
                     gameArea.loadItems(Session);
                 }
+                else if (Session.User.Area is IslandArea)
+                {
+                    IslandArea islandArea = (IslandArea)Session.User.Area;
+                    islandArea.loadAreaObjectsHandler(Session);
+                    islandArea.loadAreaParametersHandler(Session);
+                }
             }
         }
         private static void goToArea(Session Session, ClientMessage Message)
@@ -77,7 +84,7 @@ namespace Proyect_Base.app.Handlers
                         loadArea(id, Session);
                         break;
                     case 128120:
-                        loadPrivateArea(id, Session);
+                        loadSpecialArea(id, Session);
                         break;
                 }
             }
@@ -141,9 +148,31 @@ namespace Proyect_Base.app.Handlers
             publicArea.loadUserHandler(Session);
             publicArea.loadAreaHandler(Session);
         }
-        private static void loadPrivateArea(int id, Session Session)
+        private static void initLoadSpecialArea(Session Session, SpecialArea specialArea)
         {
-
+            specialArea.addUser(Session);
+            specialArea.loadUserHandler(Session);
+            specialArea.loadAreaHandler(Session);
+        }
+        private static void loadSpecialArea(int id, Session Session)
+        {
+            SpecialArea specialArea = SpecialAreaDAO.getSpecialAreaById(id);
+            if (specialArea != null && specialArea.users.Count < specialArea.max_visitors)
+            {
+                if (UserMiddleware.userInArea(Session))
+                {
+                    Session.User.Area.removeUserByCompassHandler(Session);
+                    initLoadSpecialArea(Session, specialArea);
+                }
+                else
+                {
+                    initLoadSpecialArea(Session, specialArea);
+                }
+            }
+            else
+            {
+                Session.SendData(new ServerMessage(new byte[] { 128, 120 }, new object[] { -1 }));
+            }
         }
         private static void loadNavBar(Session Session, ClientMessage Message)
         {

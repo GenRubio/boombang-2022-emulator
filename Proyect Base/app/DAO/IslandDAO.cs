@@ -36,7 +36,7 @@ namespace Proyect_Base.app.DAO
         {
             SqlClient client = SqlManager.GetClient();
             client.SetParameter("id", id);
-            client.ExecuteQueryRow("SELECT * FROM islas WHERE id = @id");
+            client.ExecuteQueryRow("DELETE FROM islas WHERE id = @id");
         }
         public static Island getIslandByName(string name)
         {

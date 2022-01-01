@@ -66,10 +66,12 @@
     <Compile Include="app\Controllers\ThreadsController.cs" />
     <Compile Include="app\DAO\AreaMapDAO.cs" />
     <Compile Include="app\DAO\GameAreaDAO.cs" />
+    <Compile Include="app\DAO\IslandAreaDAO.cs" />
     <Compile Include="app\DAO\IslandDAO.cs" />
     <Compile Include="app\DAO\ItemAreaDAO.cs" />
     <Compile Include="app\DAO\PublicAreaDAO.cs" />
     <Compile Include="app\DAO\ShopObjectDAO.cs" />
+    <Compile Include="app\DAO\SpecialAreaDAO.cs" />
     <Compile Include="app\DAO\UserBackpackObjectDAO.cs" />
     <Compile Include="app\DAO\UserDAO.cs" />
     <Compile Include="app\DAO\UserObjectDAO.cs" />
@@ -95,11 +97,12 @@
     <Compile Include="app\Models\AreaMap.cs" />
     <Compile Include="app\Models\GameArea.cs" />
     <Compile Include="app\Models\Island.cs" />
+    <Compile Include="app\Models\IslandArea.cs" />
     <Compile Include="app\Models\ItemArea.cs" />
     <Compile Include="app\Models\PreLocks.cs" />
-    <Compile Include="app\Models\PrivateArea.cs" />
     <Compile Include="app\Models\PublicArea.cs" />
     <Compile Include="app\Models\ShopObject.cs" />
+    <Compile Include="app\Models\SpecialArea.cs" />
     <Compile Include="app\Models\UltraLocks.cs" />
     <Compile Include="app\Models\User.cs" />
     <Compile Include="app\Models\UserBackpackObject.cs" />

@@ -1,6 +1,7 @@
 ﻿using Proyect_Base.app.Connection;
 using Proyect_Base.app.DAO;
 using Proyect_Base.app.Middlewares;
+using Proyect_Base.forms;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -61,15 +62,15 @@ namespace Proyect_Base.app.Models
         {
             if (this.category == 1 || this.category == 3)
             {
-                return AreaMapDAO.getPublicAreaMap(this.id);
+                return AreaMapDAO.getPublicAreaMap(this.model);
             }
             if (this.category == 2 || this.category == 4)
             {
-                return AreaMapDAO.getPrivateAreaMap(this.id);
+                return AreaMapDAO.getPrivateAreaMap(this.model);
             }
             if (this.category == 5)
             {
-                return AreaMapDAO.getGameAreaMap(this.id);
+                return AreaMapDAO.getGameAreaMap(this.model);
             }
             return null;
         }
