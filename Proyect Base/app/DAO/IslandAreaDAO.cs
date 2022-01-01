@@ -76,6 +76,19 @@ namespace Proyect_Base.app.DAO
                 Log.error(ex);
             }
         }
+        public static void updateNameIslandArea(User User, int islandId, int id, string name)
+        {
+            SqlClient client = SqlManager.GetClient();
+            client.SetParameter("id", id);
+            client.SetParameter("CreadorID", User.id);
+            client.SetParameter("islandId", islandId);
+            client.SetParameter("nombre", name);
+            client.ExecuteNonQuery("UPDATE escenarios_privados " +
+                  "SET nombre = @nombre " +
+                  "WHERE id = @id " +
+                  "AND CreadorID = @CreadorID " +
+                  "AND IslaID = @islandId");
+        }
         public static void deleteIslandAreaById(User User, int id)
         {
             try

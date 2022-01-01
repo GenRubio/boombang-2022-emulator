@@ -1,5 +1,6 @@
 ﻿using Proyect_Base.app.Connection;
 using Proyect_Base.app.DAO;
+using Proyect_Base.app.Helpers;
 using Proyect_Base.app.Middlewares;
 using Proyect_Base.app.Models;
 using Proyect_Base.logs;
@@ -20,6 +21,25 @@ namespace Proyect_Base.app.Handlers
             HandlerManager.RegisterHandler(189149, new ProcessHandler(deleteIsland), true);
             HandlerManager.RegisterHandler(189121, new ProcessHandler(makeIslandArea), true);
             HandlerManager.RegisterHandler(189132, new ProcessHandler(deleteIslandArea), true);
+            HandlerManager.RegisterHandler(189130, new ProcessHandler(renameIslandArea), true);
+        }
+        private static void renameIslandArea(Session Session, ClientMessage Message)
+        {
+            try
+            {
+                int islaId = int.Parse(Message.Parameters[0, 0]);
+                int id = int.Parse(Message.Parameters[1, 0]);
+                string newName = Message.Parameters[2, 0];
+
+                if (UserMiddleware.userOutOfArea(Session) && CharactersHelper.validTextExtend(newName))
+                {
+                    IslandAreaDAO.updateNameIslandArea(Session.User, islaId, id, newName);
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.error(ex);
+            }
         }
         private static void deleteIslandArea(Session Session, ClientMessage Message)
         {
