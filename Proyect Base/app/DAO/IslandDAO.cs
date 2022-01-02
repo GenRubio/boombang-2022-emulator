@@ -13,6 +13,16 @@ namespace Proyect_Base.app.DAO
 {
     class IslandDAO
     {
+        public static List<Island> getIslandsAll()
+        {
+            List<Island> islands = new List<Island>();
+            SqlClient client = SqlManager.GetClient();
+            foreach (DataRow row in client.ExecuteQueryTable("SELECT * FROM islas").Rows)
+            {
+                islands.Add(new Island(row));
+            }
+            return islands;
+        }
         public static Dictionary<int, Island> getUserIslands(User User)
         {
             Dictionary<int, Island> islands = new Dictionary<int, Island>();

@@ -35,6 +35,15 @@ namespace Proyect_Base.app.Models
         //MODEL SETTERS
 
         //MODEL GETTERS
+        public int getCountUsersInIsland()
+        {
+            int count = 0;
+            foreach(IslandArea islandArea in getAreas())
+            {
+                count += islandArea.users.Count();
+            }
+            return count;
+        }
         public User userCreator()
         {
             return UserDAO.getUserById(this.userCreatorId);

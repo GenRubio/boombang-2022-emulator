@@ -212,6 +212,7 @@ namespace Proyect_Base.app.Handlers
                         loadGameAreas(Session);
                         break;
                     case 4:
+                        loadHouses(Session);
                         break;
                 }
             }
@@ -220,11 +221,26 @@ namespace Proyect_Base.app.Handlers
                 Log.error(ex);
             }
         }
+        private static void loadHouses(Session Session)
+        {
+            ServerMessage server = new ServerMessage(new byte[] { 154, 32 });
+            server.AppendParameter(4);
+            Session.SendData(server);
+        }
         private static void loadIslands(Session Session)
         {
             ServerMessage server = new ServerMessage(new byte[] { 154, 32 });
             server.AppendParameter(2);
+            List<Island> islands = getIslandsWithUsers();
+            foreach(Island island in islands)
+            {
+                server.AppendParameter(new object[] { 0, 0, 0, island.name, island.getCountUsersInIsland(), island.id, 0, 0, 0, 0 });
+            }
             Session.SendData(server);
+        }
+        private static List<Island> getIslandsWithUsers()
+        {
+            return IslandDAO.getIslandsAll().Where(i => i.getCountUsersInIsland() > 0).OrderBy(i => i.getCountUsersInIsland()).ToList();
         }
         private static void loadGameAreas(Session Session)
         {
