@@ -34,7 +34,7 @@ namespace Proyect_Base.app.Handlers
                     UserObject userObject = getUserObject(Session, id, true);
                     if (userObject != null)
                     {
-                        updateUserObjectAttributesForRemove(userObject);
+                        updateUserObjectAttributes(userObject, Session.User.Area.id, 0, 0, 0, "");
                         islandArea.removeObjectHandler(userObject);
                         Session.User.addObjectToBackpackHandler(Session, userObject);
                         UserObjectDAO.putOrRemoveUserObjectFromArea(Session.User, userObject);
@@ -45,14 +45,6 @@ namespace Proyect_Base.app.Handlers
             {
                 Log.error(ex);
             }
-        }
-        private static void updateUserObjectAttributesForRemove(UserObject userObject)
-        {
-            userObject.ocupe = "";
-            userObject.ZonaID = 0;
-            userObject.Posicion.x = 0;
-            userObject.Posicion.y = 0;
-            userObject.height = "0";
         }
         private static void moveObject(Session Session, ClientMessage Message)
         {
@@ -114,8 +106,8 @@ namespace Proyect_Base.app.Handlers
                     }
                     if (!objectOnUser(Session, position, coordinates))
                     {
-                        updateUserObjectAttributes(userObject, Session.User, x, y, height, coordinates);
                         IslandArea islandArea = (IslandArea)Session.User.Area;
+                        updateUserObjectAttributes(userObject, islandArea.id, x, y, height, coordinates);
                         if (objectArea)
                         {
                             islandArea.moveObjectHandler(userObject);
@@ -143,10 +135,10 @@ namespace Proyect_Base.app.Handlers
                 return Session.User.getObjectById(id);
             }
         }
-        private static void updateUserObjectAttributes(UserObject userObject, User User, int x, int y, int height, string coordinates)
+        private static void updateUserObjectAttributes(UserObject userObject, int areaId, int x, int y, int height, string coordinates)
         {
             userObject.ocupe = coordinates;
-            userObject.ZonaID = User.Area.id;
+            userObject.ZonaID = areaId;
             userObject.Posicion.x = x;
             userObject.Posicion.y = y;
             userObject.height = height.ToString();
