@@ -30,51 +30,43 @@ namespace Proyect_Base.app.Models
         }
         public bool WalkByObjects(int x, int y)
         {
-            List<Posicion> PointOccuped = new List<Posicion>();
-            foreach (UserObject Item in this.objects)
+            List<Posicion> occupiedPoints = getObjectsCoordinates();
+            Posicion posicion = occupiedPoints.Find(i => i.x == x && i.y == y);
+            if (posicion != null)
             {
-                try
-                {
-                    if (Item.ocupe != "")
-                    {
-                        int s_x = 0;
-                        int s_y = 0;
-                        foreach (string punto in Item.ocupe.Split(','))
-                        {
-                            if (s_x == 0)
-                            {
-                                s_x = Convert.ToInt32(punto);
-                                continue;
-                            }
-                            if (s_y == 0)
-                            {
-                                s_y = Convert.ToInt32(punto);
-                                PointOccuped.Add(new Posicion(s_x, s_y));
-                            }
-                            s_x = 0;
-                            s_y = 0;
-                        }
-                    }
-                }
-                catch
-                {
-                    continue;
-                }
+                return false;
             }
-
-            foreach (Posicion pos in PointOccuped)
-            {
-                if (pos.x == x && pos.y == y)
-                {
-                    return false;
-                }
-            }
-
             return true;
         }
         //MODEL SETTERS
 
         //MODEL GETTERS
+        private List<Posicion> getObjectsCoordinates()
+        {
+            List<Posicion> occupiedPoints = new List<Posicion>();
+            List<UserObject> userObjects = this.objects.Where(i => i.ocupe != "").ToList();
+            foreach (UserObject Item in userObjects)
+            {
+                int s_x = 0;
+                int s_y = 0;
+                foreach (string punto in Item.ocupe.Split(','))
+                {
+                    if (s_x == 0)
+                    {
+                        s_x = Convert.ToInt32(punto);
+                        continue;
+                    }
+                    if (s_y == 0)
+                    {
+                        s_y = Convert.ToInt32(punto);
+                        occupiedPoints.Add(new Posicion(s_x, s_y));
+                    }
+                    s_x = 0;
+                    s_y = 0;
+                }
+            }
+            return occupiedPoints;
+        }
         public User getUser()
         {
             return UserDAO.getUserById(this.userCreatorId);

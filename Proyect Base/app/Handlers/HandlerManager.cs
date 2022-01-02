@@ -49,7 +49,10 @@ namespace Proyect_Base.app.Handlers
                         HandlersRegistrados[Message.GetInteger()](Session, Message);
                         return;
                     }
-                    App.Form.WriteLine("Falta: " + Message.GetInteger() + " -> " + Message.GetData());
+                    if (Config.APP_SEND_NOT_PROGRAMMED_PACKETS)
+                    {
+                        App.Form.WriteLine("Falta: " + Message.GetInteger() + " -> " + Message.GetData());
+                    }
                 }
             }
             catch (Exception ex)

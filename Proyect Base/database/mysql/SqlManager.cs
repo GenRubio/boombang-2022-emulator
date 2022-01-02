@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Proyect_Base;
+using Proyect_Base.logs;
 
 namespace BurBian_ULTIMANTE
 {

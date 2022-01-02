@@ -10,6 +10,7 @@ namespace Proyect_Base
     {
         //App config
         public static string APP_NAME = "BoomBang Server";
+        public static bool APP_SEND_NOT_PROGRAMMED_PACKETS = true;
 
         //FlashSocket config
         public static int FLASH_SOCKET_PORT = 2001;
