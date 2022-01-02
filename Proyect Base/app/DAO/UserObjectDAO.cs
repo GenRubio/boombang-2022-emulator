@@ -61,7 +61,7 @@ namespace Proyect_Base.app.DAO
             }
             return userObjects;
         }
-        public static void putUserObjectToArea(User User, UserObject userObject)
+        public static void putOrRemoveUserObjectFromArea(User User, UserObject userObject)
         {
             SqlClient client = SqlManager.GetClient();
             client.SetParameter("id", userObject.id);

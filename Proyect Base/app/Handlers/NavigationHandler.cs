@@ -73,23 +73,20 @@ namespace Proyect_Base.app.Handlers
         private static void loadArea(Session Session, ClientMessage Message)
         {
             if (UserMiddleware.userInArea(Session)){
-                if (Session.User.Area is PublicArea)
+                if (Session.User.Area is PublicArea publicArea)
                 {
-                    PublicArea publicArea = (PublicArea)Session.User.Area;
                     publicArea.loadAreaObjectsHandler(Session);
                     publicArea.loadAreaParametersHandler(Session);
                     publicArea.loadItems(Session);
                 }
-                else if(Session.User.Area is GameArea)
+                else if (Session.User.Area is GameArea gameArea)
                 {
-                    GameArea gameArea = (GameArea)Session.User.Area;
                     gameArea.loadAreaObjectsHandler(Session);
                     gameArea.loadAreaParametersHandler(Session);
                     gameArea.loadItems(Session);
                 }
-                else if (Session.User.Area is IslandArea)
+                else if (Session.User.Area is IslandArea islandArea)
                 {
-                    IslandArea islandArea = (IslandArea)Session.User.Area;
                     islandArea.loadAreaObjectsHandler(Session);
                     islandArea.loadAreaParametersHandler(Session);
                 }

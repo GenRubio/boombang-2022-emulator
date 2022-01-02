@@ -18,6 +18,63 @@ namespace Proyect_Base.app.Handlers
         public static void init()
         {
             HandlerManager.RegisterHandler(189136, new ProcessHandler(putObject), true);
+            HandlerManager.RegisterHandler(189145, new ProcessHandler(moveObject), true);
+            HandlerManager.RegisterHandler(189140, new ProcessHandler(removeObject), true);
+        }
+        private static void removeObject(Session Session, ClientMessage Message)
+        {
+            try
+            {
+                int id = Convert.ToInt32(Message.Parameters[0, 0]);
+
+                if (UserMiddleware.userInArea(Session) 
+                    && Session.User.Area is IslandArea islandArea
+                    && validateUserCreator(Session))
+                {
+                    UserObject userObject = getUserObject(Session, id, true);
+                    if (userObject != null)
+                    {
+                        updateUserObjectAttributesForRemove(userObject);
+                        islandArea.removeObjectHandler(userObject);
+                        Session.User.addObjectToBackpackHandler(Session, userObject);
+                        UserObjectDAO.putOrRemoveUserObjectFromArea(Session.User, userObject);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.error(ex);
+            }
+        }
+        private static void updateUserObjectAttributesForRemove(UserObject userObject)
+        {
+            userObject.ocupe = "";
+            userObject.ZonaID = 0;
+            userObject.Posicion.x = 0;
+            userObject.Posicion.y = 0;
+            userObject.height = "0";
+        }
+        private static void moveObject(Session Session, ClientMessage Message)
+        {
+            try
+            {
+                int id = int.Parse(Message.Parameters[0, 0]);
+                int x = int.Parse(Message.Parameters[1, 0]);
+                int y = int.Parse(Message.Parameters[2, 0]);
+                int height = int.Parse(Message.Parameters[3, 0]);
+                string coordinates = string.Empty;
+
+                if (UserMiddleware.userInArea(Session) 
+                    && Session.User.Area is IslandArea 
+                    && validateUserCreator(Session))
+                {
+                    putObjectArea(Session, id, x, y, coordinates, height, true);
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.error(ex);
+            }
         }
         private static void putObject(Session Session, ClientMessage Message)
         {
@@ -29,39 +86,61 @@ namespace Proyect_Base.app.Handlers
                 int height = Convert.ToInt32(Message.Parameters[3, 0]);
                 string coordinates = string.Empty;
 
-                if (UserMiddleware.userInArea(Session) && Session.User.Area is IslandArea)
+                if (UserMiddleware.userInArea(Session) 
+                    && Session.User.Area is IslandArea 
+                    && validateUserCreator(Session))
                 {
-                    if (validateUserCreator(Session))
-                    {
-                        UserObject userObject = Session.User.getObjectById(id);
-                        if (userObject != null)
-                        {
-                            ShopObject shopObject = ShopObjectCollection.getShopObjectById(userObject.ObjetoID);
-                            if (shopObject != null)
-                            {
-                                Point position = getPosition(Session, x, y);
-                                string shopObjectCoordinates = shopObject.something_1;
-                                if (shopObjectCoordinates != string.Empty)
-                                {
-                                    coordinates = Session.User.Area.MapaBytes.GetCoordinatesTakes(position, shopObjectCoordinates);
-                                }
-                                if (!objectOnUser(Session, position, coordinates))
-                                {
-                                    updateUserObjectAttributes(userObject, Session.User, x, y, height, coordinates);
-                                    IslandArea islandArea = (IslandArea)Session.User.Area;
-                                    Session.User.removeObjectBackpackHandler(Session, userObject);
-                                    islandArea.putObjectHandler(Session, userObject);
-                                    UserObjectDAO.putUserObjectToArea(Session.User, userObject);
-                                    islandArea.addObject(userObject);
-                                }
-                            }
-                        }
-                    }
+                    putObjectArea(Session, id, x, y, coordinates, height);
                 }
             }
             catch(Exception ex)
             {
                 Log.error(ex);
+            }
+        }
+        private static void putObjectArea(Session Session, int id, int x, int y, string coordinates, int height, bool objectArea = false)
+        {
+            UserObject userObject = getUserObject(Session, id, objectArea);
+            if (userObject != null)
+            {
+                ShopObject shopObject = ShopObjectCollection.getShopObjectById(userObject.ObjetoID);
+                if (shopObject != null)
+                {
+                    Point position = getPosition(Session, x, y);
+                    string shopObjectCoordinates = shopObject.something_1;
+                    if (shopObjectCoordinates != string.Empty)
+                    {
+                        coordinates = Session.User.Area.MapaBytes.GetCoordinatesTakes(position, shopObjectCoordinates);
+                    }
+                    if (!objectOnUser(Session, position, coordinates))
+                    {
+                        updateUserObjectAttributes(userObject, Session.User, x, y, height, coordinates);
+                        IslandArea islandArea = (IslandArea)Session.User.Area;
+                        if (objectArea)
+                        {
+                            islandArea.moveObjectHandler(userObject);
+                        }
+                        else
+                        {
+                            Session.User.removeObjectBackpackHandler(Session, userObject);
+                            islandArea.putObjectHandler(Session, userObject);
+                            islandArea.addObject(userObject);
+                        }
+                        UserObjectDAO.putOrRemoveUserObjectFromArea(Session.User, userObject);
+                    }
+                }
+            }
+        }
+        private static UserObject getUserObject(Session Session, int id, bool objectArea)
+        {
+            if (objectArea)
+            {
+                IslandArea islandArea = (IslandArea)Session.User.Area;
+                return islandArea.getObjectById(id);
+            }
+            else
+            {
+                return Session.User.getObjectById(id);
             }
         }
         private static void updateUserObjectAttributes(UserObject userObject, User User, int x, int y, int height, string coordinates)

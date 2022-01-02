@@ -83,6 +83,10 @@ namespace Proyect_Base.app.Models
         {
             return IslandDAO.getIslandById(this.islandId);
         }
+        public UserObject getObjectById(int id)
+        {
+            return this.objects.Find(i => i.id == id);
+        }
         //HANDLERS
         public void loadAreaObjectsHandler(Session Session)
         {
@@ -170,7 +174,7 @@ namespace Proyect_Base.app.Models
             ServerMessage server = new ServerMessage(new byte[] { 189, 136 });
             server.AppendParameter(userObject.id);
             server.AppendParameter(userObject.ObjetoID);
-            server.AppendParameter(this.id);
+            server.AppendParameter(userObject.ZonaID);
             server.AppendParameter(Session.User.id);
             server.AppendParameter(userObject.Posicion.x);
             server.AppendParameter(userObject.Posicion.y);
@@ -181,6 +185,22 @@ namespace Proyect_Base.app.Models
             server.AppendParameter(userObject.Color_1);
             server.AppendParameter(userObject.Color_2);
             server.AppendParameter(Convert.ToInt32(userObject.height) > 0 ? userObject.height : userObject.data);
+            SendData(server);
+        }
+        public void moveObjectHandler(UserObject userObject)
+        {
+            ServerMessage server = new ServerMessage(new byte[] { 189, 145 });
+            server.AppendParameter(userObject.id);
+            server.AppendParameter(userObject.Posicion.x);
+            server.AppendParameter(userObject.Posicion.y);
+            server.AppendParameter(userObject.height);
+            server.AppendParameter(userObject.ocupe);
+            SendData(server);
+        }
+        public void removeObjectHandler(UserObject userObject)
+        {
+            ServerMessage server = new ServerMessage(new byte[] { 189, 140 });
+            server.AppendParameter(userObject.id);
             SendData(server);
         }
     }
