@@ -27,7 +27,7 @@ namespace Proyect_Base.app.Handlers
                 int x = Convert.ToInt32(Message.Parameters[1, 0]);
                 int y = Convert.ToInt32(Message.Parameters[2, 0]);
                 int height = Convert.ToInt32(Message.Parameters[3, 0]);
-                string espacioOcupado = string.Empty;
+                string coordinates = string.Empty;
 
                 if (UserMiddleware.userInArea(Session) && Session.User.Area is IslandArea)
                 {
@@ -40,14 +40,14 @@ namespace Proyect_Base.app.Handlers
                             if (shopObject != null)
                             {
                                 Point position = getPosition(Session, x, y);
-                                string cordenadas_objeto = shopObject.something_1;
-                                if (cordenadas_objeto != "")
+                                string shopObjectCoordinates = shopObject.something_1;
+                                if (shopObjectCoordinates != string.Empty)
                                 {
-                                    espacioOcupado = Session.User.Area.MapaBytes.GetCoordinatesTakes(position, cordenadas_objeto);
+                                    coordinates = Session.User.Area.MapaBytes.GetCoordinatesTakes(position, shopObjectCoordinates);
                                 }
-                                if (!objectOnUser(Session, position, espacioOcupado))
+                                if (!objectOnUser(Session, position, coordinates))
                                 {
-                                    updateUserObjectAttributes(userObject, Session.User, x, y, height, espacioOcupado);
+                                    updateUserObjectAttributes(userObject, Session.User, x, y, height, coordinates);
                                     IslandArea islandArea = (IslandArea)Session.User.Area;
                                     Session.User.removeObjectBackpackHandler(Session, userObject);
                                     islandArea.putObjectHandler(Session, userObject);
@@ -64,17 +64,17 @@ namespace Proyect_Base.app.Handlers
                 Log.error(ex);
             }
         }
-        private static void updateUserObjectAttributes(UserObject userObject, User User, int x, int y, int height, string espacioOcupado)
+        private static void updateUserObjectAttributes(UserObject userObject, User User, int x, int y, int height, string coordinates)
         {
-            userObject.ocupe = espacioOcupado;
+            userObject.ocupe = coordinates;
             userObject.ZonaID = User.Area.id;
             userObject.Posicion.x = x;
             userObject.Posicion.y = y;
             userObject.height = height.ToString();
         }
-        private static bool objectOnUser(Session Session, Point position, string espacioOcupado)
+        private static bool objectOnUser(Session Session, Point position, string coordinates)
         {
-            if (espacioOcupado != string.Empty)
+            if (coordinates != string.Empty)
             {
                 Session OnPosition = Session.User.Area.getSession(position.X, position.Y);
                 if (OnPosition != null)

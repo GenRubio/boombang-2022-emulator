@@ -14,6 +14,7 @@ namespace Proyect_Base.app.Collections
             GameAreaCollection.init();
             ItemAreaCollection.init();
             ShopObjectCollection.init();
+            SpecialAreaCollection.init();
         }
     }
 }

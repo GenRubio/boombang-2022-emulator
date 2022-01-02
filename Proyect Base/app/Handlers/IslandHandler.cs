@@ -1,4 +1,5 @@
-﻿using Proyect_Base.app.Connection;
+﻿using Proyect_Base.app.Collections;
+using Proyect_Base.app.Connection;
 using Proyect_Base.app.DAO;
 using Proyect_Base.app.Helpers;
 using Proyect_Base.app.Middlewares;
@@ -33,6 +34,7 @@ namespace Proyect_Base.app.Handlers
 
                 if (UserMiddleware.userOutOfArea(Session) && CharactersHelper.validTextExtend(newName))
                 {
+                    SpecialAreaCollection.updateNameIslandArea(Session.User, id, newName);
                     IslandAreaDAO.updateNameIslandArea(Session.User, islaId, id, newName);
                 }
             }
@@ -48,6 +50,7 @@ namespace Proyect_Base.app.Handlers
                 int id = int.Parse(Message.Parameters[0, 0]);
                 if (UserMiddleware.userOutOfArea(Session))
                 {
+                    SpecialAreaCollection.removeIslandArea(Session.User, id);
                     IslandAreaDAO.deleteIslandAreaById(Session.User, id);
                 }
             }
@@ -76,6 +79,7 @@ namespace Proyect_Base.app.Handlers
                             IslandArea islandArea = IslandAreaDAO.makeIslandArea(island, Session.User, name, model, color_1, color_2);
                             if (islandArea != null)
                             {
+                                SpecialAreaCollection.addIslandArea(islandArea);
                                 Session.SendData(new ServerMessage(new byte[] { 189, 121 }, new object[] { 
                                     0, 0, island.id, islandArea.id, islandArea.id }));
                             }

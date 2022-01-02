@@ -54,6 +54,7 @@
     <Compile Include="app\Api\API.cs" />
     <Compile Include="app\Collections\ItemAreaCollection.cs" />
     <Compile Include="app\Collections\ShopObjectCollection.cs" />
+    <Compile Include="app\Collections\SpecialAreaCollection.cs" />
     <Compile Include="app\Controllers\CollectionsController.cs" />
     <Compile Include="app\Collections\GameAreaCollection.cs" />
     <Compile Include="app\Collections\PublicAreaCollection.cs" />

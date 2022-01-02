@@ -158,7 +158,7 @@ namespace Proyect_Base.app.Models
         {
             ServerMessage server = new ServerMessage(new byte[] { 128, 122 });
             getUserDataPackage(Session, server);
-            Session.SendData(server);
+            SendData(server);
         }
         public ServerMessage loadUsersInAreaHandler(ServerMessage server)
         {

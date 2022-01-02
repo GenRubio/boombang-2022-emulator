@@ -74,5 +74,17 @@ namespace Proyect_Base.app.DAO
             }
             return null;
         }
+        public static List<Island> getIslandsByName(string name)
+        {
+            List<Island> islands = new List<Island>();
+            SqlClient client = SqlManager.GetClient();
+            client.SetParameter("name", name);
+            foreach (DataRow row in client.ExecuteQueryTable("SELECT * FROM islas " +
+                "WHERE Nombre LIKE '%" + name + "%'").Rows)
+            {
+                islands.Add(new Island(row));
+            }
+            return islands;
+        }
     }
 }

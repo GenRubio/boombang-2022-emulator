@@ -1,2 +1,9 @@
 
 The logs file was created successfully.
+-----------------------------------------------------------------------------
+Date : 02/01/2022 9:43:45
+
+System.NullReferenceException
+Message : Referencia a objeto no establecida como instancia de un objeto.
+StackTrace :    en Proyect_Base.app.DAO.IslandDAO.getIslandsByName(String name) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\DAO\IslandDAO.cs:línea 82
+   en Proyect_Base.app.Handlers.NavigationHandler.search(Session Session, ClientMessage Message) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Handlers\NavigationHandler.cs:línea 36

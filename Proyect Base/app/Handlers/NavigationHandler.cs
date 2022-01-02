@@ -18,10 +18,34 @@ namespace Proyect_Base.app.Handlers
         public static void init()
         {
             HandlerManager.RegisterHandler(15432, new ProcessHandler(loadNavBar), true);
+            HandlerManager.RegisterHandler(195, new ProcessHandler(search), true);
             HandlerManager.RegisterHandler(128125, new ProcessHandler(goToArea), true);
             HandlerManager.RegisterHandler(128120, new ProcessHandler(goToArea), true);
             HandlerManager.RegisterHandler(128121, new ProcessHandler(loadArea), true);
             HandlerManager.RegisterHandler(193, new ProcessHandler(loadUserIslands), true);
+        }
+        private static void search(Session Session, ClientMessage Message)
+        {
+            try
+            {
+                string name = Message.Parameters[1, 0];
+
+                if (UserMiddleware.userOutOfArea(Session))
+                {
+                    ServerMessage server = new ServerMessage(new byte[] { 195 });
+                    server.AppendParameter(Message.Parameters[0, 0]);
+                    List<Island> islands = IslandDAO.getIslandsByName(name);
+                    foreach(Island island in islands)
+                    {
+                        server.AppendParameter(new object[] { 0, 0, 1, island.name, 0, island.id, 0, 0, 0, 0 });
+                    }
+                    Session.SendData(server);
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.error(ex);
+            }
         }
         private static void loadUserIslands(Session Session, ClientMessage Message)
         {
@@ -156,7 +180,7 @@ namespace Proyect_Base.app.Handlers
         }
         private static void loadSpecialArea(int id, Session Session)
         {
-            SpecialArea specialArea = SpecialAreaDAO.getSpecialAreaById(id);
+            SpecialArea specialArea = SpecialAreaCollection.getSpecialAreaById(id);
             if (specialArea != null && specialArea.users.Count < specialArea.max_visitors)
             {
                 if (UserMiddleware.userInArea(Session))

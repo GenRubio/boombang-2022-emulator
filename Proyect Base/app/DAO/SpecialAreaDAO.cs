@@ -12,6 +12,26 @@ namespace Proyect_Base.app.DAO
 {
     class SpecialAreaDAO
     {
+        public static List<SpecialArea> getIslandAreas()
+        {
+            List<SpecialArea> specialAreas = new List<SpecialArea>();
+            try
+            {
+                SqlClient client = SqlManager.GetClient();
+                foreach (DataRow row in client.ExecuteQueryTable("SELECT * FROM escenarios_privados").Rows)
+                {
+                    if ((int)row["categoria"] == 2)
+                    {
+                        specialAreas.Add(new IslandArea(row));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.error(ex);
+            }
+            return specialAreas;
+        }
         public static SpecialArea getSpecialAreaById(int id)
         {
             try
@@ -29,7 +49,7 @@ namespace Proyect_Base.app.DAO
                     return null;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.error(ex);
             }

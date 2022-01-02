@@ -1,4 +1,5 @@
-﻿using Proyect_Base.app.Connection;
+﻿using Proyect_Base.app.Collections;
+using Proyect_Base.app.Connection;
 using Proyect_Base.app.DAO;
 using Proyect_Base.forms;
 using System;
@@ -40,7 +41,7 @@ namespace Proyect_Base.app.Models
         }
         public List<IslandArea> getAreas()
         {
-            return IslandAreaDAO.getIslandAreasByIslandId(this.id);
+            return SpecialAreaCollection.getIslandAreasByIslandId(this.id);
         }
         //HANDLERS
         public void loadIslandHandler(Session Session)
