@@ -17,12 +17,34 @@ namespace Proyect_Base.app.Handlers
     {
         public static void init()
         {
+            HandlerManager.RegisterHandler(189147, new ProcessHandler(removeUserArea), true);
             HandlerManager.RegisterHandler(189146, new ProcessHandler(changeColorsArea), true);
             HandlerManager.RegisterHandler(189136, new ProcessHandler(putObject), true);
             HandlerManager.RegisterHandler(189145, new ProcessHandler(moveObject), true);
             HandlerManager.RegisterHandler(189140, new ProcessHandler(removeObject), true);
             HandlerManager.RegisterHandler(189143, new ProcessHandler(changeRotationObject), true);
             HandlerManager.RegisterHandler(189142, new ProcessHandler(changeColorsObject), true);
+        }
+        private static void removeUserArea(Session Session, ClientMessage Message)
+        {
+            try
+            {
+                int id = int.Parse(Message.Parameters[0, 0]);
+
+                if (validateUserCreator(Session))
+                {
+                    IslandArea islandArea = (IslandArea)Session.User.Area;
+                    Session sessionUser = islandArea.getSession(id);
+                    if(sessionUser != null)
+                    {
+                        islandArea.removeUserHandler(sessionUser);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.error(ex);
+            }
         }
         private static void changeColorsArea(Session Session, ClientMessage Message)
         {
@@ -223,7 +245,7 @@ namespace Proyect_Base.app.Handlers
                 return Session.User.getObjectById(id);
             }
         }
-        private static void updateUserObjectAttributes(UserObject userObject, 
+        public static void updateUserObjectAttributes(UserObject userObject, 
             int areaId, int x, int y, int height, string coordinates, int rotation, string color, string colorRGB)
         {
             userObject.ocupe = coordinates;
