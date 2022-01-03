@@ -17,11 +17,33 @@ namespace Proyect_Base.app.Handlers
     {
         public static void init()
         {
+            HandlerManager.RegisterHandler(189146, new ProcessHandler(changeColorsArea), true);
             HandlerManager.RegisterHandler(189136, new ProcessHandler(putObject), true);
             HandlerManager.RegisterHandler(189145, new ProcessHandler(moveObject), true);
             HandlerManager.RegisterHandler(189140, new ProcessHandler(removeObject), true);
             HandlerManager.RegisterHandler(189143, new ProcessHandler(changeRotationObject), true);
             HandlerManager.RegisterHandler(189142, new ProcessHandler(changeColorsObject), true);
+        }
+        private static void changeColorsArea(Session Session, ClientMessage Message)
+        {
+            try
+            {
+                string colors = Message.Parameters[0, 0];
+                string colorsRGB = Message.Parameters[1, 0];
+
+                if (validateUserCreator(Session))
+                {
+                    IslandArea islandArea = (IslandArea)Session.User.Area;
+                    islandArea.color_1 = colors;
+                    islandArea.color_2 = colorsRGB;
+                    islandArea.changeColorsAreaHandler();
+                    IslandAreaDAO.updateColors(islandArea);
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.error(ex);
+            }
         }
         private static void changeColorsObject(Session Session, ClientMessage Message)
         {

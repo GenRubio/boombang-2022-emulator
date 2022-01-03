@@ -212,5 +212,9 @@ namespace Proyect_Base.app.Models
             server.AppendParameter(userObject.ObjetoID);
             SendData(server);
         }
+        public void changeColorsAreaHandler()
+        {
+            SendData(new ServerMessage(new byte[] { 189, 146 }, new object[] { this.id, this.color_1, this.color_2 }));
+        }
     }
 }

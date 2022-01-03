@@ -111,5 +111,15 @@ namespace Proyect_Base.app.DAO
                 Log.error(ex);
             }
         }
+        public static void updateColors(IslandArea islandArea)
+        {
+            SqlClient client = SqlManager.GetClient();
+            client.SetParameter("id", islandArea.id);
+            client.SetParameter("color_1", islandArea.color_1);
+            client.SetParameter("color_2", islandArea.color_2);
+            client.ExecuteNonQuery("UPDATE escenarios_privados " +
+                "SET color_1 = @color_1, color_2 = @color_2 " +
+                "WHERE id = @id");
+        }
     }
 }
