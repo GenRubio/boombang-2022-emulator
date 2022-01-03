@@ -195,5 +195,22 @@ namespace Proyect_Base.app.Models
             server.AppendParameter(userObject.id);
             SendData(server);
         }
+        public void rotateObjectHandler(UserObject userObject)
+        {
+            ServerMessage server = new ServerMessage(new byte[] { 189, 143 });
+            server.AppendParameter(userObject.id);
+            server.AppendParameter(userObject.rotation);
+            server.AppendParameter(userObject.ocupe);
+            SendData(server);
+        }
+        public void changeObjectColorsHandler(UserObject userObject)
+        {
+            ServerMessage server = new ServerMessage(new byte[] { 189, 142 });
+            server.AppendParameter(userObject.id);
+            server.AppendParameter(userObject.Color_1);
+            server.AppendParameter(userObject.Color_2);
+            server.AppendParameter(userObject.ObjetoID);
+            SendData(server);
+        }
     }
 }

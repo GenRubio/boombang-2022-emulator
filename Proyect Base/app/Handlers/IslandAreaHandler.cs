@@ -20,6 +20,74 @@ namespace Proyect_Base.app.Handlers
             HandlerManager.RegisterHandler(189136, new ProcessHandler(putObject), true);
             HandlerManager.RegisterHandler(189145, new ProcessHandler(moveObject), true);
             HandlerManager.RegisterHandler(189140, new ProcessHandler(removeObject), true);
+            HandlerManager.RegisterHandler(189143, new ProcessHandler(changeRotationObject), true);
+            HandlerManager.RegisterHandler(189142, new ProcessHandler(changeColorsObject), true);
+        }
+        private static void changeColorsObject(Session Session, ClientMessage Message)
+        {
+            try
+            {
+                int id = Convert.ToInt32(Message.Parameters[0, 0]);
+                string color = Message.Parameters[1, 0];
+                string colorRGB = Message.Parameters[2, 0];
+                int shopObjectId = Convert.ToInt32(Message.Parameters[3, 0]);
+
+                if (validateUserCreator(Session))
+                {
+                    UserObject userObject = getUserObject(Session, id, true);
+                    if (userObject != null)
+                    {
+                        IslandArea islandArea = (IslandArea)Session.User.Area;
+                        updateUserObjectAttributes(userObject,
+                            Session.User.Area.id,
+                            userObject.Posicion.x,
+                            userObject.Posicion.y,
+                            Convert.ToInt32(userObject.height),
+                            userObject.ocupe,
+                            userObject.rotation,
+                            color,
+                            colorRGB);
+                        islandArea.changeObjectColorsHandler(userObject);
+                        UserObjectDAO.updateUserObjectColorsInArea(userObject);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.error(ex);
+            }
+        }
+        private static void changeRotationObject(Session Session, ClientMessage Message)
+        {
+            try
+            {
+                int id = Convert.ToInt32(Message.Parameters[0, 0]);
+                int rotation = Convert.ToInt32(Message.Parameters[6, 0]);
+
+                if (validateUserCreator(Session))
+                {
+                    UserObject userObject = getUserObject(Session, id, true);
+                    if (userObject != null)
+                    {
+                        IslandArea islandArea = (IslandArea)Session.User.Area;
+                        updateUserObjectAttributes(userObject, 
+                            Session.User.Area.id, 
+                            userObject.Posicion.x, 
+                            userObject.Posicion.y, 
+                            Convert.ToInt32(userObject.height), 
+                            userObject.ocupe, 
+                            rotation,
+                            userObject.Color_1, 
+                            userObject.Color_2);
+                        islandArea.rotateObjectHandler(userObject);
+                        UserObjectDAO.rotateUserObjectInArea(userObject);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.error(ex);
+            }
         }
         private static void removeObject(Session Session, ClientMessage Message)
         {
@@ -27,14 +95,14 @@ namespace Proyect_Base.app.Handlers
             {
                 int id = Convert.ToInt32(Message.Parameters[0, 0]);
 
-                if (UserMiddleware.userInArea(Session) 
-                    && Session.User.Area is IslandArea islandArea
-                    && validateUserCreator(Session))
+                if (validateUserCreator(Session))
                 {
                     UserObject userObject = getUserObject(Session, id, true);
                     if (userObject != null)
                     {
-                        updateUserObjectAttributes(userObject, Session.User.Area.id, 0, 0, 0, "");
+                        IslandArea islandArea = (IslandArea)Session.User.Area;
+                        updateUserObjectAttributes(userObject, Session.User.Area.id, 0, 0, 0, "", userObject.rotation,
+                            userObject.Color_1, userObject.Color_2);
                         islandArea.removeObjectHandler(userObject);
                         Session.User.addObjectToBackpackHandler(Session, userObject);
                         UserObjectDAO.putOrRemoveUserObjectFromArea(Session.User, userObject);
@@ -56,9 +124,7 @@ namespace Proyect_Base.app.Handlers
                 int height = int.Parse(Message.Parameters[3, 0]);
                 string coordinates = string.Empty;
 
-                if (UserMiddleware.userInArea(Session) 
-                    && Session.User.Area is IslandArea 
-                    && validateUserCreator(Session))
+                if (validateUserCreator(Session))
                 {
                     putObjectArea(Session, id, x, y, coordinates, height, true);
                 }
@@ -78,9 +144,7 @@ namespace Proyect_Base.app.Handlers
                 int height = Convert.ToInt32(Message.Parameters[3, 0]);
                 string coordinates = string.Empty;
 
-                if (UserMiddleware.userInArea(Session) 
-                    && Session.User.Area is IslandArea 
-                    && validateUserCreator(Session))
+                if (validateUserCreator(Session))
                 {
                     putObjectArea(Session, id, x, y, coordinates, height);
                 }
@@ -90,7 +154,8 @@ namespace Proyect_Base.app.Handlers
                 Log.error(ex);
             }
         }
-        private static void putObjectArea(Session Session, int id, int x, int y, string coordinates, int height, bool objectArea = false)
+        private static void putObjectArea(Session Session, 
+            int id, int x, int y, string coordinates, int height, bool objectArea = false)
         {
             UserObject userObject = getUserObject(Session, id, objectArea);
             if (userObject != null)
@@ -107,7 +172,8 @@ namespace Proyect_Base.app.Handlers
                     if (!objectOnUser(Session, position, coordinates))
                     {
                         IslandArea islandArea = (IslandArea)Session.User.Area;
-                        updateUserObjectAttributes(userObject, islandArea.id, x, y, height, coordinates);
+                        updateUserObjectAttributes(userObject, islandArea.id, x, y, height, coordinates, 
+                            userObject.rotation, userObject.Color_1, userObject.Color_2);
                         if (objectArea)
                         {
                             islandArea.moveObjectHandler(userObject);
@@ -135,13 +201,17 @@ namespace Proyect_Base.app.Handlers
                 return Session.User.getObjectById(id);
             }
         }
-        private static void updateUserObjectAttributes(UserObject userObject, int areaId, int x, int y, int height, string coordinates)
+        private static void updateUserObjectAttributes(UserObject userObject, 
+            int areaId, int x, int y, int height, string coordinates, int rotation, string color, string colorRGB)
         {
             userObject.ocupe = coordinates;
             userObject.ZonaID = areaId;
             userObject.Posicion.x = x;
             userObject.Posicion.y = y;
             userObject.height = height.ToString();
+            userObject.rotation = rotation;
+            userObject.Color_1 = color;
+            userObject.Color_2 = colorRGB;
         }
         private static bool objectOnUser(Session Session, Point position, string coordinates)
         {
@@ -158,14 +228,15 @@ namespace Proyect_Base.app.Handlers
         }
         private static Point getPosition(Session Session, int x, int y)
         {
-            Point P = new Point(x, y);
-            Point Position = Session.User.Area.MapaBytes.GetCoordinates(P);
-            return Position;
+            Point point = new Point(x, y);
+            Point position = Session.User.Area.MapaBytes.GetCoordinates(point);
+            return position;
         }
         private static bool validateUserCreator(Session Session)
         {
-            IslandArea islandArea = (IslandArea)Session.User.Area;
-            if (islandArea.userCreatorId == Session.User.id)
+            if(UserMiddleware.userInArea(Session)
+                && Session.User.Area is IslandArea islandArea
+                && islandArea.userCreatorId == Session.User.id)
             {
                 return true;
             }

@@ -75,6 +75,24 @@ namespace Proyect_Base.app.DAO
                 "SET sala_id = @ds, x = @sd, y = @y, height = @height, UserID = @userid, ocupe = @ocupe  " +
                 "WHERE id = @id");
         }
+        public static void rotateUserObjectInArea(UserObject userObject)
+        {
+            SqlClient client = SqlManager.GetClient();
+            client.SetParameter("id", userObject.id);
+            client.SetParameter("r", userObject.rotation);
+            client.ExecuteNonQuery("UPDATE boombang_buyitems SET rotation = @r WHERE id = @id");
+        }
+        public static void updateUserObjectColorsInArea(UserObject userObject)
+        {
+            SqlClient client = SqlManager.GetClient();
+            client.SetParameter("id", userObject.id);
+            client.SetParameter("itemid", userObject.ObjetoID);
+            client.SetParameter("color", userObject.Color_1);
+            client.SetParameter("rgb", userObject.Color_2);
+            client.ExecuteNonQuery("UPDATE boombang_buyitems " +
+                "SET color = @color, rgb_ratio = @rgb " +
+                "WHERE id = @id AND ItemID = @itemid");
+        }
         public static UserObject getUserObjectByItemAndUserIds(int userId, int itemId)
         {
             SqlClient client = SqlManager.GetClient();
