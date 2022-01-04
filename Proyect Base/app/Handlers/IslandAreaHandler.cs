@@ -82,7 +82,7 @@ namespace Proyect_Base.app.Handlers
                     if (userObject != null)
                     {
                         IslandArea islandArea = (IslandArea)Session.User.Area;
-                        userObject.updateAttributes(Session.User.Area.id,
+                        userObject.updateAttributes(Session.User, Session.User.Area.id,
                             userObject.Posicion.x,
                             userObject.Posicion.y,
                             Convert.ToInt32(userObject.height),
@@ -119,7 +119,7 @@ namespace Proyect_Base.app.Handlers
                         if (!objectOnUser(Session, position, coordinates))
                         {
                             IslandArea islandArea = (IslandArea)Session.User.Area;
-                            userObject.updateAttributes(Session.User.Area.id,
+                            userObject.updateAttributes(Session.User, Session.User.Area.id,
                                 x,
                                 y,
                                 Convert.ToInt32(userObject.height),
@@ -150,7 +150,7 @@ namespace Proyect_Base.app.Handlers
                     if (userObject != null)
                     {
                         IslandArea islandArea = (IslandArea)Session.User.Area;
-                        userObject.updateAttributes(0, 0, 0, 0, "", 0,
+                        userObject.updateAttributes(Session.User, 0, 0, 0, 0, "", 0,
                             userObject.Color_1, userObject.Color_2);
                         islandArea.removeObjectHandler(userObject);
                         Session.User.addObjectToBackpackHandler(Session, userObject);
@@ -218,7 +218,7 @@ namespace Proyect_Base.app.Handlers
                 if (!objectOnUser(Session, position, coordinates))
                 {
                     IslandArea islandArea = (IslandArea)Session.User.Area;
-                    userObject.updateAttributes(islandArea.id, x, y, height, coordinates,
+                    userObject.updateAttributes(Session.User, islandArea.id, x, y, height, coordinates,
                         userObject.rotation, userObject.Color_1, userObject.Color_2);
                     if (objectArea)
                     {

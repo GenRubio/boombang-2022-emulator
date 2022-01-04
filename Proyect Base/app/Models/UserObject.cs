@@ -46,16 +46,33 @@ namespace Proyect_Base.app.Models
             this.swf = (string)row["swf"];
         }
         //FUNCTIONS
-        public void updateAttributes(int areaId, int x, int y, int height, string coordinates, int rotation, string color, string colorRGB)
+        public void updateAttributes(User User, 
+            int areaId, int x, int y, int height, string coordinates, int rotation, string color, string colorRGB)
         {
-            this.ocupe = coordinates;
-            this.ZonaID = areaId;
-            this.Posicion.x = x;
-            this.Posicion.y = y;
-            this.height = height.ToString();
-            this.rotation = rotation;
-            this.Color_1 = color;
-            this.Color_2 = colorRGB;
+            updateAttributesUserObjectOrAreaObject(this, areaId, x, y, 
+                height, coordinates, rotation, color, colorRGB);
+
+            if (User != null)
+            {
+                UserObject userObject = User.getObjectById(this.id);
+                if (userObject != null)
+                {
+                    updateAttributesUserObjectOrAreaObject(userObject, areaId, x, y,
+                        height, coordinates, rotation, color, colorRGB);
+                }
+            }
+        }
+        private void updateAttributesUserObjectOrAreaObject(UserObject userObject, 
+            int areaId, int x, int y, int height, string coordinates, int rotation, string color, string colorRGB)
+        {
+            userObject.ocupe = coordinates;
+            userObject.ZonaID = areaId;
+            userObject.Posicion.x = x;
+            userObject.Posicion.y = y;
+            userObject.height = height.ToString();
+            userObject.rotation = rotation;
+            userObject.Color_1 = color;
+            userObject.Color_2 = colorRGB;
         }
         //MODEL SETTERS
 
