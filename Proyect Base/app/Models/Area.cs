@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Proyect_Base.app.Models
@@ -151,6 +152,14 @@ namespace Proyect_Base.app.Models
         {
             if (removeUser(Session))
             {
+                Session.SendData(new ServerMessage(new byte[] { 153 }));
+            }
+        }
+        public void removeUserToFlowerPowerHandler(Session Session)
+        {
+            if (removeUser(Session))
+            {
+                Thread.Sleep(new TimeSpan(0, 0, 0, 0, 500));
                 Session.SendData(new ServerMessage(new byte[] { 153 }));
             }
         }

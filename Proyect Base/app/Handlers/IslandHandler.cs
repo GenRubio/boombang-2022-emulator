@@ -48,8 +48,14 @@ namespace Proyect_Base.app.Handlers
             try
             {
                 int id = int.Parse(Message.Parameters[0, 0]);
+
                 if (UserMiddleware.userOutOfArea(Session))
                 {
+                    IslandArea islandArea = SpecialAreaCollection.getIslandAreaById(id);
+                    if (islandArea != null)
+                    {
+                        islandArea.removeAllUsers();
+                    }
                     SpecialAreaCollection.removeIslandArea(Session.User, id);
                     IslandAreaDAO.deleteIslandAreaById(Session.User, id);
                 }
@@ -100,10 +106,15 @@ namespace Proyect_Base.app.Handlers
 
                 if (UserMiddleware.userOutOfArea(Session))
                 {
-                    if (Session.User.removeIsland(id))
+                    Island island = Session.User.getIsland(id);
+                    if (island != null)
                     {
-                        IslandDAO.deleteIslandById(id);
-                        IslandAreaDAO.deleteIslandAreaByIslandId(Session.User, id);
+                        if (Session.User.removeIsland(id))
+                        {
+                            IslandAreaDAO.deleteIslandAreaByIslandId(Session.User, id);
+                            island.removeUsersFromAllAreasHandler();
+                            IslandDAO.deleteIslandById(id);
+                        }
                     }
                 }
             }

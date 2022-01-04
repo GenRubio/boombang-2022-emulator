@@ -325,6 +325,14 @@ namespace Proyect_Base.app.Models
             }
             return null;
         }
+        public Island getUserIsland(int id)
+        {
+            if (this.islands.ContainsKey(id))
+            {
+                return this.islands[id];
+            }
+            return null;
+        }
         //FUNCTIONS
         public bool removeIsland(int id)
         {

@@ -109,5 +109,12 @@ namespace Proyect_Base.app.Models
             }
             return server;
         }
+        public void removeUsersFromAllAreasHandler()
+        {
+            foreach(IslandArea islandArea in getAreas())
+            {
+                islandArea.removeAllUsersToFlowerPower();
+            }
+        }
     }
 }

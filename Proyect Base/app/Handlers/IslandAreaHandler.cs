@@ -82,8 +82,7 @@ namespace Proyect_Base.app.Handlers
                     if (userObject != null)
                     {
                         IslandArea islandArea = (IslandArea)Session.User.Area;
-                        updateUserObjectAttributes(userObject,
-                            Session.User.Area.id,
+                        userObject.updateAttributes(Session.User.Area.id,
                             userObject.Posicion.x,
                             userObject.Posicion.y,
                             Convert.ToInt32(userObject.height),
@@ -107,24 +106,30 @@ namespace Proyect_Base.app.Handlers
             {
                 int id = Convert.ToInt32(Message.Parameters[0, 0]);
                 int rotation = Convert.ToInt32(Message.Parameters[6, 0]);
+                int x = Convert.ToInt32(Message.Parameters[2, 0]);
+                int y = Convert.ToInt32(Message.Parameters[3, 0]);
+                string coordinates = Message.Parameters[4, 0];
 
                 if (validateUserCreator(Session))
                 {
                     UserObject userObject = getUserObject(Session, id, true);
                     if (userObject != null)
                     {
-                        IslandArea islandArea = (IslandArea)Session.User.Area;
-                        updateUserObjectAttributes(userObject, 
-                            Session.User.Area.id, 
-                            userObject.Posicion.x, 
-                            userObject.Posicion.y, 
-                            Convert.ToInt32(userObject.height), 
-                            userObject.ocupe, 
-                            rotation,
-                            userObject.Color_1, 
-                            userObject.Color_2);
-                        islandArea.rotateObjectHandler(userObject);
-                        UserObjectDAO.rotateUserObjectInArea(userObject);
+                        Point position = getPosition(Session, x, y);
+                        if (!objectOnUser(Session, position, coordinates))
+                        {
+                            IslandArea islandArea = (IslandArea)Session.User.Area;
+                            userObject.updateAttributes(Session.User.Area.id,
+                                x,
+                                y,
+                                Convert.ToInt32(userObject.height),
+                                coordinates,
+                                rotation,
+                                userObject.Color_1,
+                                userObject.Color_2);
+                            islandArea.rotateObjectHandler(userObject);
+                            UserObjectDAO.rotateUserObjectInArea(userObject);
+                        }
                     }
                 }
             }
@@ -145,7 +150,7 @@ namespace Proyect_Base.app.Handlers
                     if (userObject != null)
                     {
                         IslandArea islandArea = (IslandArea)Session.User.Area;
-                        updateUserObjectAttributes(userObject, Session.User.Area.id, 0, 0, 0, "", userObject.rotation,
+                        userObject.updateAttributes(0, 0, 0, 0, "", 0,
                             userObject.Color_1, userObject.Color_2);
                         islandArea.removeObjectHandler(userObject);
                         Session.User.addObjectToBackpackHandler(Session, userObject);
@@ -204,32 +209,28 @@ namespace Proyect_Base.app.Handlers
             UserObject userObject = getUserObject(Session, id, objectArea);
             if (userObject != null)
             {
-                ShopObject shopObject = ShopObjectCollection.getShopObjectById(userObject.ObjetoID);
-                if (shopObject != null)
+                Point position = getPosition(Session, x, y);
+                string shopObjectCoordinates = getShopObjectCoordinates(Session, userObject, position);
+                if (shopObjectCoordinates != null)
                 {
-                    Point position = getPosition(Session, x, y);
-                    string shopObjectCoordinates = shopObject.something_1;
-                    if (shopObjectCoordinates != string.Empty)
+                    coordinates = shopObjectCoordinates;
+                }
+                if (!objectOnUser(Session, position, coordinates))
+                {
+                    IslandArea islandArea = (IslandArea)Session.User.Area;
+                    userObject.updateAttributes(islandArea.id, x, y, height, coordinates,
+                        userObject.rotation, userObject.Color_1, userObject.Color_2);
+                    if (objectArea)
                     {
-                        coordinates = Session.User.Area.MapaBytes.GetCoordinatesTakes(position, shopObjectCoordinates);
+                        islandArea.moveObjectHandler(userObject);
                     }
-                    if (!objectOnUser(Session, position, coordinates))
+                    else
                     {
-                        IslandArea islandArea = (IslandArea)Session.User.Area;
-                        updateUserObjectAttributes(userObject, islandArea.id, x, y, height, coordinates, 
-                            userObject.rotation, userObject.Color_1, userObject.Color_2);
-                        if (objectArea)
-                        {
-                            islandArea.moveObjectHandler(userObject);
-                        }
-                        else
-                        {
-                            Session.User.removeObjectBackpackHandler(Session, userObject);
-                            islandArea.putObjectHandler(Session, userObject);
-                            islandArea.addObject(userObject);
-                        }
-                        UserObjectDAO.putOrRemoveUserObjectFromArea(Session.User, userObject);
+                        Session.User.removeObjectBackpackHandler(Session, userObject);
+                        islandArea.putObjectHandler(Session, userObject);
+                        islandArea.addObject(userObject);
                     }
+                    UserObjectDAO.putOrRemoveUserObjectFromArea(Session.User, userObject);
                 }
             }
         }
@@ -245,18 +246,6 @@ namespace Proyect_Base.app.Handlers
                 return Session.User.getObjectById(id);
             }
         }
-        public static void updateUserObjectAttributes(UserObject userObject, 
-            int areaId, int x, int y, int height, string coordinates, int rotation, string color, string colorRGB)
-        {
-            userObject.ocupe = coordinates;
-            userObject.ZonaID = areaId;
-            userObject.Posicion.x = x;
-            userObject.Posicion.y = y;
-            userObject.height = height.ToString();
-            userObject.rotation = rotation;
-            userObject.Color_1 = color;
-            userObject.Color_2 = colorRGB;
-        }
         private static bool objectOnUser(Session Session, Point position, string coordinates)
         {
             if (coordinates != string.Empty)
@@ -269,6 +258,19 @@ namespace Proyect_Base.app.Handlers
                 }
             }
             return false;
+        }
+        private static string getShopObjectCoordinates(Session Session, UserObject userObject, Point position)
+        {
+            ShopObject shopObject = ShopObjectCollection.getShopObjectById(userObject.ObjetoID);
+            if (shopObject != null)
+            {
+                string shopObjectCoordinates = shopObject.something_1;
+                if (shopObjectCoordinates != string.Empty)
+                {
+                    return Session.User.Area.MapaBytes.GetCoordinatesTakes(position, shopObjectCoordinates);
+                }
+            }
+            return null;
         }
         private static Point getPosition(Session Session, int x, int y)
         {

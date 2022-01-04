@@ -65,14 +65,15 @@ namespace Proyect_Base.app.DAO
         {
             SqlClient client = SqlManager.GetClient();
             client.SetParameter("id", userObject.id);
-            client.SetParameter("ds", User.Area.id);
+            client.SetParameter("ds", userObject.ZonaID);
             client.SetParameter("sd", userObject.Posicion.x);
             client.SetParameter("y", userObject.Posicion.y);
             client.SetParameter("height", userObject.height);
             client.SetParameter("userid", User.id);
             client.SetParameter("ocupe", userObject.ocupe);
+            client.SetParameter("rotation", userObject.rotation);
             client.ExecuteNonQuery("UPDATE boombang_buyitems " +
-                "SET sala_id = @ds, x = @sd, y = @y, height = @height, UserID = @userid, ocupe = @ocupe  " +
+                "SET sala_id = @ds, x = @sd, y = @y, height = @height, UserID = @userid, ocupe = @ocupe, rotation = @rotation  " +
                 "WHERE id = @id");
         }
         public static void rotateUserObjectInArea(UserObject userObject)
@@ -80,7 +81,12 @@ namespace Proyect_Base.app.DAO
             SqlClient client = SqlManager.GetClient();
             client.SetParameter("id", userObject.id);
             client.SetParameter("r", userObject.rotation);
-            client.ExecuteNonQuery("UPDATE boombang_buyitems SET rotation = @r WHERE id = @id");
+            client.SetParameter("x", userObject.Posicion.x);
+            client.SetParameter("y", userObject.Posicion.y);
+            client.SetParameter("ocupe", userObject.ocupe);
+            client.ExecuteNonQuery("UPDATE boombang_buyitems " +
+                "SET rotation = @r, x = @x, y = @y, ocupe = @ocupe " +
+                "WHERE id = @id");
         }
         public static void updateUserObjectColorsInArea(UserObject userObject)
         {

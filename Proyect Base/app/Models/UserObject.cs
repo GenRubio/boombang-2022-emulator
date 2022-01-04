@@ -46,7 +46,17 @@ namespace Proyect_Base.app.Models
             this.swf = (string)row["swf"];
         }
         //FUNCTIONS
-
+        public void updateAttributes(int areaId, int x, int y, int height, string coordinates, int rotation, string color, string colorRGB)
+        {
+            this.ocupe = coordinates;
+            this.ZonaID = areaId;
+            this.Posicion.x = x;
+            this.Posicion.y = y;
+            this.height = height.ToString();
+            this.rotation = rotation;
+            this.Color_1 = color;
+            this.Color_2 = colorRGB;
+        }
         //MODEL SETTERS
 
         //MODEL GETTERS

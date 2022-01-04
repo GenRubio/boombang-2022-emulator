@@ -38,6 +38,20 @@ namespace Proyect_Base.app.Models
             }
             return true;
         }
+        public void removeAllUsers()
+        {
+            foreach (Session Session in this.users.Values.ToList())
+            {
+                removeUserHandler(Session);
+            }
+        }
+        public void removeAllUsersToFlowerPower()
+        {
+            foreach (Session Session in this.users.Values.ToList())
+            {
+                removeUserToFlowerPowerHandler(Session);
+            }
+        }
         //MODEL SETTERS
 
         //MODEL GETTERS
