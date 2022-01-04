@@ -31,7 +31,7 @@ namespace Proyect_Base.app.Handlers
             {
                 int id = int.Parse(Message.Parameters[0, 0]);
 
-                if (validateUserCreator(Session))
+                if (UserMiddleware.isIslandOwner(Session))
                 {
                     IslandArea islandArea = (IslandArea)Session.User.Area;
                     Session sessionUser = islandArea.getSession(id);
@@ -53,7 +53,7 @@ namespace Proyect_Base.app.Handlers
                 string colors = Message.Parameters[0, 0];
                 string colorsRGB = Message.Parameters[1, 0];
 
-                if (validateUserCreator(Session))
+                if (UserMiddleware.isIslandOwner(Session))
                 {
                     IslandArea islandArea = (IslandArea)Session.User.Area;
                     islandArea.color_1 = colors;
@@ -76,7 +76,7 @@ namespace Proyect_Base.app.Handlers
                 string colorRGB = Message.Parameters[2, 0];
                 int shopObjectId = Convert.ToInt32(Message.Parameters[3, 0]);
 
-                if (validateUserCreator(Session))
+                if (UserMiddleware.isIslandOwner(Session))
                 {
                     UserObject userObject = getUserObject(Session, id, true);
                     if (userObject != null)
@@ -110,7 +110,7 @@ namespace Proyect_Base.app.Handlers
                 int y = Convert.ToInt32(Message.Parameters[3, 0]);
                 string coordinates = Message.Parameters[4, 0];
 
-                if (validateUserCreator(Session))
+                if (UserMiddleware.isIslandOwner(Session))
                 {
                     UserObject userObject = getUserObject(Session, id, true);
                     if (userObject != null)
@@ -144,7 +144,7 @@ namespace Proyect_Base.app.Handlers
             {
                 int id = Convert.ToInt32(Message.Parameters[0, 0]);
 
-                if (validateUserCreator(Session))
+                if (UserMiddleware.isIslandOwner(Session))
                 {
                     UserObject userObject = getUserObject(Session, id, true);
                     if (userObject != null)
@@ -173,7 +173,7 @@ namespace Proyect_Base.app.Handlers
                 int height = int.Parse(Message.Parameters[3, 0]);
                 string coordinates = string.Empty;
 
-                if (validateUserCreator(Session))
+                if (UserMiddleware.isIslandOwner(Session))
                 {
                     putObjectArea(Session, id, x, y, coordinates, height, true);
                 }
@@ -193,7 +193,7 @@ namespace Proyect_Base.app.Handlers
                 int height = Convert.ToInt32(Message.Parameters[3, 0]);
                 string coordinates = string.Empty;
 
-                if (validateUserCreator(Session))
+                if (UserMiddleware.isIslandOwner(Session))
                 {
                     putObjectArea(Session, id, x, y, coordinates, height);
                 }
@@ -277,16 +277,6 @@ namespace Proyect_Base.app.Handlers
             Point point = new Point(x, y);
             Point position = Session.User.Area.MapaBytes.GetCoordinates(point);
             return position;
-        }
-        private static bool validateUserCreator(Session Session)
-        {
-            if(UserMiddleware.userInArea(Session)
-                && Session.User.Area is IslandArea islandArea
-                && islandArea.userCreatorId == Session.User.id)
-            {
-                return true;
-            }
-            return false;
         }
     }
 }
