@@ -24,7 +24,6 @@ namespace Proyect_Base.app.Models
         public string height{ get; set; }
         public string ocupe{ get; set; }
         public string data{ get; set; }
-        public bool Caminando { get; set; }
         public int open { get; set; }
         public string swf{ get; set; }
         public UserObject(DataRow row)
