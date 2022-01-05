@@ -1,10 +1,13 @@
 ﻿using Proyect_Base.app.Connection;
 using Proyect_Base.app.DAO;
+using Proyect_Base.app.Helpers;
 using Proyect_Base.app.Pathfinding;
 using Proyect_Base.app.Pathfinding.A_Star;
+using Proyect_Base.forms;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -22,13 +25,13 @@ namespace Proyect_Base.app.Models
         public int avatar { get; set; }
         public string colors { get; set; }
         public int age { get; set; }
-        public double vip { get; set; }
-        public string end_vip { get; set; }
+        public bool vip { get; set; }
+        public DateTime end_vip { get; set; }
         public string email { get; set; }
         public string current_ip { get; set; }
         public int oro { get; set; }
         public int plata { get; set; }
-        public int admin { get; set; }
+        public bool admin { get; set; }
         public string description { get; set; }
         public int besos_enviados { get; set; }
         public int besos_recibidos { get; set; }
@@ -49,20 +52,20 @@ namespace Proyect_Base.app.Models
         public int Votos_Legal { get; set; }
         public int Votos_Sexy { get; set; }
         public int Votos_Simpatico { get; set; }
-        public string last_connection { get; set; }
-        public string fecha_registro { get; set; }
+        public DateTime last_connection { get; set; }
+        public DateTime fecha_registro { get; set; }
         public int rings_ganados { get; set; }
         public int puntos_cocos { get; set; }
         public int puntos_ninja { get; set; }
         public int puntos_sendero { get; set; }
-        public int GorroToro { get; set; }
-        public int GorroAtrevido { get; set; }
-        public int GorroPanda { get; set; }
-        public int GorroRana { get; set; }
-        public int GorroConejo { get; set; }
-        public int TrajeLobo { get; set; }
-        public int TrajeZombi { get; set; }
-        public int TrajeEsqueleto { get; set; }
+        public bool GorroToro { get; set; }
+        public bool GorroAtrevido { get; set; }
+        public bool GorroPanda { get; set; }
+        public bool GorroRana { get; set; }
+        public bool GorroConejo { get; set; }
+        public bool TrajeLobo { get; set; }
+        public bool TrajeZombi { get; set; }
+        public bool TrajeEsqueleto { get; set; }
         public int UpperSelect { get; set; }
         public int NinjaLevel { get; set; }
         public int Ninja_FinishLevel { get; set; }
@@ -84,55 +87,55 @@ namespace Proyect_Base.app.Models
         public List<UserBackpackObject> backpackObjects { get; set; }
         public Dictionary<int, UserObject> objects { get; set; }
         public Dictionary<int, Island> islands { get; set; }
-        public User(DataRow Row)
+        public User(DataRow row)
         {
-            this.id = int.Parse(Row["id"].ToString());
-            this.name = Row["name"].ToString();
-            this.password = Row["password"].ToString();
-            this.security = Row["security"].ToString();
-            this.avatar = int.Parse(Row["avatar"].ToString());
-            this.colors = Row["colors"].ToString();
-            this.age = int.Parse(Row["age"].ToString());
-            this.vip = double.Parse(Row["vip"].ToString());
-            this.end_vip = Row["end_vip"].ToString();
-            this.email = Row["email"].ToString();
-            this.oro = int.Parse(Row["oro"].ToString());
-            this.plata = int.Parse(Row["plata"].ToString());
-            this.admin = int.Parse(Row["admin"].ToString());
-            this.description = Row["motto"].ToString();
-            this.besos_enviados = int.Parse(Row["besos_enviados"].ToString());
-            this.besos_recibidos = int.Parse(Row["besos_recibidos"].ToString());
-            this.jugos_enviados = int.Parse(Row["jugos_enviados"].ToString());
-            this.jugos_recibidos = int.Parse(Row["jugos_recibidos"].ToString());
-            this.flores_enviadas = int.Parse(Row["flores_enviadas"].ToString());
-            this.flores_recibidas = int.Parse(Row["flores_recibidas"].ToString());
-            this.uppers_enviados = int.Parse(Row["uppers_enviados"].ToString());
-            this.uppers_recibidos = int.Parse(Row["uppers_recibidos"].ToString());
-            this.cocos_enviados = int.Parse(Row["cocos_enviados"].ToString());
-            this.cocos_recibidos = int.Parse(Row["cocos_recibidos"].ToString());
-            this.hobby_1 = Row["hobby_1"].ToString();
-            this.hobby_2 = Row["hobby_2"].ToString();
-            this.hobby_3 = Row["hobby_3"].ToString();
-            this.deseo_1 = Row["deseo_1"].ToString();
-            this.deseo_2 = Row["deseo_2"].ToString();
-            this.deseo_3 = Row["deseo_3"].ToString();
-            this.rings_ganados = int.Parse(Row["rings_ganados"].ToString());
-            this.puntos_ninja = int.Parse(Row["puntos_ninja"].ToString());
-            this.puntos_cocos = int.Parse(Row["puntos_cocos"].ToString());
-            this.puntos_sendero = int.Parse(Row["senderos_ganados"].ToString());
-            this.last_connection = Row["last_connection"].ToString();
-            this.fecha_registro = Row["fecha_registro"].ToString();
-            this.Votos_Legal = int.Parse(Row["votos_legal"].ToString());
-            this.Votos_Sexy = int.Parse(Row["votos_sexy"].ToString());
-            this.Votos_Simpatico = int.Parse(Row["votos_simpatico"].ToString());
-            this.GorroToro = int.Parse(Row["gr_toro"].ToString());
-            this.GorroRana = int.Parse(Row["gr_rana"].ToString());
-            this.GorroPanda = int.Parse(Row["gr_panda"].ToString());
-            this.GorroConejo = int.Parse(Row["gr_conejo"].ToString());
-            this.GorroAtrevido = int.Parse(Row["gr_atrevido"].ToString());
-            this.TrajeLobo = int.Parse(Row["tr_lobo"].ToString());
-            this.TrajeZombi = int.Parse(Row["tr_zombi"].ToString());
-            this.TrajeEsqueleto = int.Parse(Row["tr_esqueleto"].ToString());
+            this.id = int.Parse(row["id"].ToString());
+            this.name = row["name"].ToString();
+            this.password = row["password"].ToString();
+            this.security = row["security_password"].ToString();
+            this.avatar = int.Parse(row["avatar_model_id"].ToString());
+            this.colors = row["colors"].ToString();
+            this.age = int.Parse(row["age"].ToString());
+            this.vip = bool.Parse(row["vip"].ToString());
+            this.end_vip = TimeHelper.getDate(row["end_vip"].ToString());
+            this.email = row["email"].ToString();
+            this.oro = int.Parse(row["coins_gold"].ToString());
+            this.plata = int.Parse(row["coins_silver"].ToString());
+            this.admin = bool.Parse(row["admin"].ToString());
+            this.description = row["description"].ToString();
+            this.besos_enviados = int.Parse(row["besos_enviados"].ToString());
+            this.besos_recibidos = int.Parse(row["besos_recibidos"].ToString());
+            this.jugos_enviados = int.Parse(row["jugos_enviados"].ToString());
+            this.jugos_recibidos = int.Parse(row["jugos_recibidos"].ToString());
+            this.flores_enviadas = int.Parse(row["flores_enviadas"].ToString());
+            this.flores_recibidas = int.Parse(row["flores_recibidas"].ToString());
+            this.uppers_enviados = int.Parse(row["uppers_enviados"].ToString());
+            this.uppers_recibidos = int.Parse(row["uppers_recibidos"].ToString());
+            this.cocos_enviados = int.Parse(row["cocos_enviados"].ToString());
+            this.cocos_recibidos = int.Parse(row["cocos_recibidos"].ToString());
+            this.hobby_1 = row["hobby_1"].ToString();
+            this.hobby_2 = row["hobby_2"].ToString();
+            this.hobby_3 = row["hobby_3"].ToString();
+            this.deseo_1 = row["deseo_1"].ToString();
+            this.deseo_2 = row["deseo_2"].ToString();
+            this.deseo_3 = row["deseo_3"].ToString();
+            this.rings_ganados = int.Parse(row["rings_ganados"].ToString());
+            this.puntos_ninja = int.Parse(row["puntos_ninja"].ToString());
+            this.puntos_cocos = int.Parse(row["puntos_cocos"].ToString());
+            this.puntos_sendero = int.Parse(row["senderos_ganados"].ToString());
+            this.Votos_Legal = int.Parse(row["votos_legal"].ToString());
+            this.Votos_Sexy = int.Parse(row["votos_sexy"].ToString());
+            this.Votos_Simpatico = int.Parse(row["votos_simpatico"].ToString());
+            this.GorroToro = bool.Parse(row["gr_toro"].ToString());
+            this.GorroRana = bool.Parse(row["gr_rana"].ToString());
+            this.GorroPanda = bool.Parse(row["gr_panda"].ToString());
+            this.GorroConejo = bool.Parse(row["gr_conejo"].ToString());
+            this.GorroAtrevido = bool.Parse(row["gr_atrevido"].ToString());
+            this.TrajeLobo = bool.Parse(row["tr_lobo"].ToString());
+            this.TrajeZombi = bool.Parse(row["tr_zombi"].ToString());
+            this.TrajeEsqueleto = bool.Parse(row["tr_esqueleto"].ToString());
+            this.fecha_registro = TimeHelper.getDate(row["fecha_registro"].ToString());
+            this.last_connection = TimeHelper.getDate(row["last_connection"].ToString());
             this.UpperSelect = ObtenerUppertLevel();
             this.CargarDatosNinja();
             this.CargarDatosCocos();
@@ -386,7 +389,7 @@ namespace Proyect_Base.app.Models
             server.AppendParameter("BoomBang");
             server.AppendParameter(0);
             server.AppendParameter(id);
-            server.AppendParameter(admin == 1 ? 1 : 0);
+            server.AppendParameter(admin ? 1 : 0);
             server.AppendParameter(oro);
             server.AppendParameter(plata);
             server.AppendParameter(200);

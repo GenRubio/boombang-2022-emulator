@@ -30,8 +30,8 @@ namespace Proyect_Base.app.Models
             this.MATRIX_Y = 335;
             this.MATRIX_SCALE = 1;
             setDimensionMap((int)row["id"]);
-            this.posX = (int)row["posX"];
-            this.posY = (int)row["posY"];
+            this.posX = (int)row["pos_x"];
+            this.posY = (int)row["pos_y"];
             this.coordinates = setCoordinates(Convert.ToString(row["mapa"]));
             this.BoolMap = new bool[this.coordinates.Length, this.coordinates[0].Length];
             this.MapSizeX = this.coordinates.Length;

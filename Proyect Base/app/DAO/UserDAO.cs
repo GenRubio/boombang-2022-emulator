@@ -51,7 +51,8 @@ namespace Proyect_Base.app.DAO
                 SqlClient client = SqlManager.GetClient();
                 client.SetParameter("id", User.id);
                 client.SetParameter("gold", coins);
-                client.ExecuteNonQuery("UPDATE users SET oro = oro + @gold WHERE id = @id");
+                client.ExecuteNonQuery("UPDATE users SET coins_gold = coins_gold + @gold " +
+                    "WHERE id = @id");
             }
             catch(Exception ex)
             {
@@ -65,7 +66,8 @@ namespace Proyect_Base.app.DAO
                 SqlClient client = SqlManager.GetClient();
                 client.SetParameter("id", User.id);
                 client.SetParameter("gold", coins);
-                client.ExecuteNonQuery("UPDATE users SET oro = oro - @gold WHERE id = @id");
+                client.ExecuteNonQuery("UPDATE users SET coins_gold = coins_gold - @gold " +
+                    "WHERE id = @id");
             }
             catch (Exception ex)
             {
@@ -93,7 +95,23 @@ namespace Proyect_Base.app.DAO
                 SqlClient client = SqlManager.GetClient();
                 client.SetParameter("id", User.id);
                 client.SetParameter("silver", coins);
-                client.ExecuteNonQuery("UPDATE users SET plata = plata - @silver WHERE id = @id");
+                client.ExecuteNonQuery("UPDATE users SET coins_silver = coins_silver - @silver " +
+                    "WHERE id = @id");
+            }
+            catch (Exception ex)
+            {
+                Log.error(ex);
+            }
+        }
+        public static void updateLastConnection(User User)
+        {
+            try
+            {
+                SqlClient client = SqlManager.GetClient();
+                client.SetParameter("id", User.id);
+                client.SetParameter("last_connection", DateTime.Now);
+                client.ExecuteNonQuery("UPDATE users SET last_connection = @last_connection " +
+                    "WHERE id = @id");
             }
             catch (Exception ex)
             {

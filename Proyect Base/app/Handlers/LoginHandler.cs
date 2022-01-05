@@ -41,6 +41,7 @@ namespace Proyect_Base.app.Handlers
                         else
                         {
                             SessionCollection.addOnlineUser(User, Session);
+                            new Thread(() => UserDAO.updateLastConnection(User)).Start();
                             User.initLoginHandler(Session);
                         }
                     }

@@ -23,9 +23,6 @@ namespace Proyect_Base.app.Models
         public int max_visitors { get; set; }
         public int uppert_price { get; set; }
         public int coco_price { get; set; }
-        public int sub_areas { get; set; }
-        public int priority { get; set; }
-        public int active { get; set; }
         public ConcurrentDictionary<int, Session> users { get; set; }
         public AreaMap MapaBytes { get; set; }
         public Area(DataRow row)
@@ -38,9 +35,6 @@ namespace Proyect_Base.app.Models
             this.max_visitors = int.Parse(row["max_visitantes"].ToString());
             this.uppert_price = int.Parse(row["uppert"].ToString());
             this.coco_price = int.Parse(row["coco"].ToString());
-            this.sub_areas = int.Parse(row["sub_escenarios"].ToString());
-            this.priority = int.Parse(row["prioridad"].ToString());
-            this.active = int.Parse(row["Visible"].ToString());
             this.users = new ConcurrentDictionary<int, Session>();
             this.MapaBytes = setAreaMap();
         }
@@ -116,9 +110,9 @@ namespace Proyect_Base.app.Models
             server.AppendParameter("BoomBang");
             server.AppendParameter(Session.User.age);
             server.AppendParameter(1);
-            server.AppendParameter(new object[] { (Session.User.NinjaLevel >= 1 ? 12 : 0), (Session.User.TrajeZombi == 1 ? 15 : 0), (Session.User.TrajeLobo == 1 ? 16 : 0), (Session.User.TrajeEsqueleto == 1 ? 17 : 0) });
+            server.AppendParameter(new object[] { (Session.User.NinjaLevel >= 1 ? 12 : 0), (Session.User.TrajeZombi ? 15 : 0), (Session.User.TrajeLobo ? 16 : 0), (Session.User.TrajeEsqueleto ? 17 : 0) });
             server.AppendParameter(-1);
-            server.AppendParameter(new object[] { (Session.User.GorroToro == 1 ? 3 : 0), (Session.User.GorroAtrevido == 1 ? 4 : 0), (Session.User.GorroRana == 1 ? 5 : 0), (Session.User.GorroPanda == 1 ? 6 : 0), (Session.User.GorroConejo == 1 ? 6 : 0) });
+            server.AppendParameter(new object[] { (Session.User.GorroToro ? 3 : 0), (Session.User.GorroAtrevido ? 4 : 0), (Session.User.GorroRana ? 5 : 0), (Session.User.GorroPanda ? 6 : 0), (Session.User.GorroConejo ? 6 : 0) });
             server.AppendParameter(Session.User.UpperSelect);
             server.AppendParameter(Session.User.ObtenerUppertLevel());
             server.AppendParameter(Session.User.CocoSelect);
@@ -128,7 +122,7 @@ namespace Proyect_Base.app.Models
             server.AppendParameter(new object[] { Session.User.Votos_Legal, Session.User.Votos_Sexy, Session.User.Votos_Simpatico });
             server.AppendParameter(Session.User.description);
             server.AppendParameter(new object[] { Session.User.besos_enviados, Session.User.besos_recibidos, Session.User.jugos_enviados, Session.User.jugos_recibidos, Session.User.flores_enviadas, Session.User.flores_recibidas, Session.User.uppers_enviados, Session.User.uppers_recibidos, Session.User.cocos_enviados, Session.User.cocos_recibidos, "0³" + Session.User.rings_ganados + "³0³0³0³" + Session.User.puntos_sendero + "³0³0³" + (Session.User.NivelCocos + 1) + "³" + Session.User.puntos_cocos + "³0³" + Session.User.Cocos_FinishLevel + "³" + Session.User.NinjaLevel + "³" + Session.User.puntos_ninja + "³0³" + Session.User.Ninja_FinishLevel });
-            server.AppendParameter(Session.User.admin == 1 ? 1 : Session.User.rings_ganados >= 2000 ? 1 : 0);
+            server.AppendParameter(Session.User.admin ? 1 : 0);
             server.AppendParameter(0);
             server.AppendParameter(1);
             server.AppendParameter(0);

@@ -21,6 +21,7 @@ namespace Proyect_Base.app.Helpers
         }
         public static string hashMake(string Password)
         {
+            return Password;
             byte[] Encrypt = hash(Encoding.Default.GetBytes(Password));
             char[] Chars = Encoding.Default.GetChars(Encrypt);
             string newString = "";

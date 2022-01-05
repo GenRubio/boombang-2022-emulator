@@ -18,9 +18,9 @@ namespace Proyect_Base.app.DAO
             try
             {
                 SqlClient client = SqlManager.GetClient();
-                client.SetParameter("islandId", id);
-                foreach (DataRow row in client.ExecuteQueryTable("SELECT * FROM escenarios_privados " +
-                    "WHERE IslaID = @islandId").Rows)
+                client.SetParameter("island_id", id);
+                foreach (DataRow row in client.ExecuteQueryTable("SELECT * FROM special_areas " +
+                    "WHERE island_id = @island_id").Rows)
                 {
                     islandAreas.Add(new IslandArea(row));
                 }
@@ -35,15 +35,15 @@ namespace Proyect_Base.app.DAO
         {
             SqlClient client = SqlManager.GetClient();
             client.SetParameter("categoria", 2);
-            client.SetParameter("IslaID", Island.id);
+            client.SetParameter("island_id", Island.id);
             client.SetParameter("Nombre", name);
             client.SetParameter("Modelo", model);
             client.SetParameter("color_1", color_1);
             client.SetParameter("color_2", color_2);
-            client.SetParameter("CreadorID", User.id);
-            if (client.ExecuteNonQuery("INSERT INTO escenarios_privados " +
-                "(`categoria`, `nombre`, `modelo`, `IslaID`, `color_1`, `color_2`, `CreadorID`) " +
-                "VALUES (@categoria, @Nombre, @Modelo, @IslaID, @color_1, @color_2, @CreadorID)") == 1)
+            client.SetParameter("user_id", User.id);
+            if (client.ExecuteNonQuery("INSERT INTO special_areas " +
+                "(`categoria`, `nombre`, `modelo`, `island_id`, `color_1`, `color_2`, `user_id`) " +
+                "VALUES (@categoria, @Nombre, @Modelo, @island_id, @color_1, @color_2, @user_id)") == 1)
             {
                 return getMakeIslandArea(User, Island);
             }
@@ -52,12 +52,12 @@ namespace Proyect_Base.app.DAO
         private static IslandArea getMakeIslandArea(User User, Island Island)
         {
             SqlClient client = SqlManager.GetClient();
-            client.SetParameter("CreadorID", User.id);
-            client.SetParameter("IslaID", Island.id);
+            client.SetParameter("user_id", User.id);
+            client.SetParameter("island_id", Island.id);
             client.SetParameter("categoria", 2);
-            DataRow row = client.ExecuteQueryRow("SELECT * FROM escenarios_privados " +
-                "WHERE CreadorID = @CreadorID " +
-                "AND IslaID = @IslaID " +
+            DataRow row = client.ExecuteQueryRow("SELECT * FROM special_areas " +
+                "WHERE user_id = @user_id " +
+                "AND island_id = @island_id " +
                 "AND categoria = @categoria " +
                 "ORDER BY id DESC LIMIT 1");
             if (row != null)
@@ -71,11 +71,11 @@ namespace Proyect_Base.app.DAO
             try
             {
                 SqlClient client = SqlManager.GetClient();
-                client.SetParameter("islandId", id);
-                client.SetParameter("CreadorID", User.id);
-                client.ExecuteNonQuery("DELETE FROM escenarios_privados " +
-                    "WHERE IslaID = @islandId " +
-                    "AND CreadorID = @CreadorID");
+                client.SetParameter("island_id", id);
+                client.SetParameter("user_id", User.id);
+                client.ExecuteNonQuery("DELETE FROM special_areas " +
+                    "WHERE island_id = @island_id " +
+                    "AND user_id = @user_id");
             }
             catch (Exception ex)
             {
@@ -86,14 +86,14 @@ namespace Proyect_Base.app.DAO
         {
             SqlClient client = SqlManager.GetClient();
             client.SetParameter("id", id);
-            client.SetParameter("CreadorID", User.id);
-            client.SetParameter("islandId", islandId);
+            client.SetParameter("user_id", User.id);
+            client.SetParameter("island_id", islandId);
             client.SetParameter("nombre", name);
-            client.ExecuteNonQuery("UPDATE escenarios_privados " +
+            client.ExecuteNonQuery("UPDATE special_areas " +
                   "SET nombre = @nombre " +
                   "WHERE id = @id " +
-                  "AND CreadorID = @CreadorID " +
-                  "AND IslaID = @islandId");
+                  "AND user_id = @user_id " +
+                  "AND island_id = @island_id");
         }
         public static void deleteIslandAreaById(User User, int id)
         {
@@ -101,10 +101,10 @@ namespace Proyect_Base.app.DAO
             {
                 SqlClient client = SqlManager.GetClient();
                 client.SetParameter("id", id);
-                client.SetParameter("CreadorID", User.id);
-                client.ExecuteNonQuery("DELETE FROM escenarios_privados " +
+                client.SetParameter("user_id", User.id);
+                client.ExecuteNonQuery("DELETE FROM special_areas " +
                     "WHERE id = @id " +
-                    "AND CreadorID = @CreadorID");
+                    "AND user_id = @user_id");
             }
             catch (Exception ex)
             {
@@ -117,7 +117,7 @@ namespace Proyect_Base.app.DAO
             client.SetParameter("id", islandArea.id);
             client.SetParameter("color_1", islandArea.color_1);
             client.SetParameter("color_2", islandArea.color_2);
-            client.ExecuteNonQuery("UPDATE escenarios_privados " +
+            client.ExecuteNonQuery("UPDATE special_areas " +
                 "SET color_1 = @color_1, color_2 = @color_2 " +
                 "WHERE id = @id");
         }

@@ -18,7 +18,7 @@ namespace Proyect_Base.app.DAO
             try
             {
                 SqlClient client = SqlManager.GetClient();
-                foreach (DataRow row in client.ExecuteQueryTable("SELECT * FROM escenarios_privados").Rows)
+                foreach (DataRow row in client.ExecuteQueryTable("SELECT * FROM special_areas").Rows)
                 {
                     if ((int)row["categoria"] == 2)
                     {
@@ -38,7 +38,7 @@ namespace Proyect_Base.app.DAO
             {
                 SqlClient client = SqlManager.GetClient();
                 client.SetParameter("id", id);
-                DataRow row = client.ExecuteQueryRow("SELECT * FROM escenarios_privados " +
+                DataRow row = client.ExecuteQueryRow("SELECT * FROM special_areas " +
                    "WHERE id = @id");
                 if (row != null)
                 {

@@ -18,6 +18,8 @@ namespace Proyect_Base.app.Models
 {
     public class PublicArea : Area
     {
+        public int priority { get; set; }
+        public int active { get; set; }
         public int minUsersToSendItemTresureChestGold { get; set; }
         public int timeToSendItemTresureChestGold { get; set; }
         public int timeToSendNextItemTresureChestGold { get; set; }
@@ -28,6 +30,8 @@ namespace Proyect_Base.app.Models
         public PublicArea(DataRow row) : 
             base(row)
         {
+            this.priority = int.Parse(row["prioridad"].ToString());
+            this.active = int.Parse(row["active"].ToString());
             setTresureChestGold();
             setTresureChestSilver();
             this.items = new Dictionary<int, ItemArea>();

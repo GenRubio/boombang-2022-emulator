@@ -17,7 +17,7 @@ namespace Proyect_Base.app.DAO
         {
             List<Island> islands = new List<Island>();
             SqlClient client = SqlManager.GetClient();
-            foreach (DataRow row in client.ExecuteQueryTable("SELECT * FROM islas").Rows)
+            foreach (DataRow row in client.ExecuteQueryTable("SELECT * FROM islands").Rows)
             {
                 islands.Add(new Island(row));
             }
@@ -30,8 +30,8 @@ namespace Proyect_Base.app.DAO
             {
                 SqlClient client = SqlManager.GetClient();
                 client.SetParameter("user_id", User.id);
-                foreach (DataRow row in client.ExecuteQueryTable("SELECT * FROM islas " +
-                    "WHERE creadorID = @user_id").Rows)
+                foreach (DataRow row in client.ExecuteQueryTable("SELECT * FROM islands " +
+                    "WHERE user_id = @user_id").Rows)
                 {
                     islands.Add((int)row["id"], new Island(row));
                 }
@@ -46,13 +46,13 @@ namespace Proyect_Base.app.DAO
         {
             SqlClient client = SqlManager.GetClient();
             client.SetParameter("id", id);
-            client.ExecuteQueryRow("DELETE FROM islas WHERE id = @id");
+            client.ExecuteQueryRow("DELETE FROM islands WHERE id = @id");
         }
         public static Island getIslandByName(string name)
         {
             SqlClient client = SqlManager.GetClient();
-            client.SetParameter("name", name);
-            DataRow row = client.ExecuteQueryRow("SELECT * FROM islas WHERE nombre = @name LIMIT 1");
+            client.SetParameter("nombre", name);
+            DataRow row = client.ExecuteQueryRow("SELECT * FROM islands WHERE nombre = @nombre LIMIT 1");
             if (row != null)
             {
                 return new Island(row);
@@ -64,10 +64,10 @@ namespace Proyect_Base.app.DAO
             SqlClient client = SqlManager.GetClient();
             client.SetParameter("nombre", name);
             client.SetParameter("modelo", model);
-            client.SetParameter("creador", User.id);
-            if (client.ExecuteNonQuery("INSERT INTO islas " +
-                "(`Nombre`, `Modelo`, `CreadorID`) " +
-                "VALUES (@nombre, @modelo, @creador)") == 1)
+            client.SetParameter("user_id", User.id);
+            if (client.ExecuteNonQuery("INSERT INTO islands " +
+                "(`nombre`, `modelo`, `user_id`) " +
+                "VALUES (@nombre, @modelo, @user_id)") == 1)
             {
                 return getIslandByName(name);
             }
@@ -77,7 +77,7 @@ namespace Proyect_Base.app.DAO
         {
             SqlClient client = SqlManager.GetClient();
             client.SetParameter("id", id);
-            DataRow row = client.ExecuteQueryRow("SELECT * FROM islas WHERE id = @id");
+            DataRow row = client.ExecuteQueryRow("SELECT * FROM islands WHERE id = @id");
             if (row != null)
             {
                 return new Island(row);
@@ -88,9 +88,9 @@ namespace Proyect_Base.app.DAO
         {
             List<Island> islands = new List<Island>();
             SqlClient client = SqlManager.GetClient();
-            client.SetParameter("name", name);
-            foreach (DataRow row in client.ExecuteQueryTable("SELECT * FROM islas " +
-                "WHERE Nombre LIKE '%" + name + "%'").Rows)
+            client.SetParameter("nombre", name);
+            foreach (DataRow row in client.ExecuteQueryTable("SELECT * FROM islands " +
+                "WHERE nombre LIKE '%" + name + "%'").Rows)
             {
                 islands.Add(new Island(row));
             }

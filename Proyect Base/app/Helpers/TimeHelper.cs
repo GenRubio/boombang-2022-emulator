@@ -9,6 +9,14 @@ namespace Proyect_Base.app.Helpers
     public enum AddType { Milisegundos, Segundos, Minutos, Horas, Dias, Meses, Años }
     class TimeHelper
     {
+        public static DateTime getDate(string date)
+        {
+            if (date != string.Empty)
+            {
+                return DateTime.Parse(date);
+            }
+            return DateTime.MinValue;
+        }
         public static double GetCurrentAndAdd(AddType Type, int Valor)
         {
             DateTime Test;

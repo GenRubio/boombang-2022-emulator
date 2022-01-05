@@ -29,17 +29,18 @@ namespace Proyect_Base.app.Models
         public string something_10 { get; set; }
         public int vip { get; set; }
         public string something_11 { get; set; }
-        public int Activado { get; set; }
         public string something_12 { get; set; }
         public string something_13 { get; set; }
         public string something_14 { get; set; }
         public string something_15 { get; set; }
         public string something_16 { get; set; }
         public string something_17 { get; set; }
+        public int Activado { get; set; }
         public ShopObject(DataRow row)
         {
             this.id = (int)row["id"];
             this.Nombre = (string)row["swf"];
+            this.vip = (int)row["vip"];
             this.Precio_Oro = (int)row["precio_oro"];
             this.Precio_Plata = (int)row["precio_plata"];
             this.Categoria = (int)row["categoria"];
@@ -55,15 +56,14 @@ namespace Proyect_Base.app.Models
             this.something_5 = (string)row["something_5"];
             this.something_6 = (string)row["something_6"];
             this.something_10 = (string)row["something_10"];
-            this.vip = (int)row["vip"];
             this.something_11 = (string)row["something_11"];
-            this.Activado = (int)row["activado"];
             this.something_12 = (string)row["something_12"];
             this.something_13 = (string)row["something_13"];
             this.something_14 = (string)row["something_14"];
             this.something_15 = (string)row["something_15"];
             this.something_16 = (string)row["something_16"];
             this.something_17 = (string)row["something_17"];
+            this.Activado = (int)row["activado"];
         }
         //FUNCTIONS
 

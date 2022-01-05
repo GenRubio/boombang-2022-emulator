@@ -19,10 +19,10 @@ namespace Proyect_Base.app.DAO
             {
                 SqlClient client = SqlManager.GetClient();
                 client.SetParameter("category", 3);
-                client.SetParameter("Visible", 1);
-                string query = "SELECT * FROM escenarios_publicos " +
+                client.SetParameter("active", 1);
+                string query = "SELECT * FROM public_areas " +
                     "WHERE categoria = @category " +
-                    "AND Visible = @Visible " +
+                    "AND active = @active " +
                     "ORDER BY prioridad ASC";
                 foreach (DataRow row in client.ExecuteQueryTable(query).Rows)
                 {

@@ -19,9 +19,9 @@ namespace Proyect_Base.app.Models
         public IslandArea(DataRow row) :
          base(row)
         {
-            this.islandId = int.Parse(row["IslaID"].ToString());
-            this.userCreatorId = int.Parse(row["CreadorID"].ToString());
-            this.password = row["clave"].ToString();
+            this.islandId = int.Parse(row["island_id"].ToString());
+            this.userCreatorId = int.Parse(row["user_id"].ToString());
+            this.password = row["password"].ToString();
         }
         //FUNCTIONS
         public void addObject(UserObject userObject)

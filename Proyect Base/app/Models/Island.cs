@@ -18,17 +18,15 @@ namespace Proyect_Base.app.Models
         public int uppertActive { get; set; }
         public string name { get; set; }
         public string description { get; set; }
-        public int special { get; set; }
         public int userCreatorId { get; set; }
         public Island(DataRow row)
         {
             this.id = (int)row["id"];
-            this.model = (int)row["Modelo"];
+            this.model = (int)row["modelo"];
             this.uppertActive = (int)row["uppercut"];
-            this.name = (string)row["Nombre"];
+            this.name = (string)row["nombre"];
             this.description = (string)row["descripcion"];
-            this.special = (int)row["Especial"];
-            this.userCreatorId = (int)row["CreadorID"];
+            this.userCreatorId = (int)row["user_id"];
         }
         //FUNCTIONS
         public void removeAllAreas(Session Session)
