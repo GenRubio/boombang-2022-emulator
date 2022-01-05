@@ -334,14 +334,9 @@ namespace Proyect_Base.app.Models
             return null;
         }
         //FUNCTIONS
-        public bool removeIsland(int id)
+        public void removeIsland(int id)
         {
-            if (this.islands.ContainsKey(id))
-            {
-                this.islands.Remove(id);
-                return true;
-            }
-            return false;
+            this.islands.Remove(id);
         }
         public void addIsland(Island island)
         {

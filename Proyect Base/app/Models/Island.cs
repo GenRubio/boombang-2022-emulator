@@ -31,7 +31,14 @@ namespace Proyect_Base.app.Models
             this.userCreatorId = (int)row["CreadorID"];
         }
         //FUNCTIONS
-
+        public void removeAllAreas(Session Session)
+        {
+            foreach(IslandArea islandArea in getAreas())
+            {
+                islandArea.removeAllObjects(Session);
+                SpecialAreaCollection.removeIslandArea(Session.User, islandArea.id);
+            }
+        }
         //MODEL SETTERS
 
         //MODEL GETTERS

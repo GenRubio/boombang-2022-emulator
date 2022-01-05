@@ -55,9 +55,10 @@ namespace Proyect_Base.app.Handlers
                     if (islandArea != null)
                     {
                         islandArea.removeAllUsers();
+                        islandArea.removeAllObjects(Session);
+                        SpecialAreaCollection.removeIslandArea(Session.User, id);
+                        IslandAreaDAO.deleteIslandAreaById(Session.User, id);
                     }
-                    SpecialAreaCollection.removeIslandArea(Session.User, id);
-                    IslandAreaDAO.deleteIslandAreaById(Session.User, id);
                 }
             }
             catch(Exception ex)
@@ -109,12 +110,11 @@ namespace Proyect_Base.app.Handlers
                     Island island = Session.User.getIsland(id);
                     if (island != null)
                     {
-                        if (Session.User.removeIsland(id))
-                        {
-                            IslandAreaDAO.deleteIslandAreaByIslandId(Session.User, id);
-                            island.removeUsersFromAllAreasHandler();
-                            IslandDAO.deleteIslandById(id);
-                        }
+                        island.removeUsersFromAllAreasHandler();
+                        island.removeAllAreas(Session);
+                        Session.User.removeIsland(island.id);
+                        IslandAreaDAO.deleteIslandAreaByIslandId(Session.User, id);
+                        IslandDAO.deleteIslandById(id);
                     }
                 }
             }

@@ -160,6 +160,7 @@ namespace Proyect_Base.app.Models
             if (removeUser(Session))
             {
                 Thread.Sleep(new TimeSpan(0, 0, 0, 0, 500));
+                Session.SendData(new ServerMessage(new byte[] { 128, 124 }));
                 Session.SendData(new ServerMessage(new byte[] { 153 }));
             }
         }

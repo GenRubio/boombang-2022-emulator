@@ -150,11 +150,7 @@ namespace Proyect_Base.app.Handlers
                     if (userObject != null)
                     {
                         IslandArea islandArea = (IslandArea)Session.User.Area;
-                        userObject.updateAttributes(Session.User, 0, 0, 0, 0, "", 0,
-                            userObject.Color_1, userObject.Color_2);
-                        islandArea.removeObjectHandler(userObject);
-                        Session.User.addObjectToBackpackHandler(Session, userObject);
-                        UserObjectDAO.putOrRemoveUserObjectFromArea(Session.User, userObject);
+                        islandArea.removeObject(Session, userObject);
                     }
                 }
             }

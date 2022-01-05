@@ -52,6 +52,21 @@ namespace Proyect_Base.app.Models
                 removeUserToFlowerPowerHandler(Session);
             }
         }
+        public void removeAllObjects(Session Session)
+        {
+            foreach(UserObject userObject in this.objects)
+            {
+                removeObject(Session, userObject);
+            }
+        }
+        public void removeObject(Session Session, UserObject userObject)
+        {
+            userObject.updateAttributes(Session.User, 0, 0, 0, 0, "", 0,
+                            userObject.Color_1, userObject.Color_2);
+            removeObjectHandler(userObject);
+            Session.User.addObjectToBackpackHandler(Session, userObject);
+            UserObjectDAO.putOrRemoveUserObjectFromArea(Session.User, userObject);
+        }
         //MODEL SETTERS
 
         //MODEL GETTERS
