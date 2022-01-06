@@ -70,6 +70,7 @@
     <Compile Include="app\DAO\IslandAreaDAO.cs" />
     <Compile Include="app\DAO\IslandDAO.cs" />
     <Compile Include="app\DAO\ItemAreaDAO.cs" />
+    <Compile Include="app\DAO\OpenObjectDAO.cs" />
     <Compile Include="app\DAO\PublicAreaDAO.cs" />
     <Compile Include="app\DAO\ShopObjectDAO.cs" />
     <Compile Include="app\DAO\SpecialAreaDAO.cs" />
@@ -102,6 +103,8 @@
     <Compile Include="app\Models\Island.cs" />
     <Compile Include="app\Models\IslandArea.cs" />
     <Compile Include="app\Models\ItemArea.cs" />
+    <Compile Include="app\Models\OpenObject.cs" />
+    <Compile Include="app\Models\OpenObjectList.cs" />
     <Compile Include="app\Models\PreLocks.cs" />
     <Compile Include="app\Models\PublicArea.cs" />
     <Compile Include="app\Models\ShopObject.cs" />
@@ -166,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="database\backups\boombang %281%29.sql" />
+    <Content Include="database\backups\boombang %282%29.sql" />
     <Content Include="Reviews.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

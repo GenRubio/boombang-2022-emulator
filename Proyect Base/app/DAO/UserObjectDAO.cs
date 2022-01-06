@@ -76,6 +76,14 @@ namespace Proyect_Base.app.DAO
                 "SET sala_id = @ds, x = @sd, y = @y, height = @height, UserID = @userid, ocupe = @ocupe, rotation = @rotation  " +
                 "WHERE id = @id");
         }
+        public static void deleteUserObject(User User, UserObject userObject)
+        {
+            SqlClient client = SqlManager.GetClient();
+            client.SetParameter("id", userObject.id);
+            client.SetParameter("userid", User.id);
+            client.ExecuteNonQuery("DELETE FROM boombang_buyitems " +
+               "WHERE id = @id AND UserID = @userid");
+        }
         public static void rotateUserObjectInArea(UserObject userObject)
         {
             SqlClient client = SqlManager.GetClient();

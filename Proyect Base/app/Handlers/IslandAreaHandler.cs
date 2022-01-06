@@ -3,6 +3,7 @@ using Proyect_Base.app.Connection;
 using Proyect_Base.app.DAO;
 using Proyect_Base.app.Middlewares;
 using Proyect_Base.app.Models;
+using Proyect_Base.forms;
 using Proyect_Base.logs;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace Proyect_Base.app.Handlers
             HandlerManager.RegisterHandler(189143, new ProcessHandler(changeRotationObject), true);
             HandlerManager.RegisterHandler(189142, new ProcessHandler(changeColorsObject), true);
             HandlerManager.RegisterHandler(189144, new ProcessHandler(changeSizeObject), true);
+            HandlerManager.RegisterHandler(189163, new ProcessHandler(openObject), true);
         }
         private static void removeUserArea(Session Session, ClientMessage Message)
         {
@@ -36,13 +38,13 @@ namespace Proyect_Base.app.Handlers
                 {
                     IslandArea islandArea = (IslandArea)Session.User.Area;
                     Session sessionUser = islandArea.getSession(id);
-                    if(sessionUser != null)
+                    if (sessionUser != null)
                     {
                         islandArea.removeUserHandler(sessionUser);
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.error(ex);
             }
@@ -63,10 +65,111 @@ namespace Proyect_Base.app.Handlers
                     IslandAreaDAO.updateColors(islandArea);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.error(ex);
             }
+        }
+        private static void openObject(Session Session, ClientMessage Message)
+        {
+            try
+            {
+                int id = Convert.ToInt32(Message.Parameters[0, 0]);
+                if (UserMiddleware.isIslandOwner(Session))
+                {
+                    UserObject userObject = getUserObject(Session, id, true);
+                    if (userObject != null)
+                    {
+                        List<OpenObject> openObjects = OpenObjectDAO.getOpenObjectsByObjectId(userObject.ObjetoID);
+                        if (openObjects.Count > 0)
+                        {
+                            if (openObjects.Count == 1)
+                            {
+                                addObjectToUser(Session, openObjects[0]);
+                            }
+                            else
+                            {
+                                List<OpenObject> objectsWithProbability = getObjectsWithProbability(openObjects);
+                                if (objectsWithProbability.Count > 0)
+                                {
+                                    OpenObject openObject = getOpenRandomObject(objectsWithProbability);
+                                    addObjectToUser(Session, openObject);
+                                }
+                                List<OpenObject> objectsWithoutProbability = getObjectsWithoutProbability(openObjects);
+                                if (objectsWithoutProbability.Count > 0)
+                                {
+                                    addMultiplesObjectsToUser(Session, objectsWithoutProbability);
+                                }
+                            }
+                        }
+                        IslandArea islandArea = (IslandArea)Session.User.Area;
+                        islandArea.deleteObject(Session, userObject);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.error(ex);
+            }
+        }
+        private static void addMultiplesObjectsToUser(Session Session, List<OpenObject> objectsWithoutProbability)
+        {
+            foreach(OpenObject openObject in objectsWithoutProbability)
+            {
+                addObjectToUser(Session, openObject);
+            }
+        }
+        private static void addObjectToUser(Session Session, OpenObject openObject)
+        {
+            if (openObject.coins_gold > 0)
+            {
+                Session.User.addGoldCoins(Session, openObject.coins_gold);
+            }
+            if (openObject.coins_silver > 0)
+            {
+                Session.User.addGoldCoins(Session, openObject.coins_silver);
+            }
+            ShopObject shopObject = ShopObjectCollection.getShopObjectById(openObject.within_shop_object_id);
+            if (shopObject != null)
+            {
+                for(int i = 0; i < openObject.amount; i++)
+                {
+                    UserObject userObject = UserObjectDAO.createObjectUser(Session.User, shopObject, "tam_n");
+                    if (userObject != null)
+                    {
+                        Session.User.addObject(userObject);
+                        Session.User.addObjectToBackpackHandler(Session, userObject);
+                    }
+                }
+            }
+        }
+        private static List<OpenObject> getObjectsWithProbability(List<OpenObject> openObjects)
+        {
+            return openObjects.Where(i => i.probability > 0).ToList();
+        }
+        private static List<OpenObject> getObjectsWithoutProbability(List<OpenObject> openObjects)
+        {
+            return openObjects.Where(i => i.probability == -1).ToList();
+        }
+        private static OpenObject getOpenRandomObject(List<OpenObject> openObjects)
+        {
+            var initial = new List<OpenObjectList>();
+            foreach (OpenObject openObject in openObjects)
+            {
+                initial.Add(new OpenObjectList(openObject.probability / 100.0, openObject));
+            }
+            var converted = new List<OpenObjectList>(initial.Count);
+            var sum = 0.0;
+            foreach (var item in initial.Take(initial.Count - 1))
+            {
+                sum += item.Probability;
+                converted.Add(new OpenObjectList(sum, item.Item));
+            }
+            converted.Add(new OpenObjectList(1.0, initial.Last().Item));
+            var rnd = new Random();
+            var probability = rnd.NextDouble();
+            var selected = converted.SkipWhile(i => i.Probability < probability).First();
+            return selected.Item;
         }
         private static void changeSizeObject(Session Session, ClientMessage Message)
         {

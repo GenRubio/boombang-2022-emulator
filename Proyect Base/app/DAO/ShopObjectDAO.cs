@@ -19,7 +19,7 @@ namespace Proyect_Base.app.DAO
             {
                 SqlClient client = SqlManager.GetClient();
                 client.SetParameter("active", 1);
-                string query = "SELECT * FROM boombang_catalogo " +
+                string query = "SELECT * FROM shop_objects " +
                     "WHERE activado = @active " +
                     "ORDER BY categoria DESC";
                 foreach (DataRow row in client.ExecuteQueryTable(query).Rows)

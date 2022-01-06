@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Proyect_Base.app.Models
 {
-    class ShopObject
+    public class ShopObject
     {
         public int id { get; set; }
         public string Nombre { get; set; }

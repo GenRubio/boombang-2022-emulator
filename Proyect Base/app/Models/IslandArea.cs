@@ -67,6 +67,13 @@ namespace Proyect_Base.app.Models
             Session.User.addObjectToBackpackHandler(Session, userObject);
             UserObjectDAO.putOrRemoveUserObjectFromArea(Session.User, userObject);
         }
+        public void deleteObject(Session Session, UserObject userObject)
+        {
+            userObject.updateAttributes(Session.User, 0, 0, 0, 0, "", 0,
+                            userObject.Color_1, userObject.Color_2, userObject.size);
+            removeObjectHandler(userObject);
+            UserObjectDAO.deleteUserObject(Session.User, userObject);
+        }
         //MODEL SETTERS
 
         //MODEL GETTERS
