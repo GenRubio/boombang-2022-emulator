@@ -62,7 +62,7 @@ namespace Proyect_Base.app.Models
         public void removeObject(Session Session, UserObject userObject)
         {
             userObject.updateAttributes(Session.User, 0, 0, 0, 0, "", 0,
-                            userObject.Color_1, userObject.Color_2);
+                            userObject.Color_1, userObject.Color_2, userObject.size);
             removeObjectHandler(userObject);
             Session.User.addObjectToBackpackHandler(Session, userObject);
             UserObjectDAO.putOrRemoveUserObjectFromArea(Session.User, userObject);
@@ -240,6 +240,11 @@ namespace Proyect_Base.app.Models
             server.AppendParameter(userObject.Color_2);
             server.AppendParameter(userObject.ObjetoID);
             SendData(server);
+        }
+        public void changeSizeObjectHandler(UserObject userObject)
+        {
+            SendData(new ServerMessage(new byte[] { 189, 144 }, new object[] { 
+                userObject.id, userObject.size, userObject.ocupe }));
         }
         public void changeColorsAreaHandler()
         {

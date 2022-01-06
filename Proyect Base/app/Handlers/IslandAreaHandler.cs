@@ -24,6 +24,7 @@ namespace Proyect_Base.app.Handlers
             HandlerManager.RegisterHandler(189140, new ProcessHandler(removeObject), true);
             HandlerManager.RegisterHandler(189143, new ProcessHandler(changeRotationObject), true);
             HandlerManager.RegisterHandler(189142, new ProcessHandler(changeColorsObject), true);
+            HandlerManager.RegisterHandler(189144, new ProcessHandler(changeSizeObject), true);
         }
         private static void removeUserArea(Session Session, ClientMessage Message)
         {
@@ -67,6 +68,43 @@ namespace Proyect_Base.app.Handlers
                 Log.error(ex);
             }
         }
+        private static void changeSizeObject(Session Session, ClientMessage Message)
+        {
+            try
+            {
+                int id = int.Parse(Message.Parameters[0, 0]);
+                int shopObjectId = int.Parse(Message.Parameters[1, 0]);
+                int x = int.Parse(Message.Parameters[2, 0]);
+                int y = int.Parse(Message.Parameters[3, 0]);
+                string coordinates = Message.Parameters[4, 0];
+                string tam = Message.Parameters[5, 0];
+                int rotation = int.Parse(Message.Parameters[6, 0]);
+
+                if (UserMiddleware.isIslandOwner(Session))
+                {
+                    UserObject userObject = getUserObject(Session, id, true);
+                    if (userObject != null)
+                    {
+                        IslandArea islandArea = (IslandArea)Session.User.Area;
+                        userObject.updateAttributes(Session.User, Session.User.Area.id,
+                            userObject.Posicion.x,
+                            userObject.Posicion.y,
+                            Convert.ToInt32(userObject.height),
+                            userObject.ocupe,
+                            userObject.rotation,
+                            userObject.Color_1,
+                            userObject.Color_2,
+                            tam);
+                        islandArea.changeSizeObjectHandler(userObject);
+                        UserObjectDAO.updateUserObjectSizeInArea(userObject);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.error(ex);
+            }
+        }
         private static void changeColorsObject(Session Session, ClientMessage Message)
         {
             try
@@ -89,7 +127,8 @@ namespace Proyect_Base.app.Handlers
                             userObject.ocupe,
                             userObject.rotation,
                             color,
-                            colorRGB);
+                            colorRGB,
+                            userObject.size);
                         islandArea.changeObjectColorsHandler(userObject);
                         UserObjectDAO.updateUserObjectColorsInArea(userObject);
                     }
@@ -126,7 +165,8 @@ namespace Proyect_Base.app.Handlers
                                 coordinates,
                                 rotation,
                                 userObject.Color_1,
-                                userObject.Color_2);
+                                userObject.Color_2,
+                                userObject.size);
                             islandArea.rotateObjectHandler(userObject);
                             UserObjectDAO.rotateUserObjectInArea(userObject);
                         }
@@ -215,7 +255,7 @@ namespace Proyect_Base.app.Handlers
                 {
                     IslandArea islandArea = (IslandArea)Session.User.Area;
                     userObject.updateAttributes(Session.User, islandArea.id, x, y, height, coordinates,
-                        userObject.rotation, userObject.Color_1, userObject.Color_2);
+                        userObject.rotation, userObject.Color_1, userObject.Color_2, userObject.size);
                     if (objectArea)
                     {
                         islandArea.moveObjectHandler(userObject);

@@ -46,10 +46,10 @@ namespace Proyect_Base.app.Models
         }
         //FUNCTIONS
         public void updateAttributes(User User, 
-            int areaId, int x, int y, int height, string coordinates, int rotation, string color, string colorRGB)
+            int areaId, int x, int y, int height, string coordinates, int rotation, string color, string colorRGB, string size)
         {
             updateAttributesUserObjectOrAreaObject(this, areaId, x, y, 
-                height, coordinates, rotation, color, colorRGB);
+                height, coordinates, rotation, color, colorRGB, size);
 
             if (User != null)
             {
@@ -57,12 +57,12 @@ namespace Proyect_Base.app.Models
                 if (userObject != null)
                 {
                     updateAttributesUserObjectOrAreaObject(userObject, areaId, x, y,
-                        height, coordinates, rotation, color, colorRGB);
+                        height, coordinates, rotation, color, colorRGB, size);
                 }
             }
         }
         private void updateAttributesUserObjectOrAreaObject(UserObject userObject, 
-            int areaId, int x, int y, int height, string coordinates, int rotation, string color, string colorRGB)
+            int areaId, int x, int y, int height, string coordinates, int rotation, string color, string colorRGB, string size)
         {
             userObject.ocupe = coordinates;
             userObject.ZonaID = areaId;
@@ -72,6 +72,7 @@ namespace Proyect_Base.app.Models
             userObject.rotation = rotation;
             userObject.Color_1 = color;
             userObject.Color_2 = colorRGB;
+            userObject.size = size;
         }
         //MODEL SETTERS
 

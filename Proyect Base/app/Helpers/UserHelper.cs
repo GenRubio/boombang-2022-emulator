@@ -22,15 +22,15 @@ namespace Proyect_Base.app.Helpers
         public static string hashMake(string Password)
         {
             return Password;
-            byte[] Encrypt = hash(Encoding.Default.GetBytes(Password));
-            char[] Chars = Encoding.Default.GetChars(Encrypt);
-            string newString = "";
-            foreach (Char Char in Chars)
-            {
-                int value = Convert.ToInt32(Char);
-                newString = newString += value.ToString();
-            }
-            return newString;
+            //byte[] Encrypt = hash(Encoding.Default.GetBytes(Password));
+            //char[] Chars = Encoding.Default.GetChars(Encrypt);
+            //string newString = "";
+            //foreach (Char Char in Chars)
+            //{
+            //    int value = Convert.ToInt32(Char);
+            //    newString = newString += value.ToString();
+            //}
+            //return newString;
         }
         private static byte[] hash(byte[] Data)
         {

@@ -99,6 +99,18 @@ namespace Proyect_Base.app.DAO
                 "SET color = @color, rgb_ratio = @rgb " +
                 "WHERE id = @id AND ItemID = @itemid");
         }
+        public static void updateUserObjectSizeInArea(UserObject userObject)
+        {
+            SqlClient client = SqlManager.GetClient();
+            client.SetParameter("id", userObject.id);
+            client.SetParameter("x", userObject.Posicion.x);
+            client.SetParameter("y", userObject.Posicion.y);
+            client.SetParameter("size", userObject.size);
+            client.SetParameter("coor", userObject.ocupe);
+            client.ExecuteNonQuery("UPDATE boombang_buyitems " +
+                "SET X = @x, Y = @y, size = @size, ocupe = @coor " +
+                "WHERE id = @id");
+        }
         public static UserObject getUserObjectByItemAndUserIds(int userId, int itemId)
         {
             SqlClient client = SqlManager.GetClient();
