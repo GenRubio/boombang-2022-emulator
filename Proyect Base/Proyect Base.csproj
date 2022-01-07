@@ -170,6 +170,7 @@
   <ItemGroup>
     <Content Include="database\backups\boombang %281%29.sql" />
     <Content Include="database\backups\boombang %282%29.sql" />
+    <Content Include="database\backups\boombang %283%29.sql" />
     <Content Include="Reviews.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

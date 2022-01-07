@@ -333,11 +333,11 @@ namespace Proyect_Base.app.Models
             ShopObject shopObject = itemArea.getShopObject();
             if (shopObject != null)
             {
-                UserObject userObject = UserObjectDAO.createObjectUser(Session.User, shopObject, "tam_n");
+                UserObject userObject = UserObjectDAO.createObjectUser(this, shopObject, "tam_n");
                 if (userObject != null)
                 {
-                    Session.User.addObject(userObject);
-                    Session.User.addObjectToBackpackHandler(Session, userObject);
+                    addObject(userObject);
+                    addObjectToBackpackHandler(Session, userObject);
                 }
             }
         }
