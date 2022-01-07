@@ -18,9 +18,9 @@ namespace Proyect_Base.app.DAO
             try
             {
                 SqlClient client = SqlManager.GetClient();
-                client.SetParameter("estado", 1);
-                string query = "SELECT * FROM contest_item " +
-                    "WHERE estado = @estado";
+                client.SetParameter("active", 1);
+                string query = "SELECT * FROM area_items " +
+                    "WHERE active = @active";
                 foreach (DataRow row in client.ExecuteQueryTable(query).Rows)
                 {
                     if (row != null)

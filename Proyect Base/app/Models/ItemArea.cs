@@ -1,4 +1,5 @@
-﻿using Proyect_Base.app.Connection;
+﻿using Proyect_Base.app.Collections;
+using Proyect_Base.app.Connection;
 using Proyect_Base.app.Helpers;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,9 @@ namespace Proyect_Base.app.Models
     {
         public int id { get; private set; }
         public string nombre { get; set; }
+        public string message { get; set; }
+        public int shop_object_id { get; set; }
         public int modelo { get; set; }
-        public int concurso_id { get; set; }
-        public int id_lanzamiento { get; set; }
         public int tipo_salida { get; set; }
         public int tipo_caida { get; set; }
         public int tiempo_aparicion { get; set; }
@@ -27,14 +28,21 @@ namespace Proyect_Base.app.Models
         {
             this.id = (int)row["id"];
             this.nombre = (string)row["nombre"];
+            this.message = row["message"].ToString();
+            this.shop_object_id = row["shop_object_id"].ToString() == string.Empty ? -1 : int.Parse(row["shop_object_id"].ToString());
             this.modelo = (int)row["modelo"];
-            this.concurso_id = (int)row["concurso_id"];
             this.tipo_salida = (int)row["tipo_salida"];
             this.tipo_caida = (int)row["tipo_caida"];
-            this.tiempo_aparicion = (int)row["tiempo"];
-            this.tiempo_desaparicion = 15;
+            this.tiempo_aparicion = (int)row["tiempo_aparicion"];
+            this.tiempo_desaparicion = (int)row["remove_in"];
         }
+        //FUNCTIONS
+
         //MODEL SETTERS
+        public ShopObject getShopObject()
+        {
+            return ShopObjectCollection.getShopObjectById(this.shop_object_id);
+        }
         public void setAreaPosition(Point position)
         {
             this.areaPosition = position;
@@ -56,5 +64,6 @@ namespace Proyect_Base.app.Models
         {
             return (ItemArea)this.MemberwiseClone();
         }
+        //HANDLERS
     }
 }

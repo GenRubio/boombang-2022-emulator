@@ -292,17 +292,16 @@ namespace Proyect_Base.app.Models
             {
                 case 1:
                     int goldCoins = 1000;
-                    this.Area.sendNotificationHandler(this.name + " " +
-                        "ha atrapado un cofre y obtiene: " + goldCoins + " créditos.");
+                    this.Area.sendNotificationHandler(this.name + " " + itemArea.message);
                     addGoldCoins(Session, goldCoins);
                     break;
                 case 2:
                     int silverCoins = 250;
-                    this.Area.sendNotificationHandler(this.name + " " +
-                        "ha atrapado un cofre y obtiene: " + silverCoins + " créditos de plata.");
+                    this.Area.sendNotificationHandler(this.name + " " + itemArea.message);
                     addSilverCoins(Session, silverCoins);
                     break;
             }
+            addItemObjectToUser(Session, itemArea);
         }
         public Island getIsland(int id)
         {
@@ -329,6 +328,19 @@ namespace Proyect_Base.app.Models
             return null;
         }
         //FUNCTIONS
+        private void addItemObjectToUser(Session Session, ItemArea itemArea)
+        {
+            ShopObject shopObject = itemArea.getShopObject();
+            if (shopObject != null)
+            {
+                UserObject userObject = UserObjectDAO.createObjectUser(Session.User, shopObject, "tam_n");
+                if (userObject != null)
+                {
+                    Session.User.addObject(userObject);
+                    Session.User.addObjectToBackpackHandler(Session, userObject);
+                }
+            }
+        }
         public void removeIsland(int id)
         {
             this.islands.Remove(id);
