@@ -1,5 +1,6 @@
 ﻿using Proyect_Base.app.Connection;
 using Proyect_Base.app.Models;
+using Proyect_Base.forms;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -20,6 +21,13 @@ namespace Proyect_Base.app.Pathfinding.A_Star
         {
             this.Sala = Session.User.Area;
             this.StartLocation = new Point(Session.User.Posicion.x, Session.User.Posicion.y);
+            this.EndLocation = endLocation;
+            this.Map = Sala.MapaBytes.BoolMap;
+        }
+        public SearchParameters(Point endLocation, AreaNpc areaNpc)
+        {
+            this.Sala = areaNpc.getArea();
+            this.StartLocation = new Point(areaNpc.Posicion.x, areaNpc.Posicion.y);
             this.EndLocation = endLocation;
             this.Map = Sala.MapaBytes.BoolMap;
         }

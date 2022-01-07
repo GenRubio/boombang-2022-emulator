@@ -13,6 +13,7 @@ namespace Proyect_Base.app.Controllers
         {
             PathfindingThread.init();
             ItemAreaThread.init();
+            NpcPathfindingThread.init();
         }
     }
 }

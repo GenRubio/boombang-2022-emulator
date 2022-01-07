@@ -1,2 +1,34 @@
 
 The logs file was created successfully.
+-----------------------------------------------------------------------------
+Date : 07/01/2022 22:51:11
+
+System.NullReferenceException
+Message : Referencia a objeto no establecida como instancia de un objeto.
+StackTrace :    en Proyect_Base.app.Models.Area.getSession(Int32 x, Int32 y) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Models\Area.cs:línea 94
+   en Proyect_Base.app.Pathfinding.Trayectoria.SiguienteMovimientoNpc() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Pathfinding\Trayectoria.cs:línea 167
+   en Proyect_Base.app.Threads.NpcPathfindingThread.Pathfinding() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Threads\NpcPathfindingThread.cs:línea 39
+-----------------------------------------------------------------------------
+Date : 07/01/2022 23:27:07
+
+System.ArgumentOutOfRangeException
+Message : El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index
+StackTrace :    en System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   en System.Collections.Generic.List`1.get_Item(Int32 index)
+   en Proyect_Base.app.Pathfinding.Trayectoria.findNextPoint() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Pathfinding\Trayectoria.cs:línea 190
+   en Proyect_Base.app.Pathfinding.Trayectoria.SiguienteMovimientoNpc() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Pathfinding\Trayectoria.cs:línea 177
+   en Proyect_Base.app.Threads.NpcPathfindingThread.moveNpcToNextPoint(PublicArea publicArea, AreaNpc areaNpc) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Threads\NpcPathfindingThread.cs:línea 63
+   en Proyect_Base.app.Threads.NpcPathfindingThread.Pathfinding() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Threads\NpcPathfindingThread.cs:línea 36
+-----------------------------------------------------------------------------
+Date : 07/01/2022 23:27:07
+
+System.ArgumentOutOfRangeException
+Message : El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index
+StackTrace :    en System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   en System.Collections.Generic.List`1.get_Item(Int32 index)
+   en Proyect_Base.app.Pathfinding.Trayectoria.findNextPoint() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Pathfinding\Trayectoria.cs:línea 190
+   en Proyect_Base.app.Pathfinding.Trayectoria.SiguienteMovimientoNpc() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Pathfinding\Trayectoria.cs:línea 173
+   en Proyect_Base.app.Threads.NpcPathfindingThread.moveNpcToNextPoint(PublicArea publicArea, AreaNpc areaNpc) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Threads\NpcPathfindingThread.cs:línea 63
+   en Proyect_Base.app.Threads.NpcPathfindingThread.Pathfinding() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Threads\NpcPathfindingThread.cs:línea 36

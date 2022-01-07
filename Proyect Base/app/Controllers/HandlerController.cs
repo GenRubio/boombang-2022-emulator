@@ -24,6 +24,7 @@ namespace Proyect_Base.app.Handlers
                 AreaHandler.init();
                 IslandHandler.init();
                 IslandAreaHandler.init();
+                NpcHandler.init();
             }
             catch (Exception ex)
             {

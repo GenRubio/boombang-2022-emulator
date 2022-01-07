@@ -89,14 +89,7 @@ namespace Proyect_Base.app.Models
         }
         public Session getSession(int x, int y)
         {
-            foreach (Session Session in this.users.Values)
-            {
-                if (Session.User.Posicion.x == x && Session.User.Posicion.y == y)
-                {
-                    return Session;
-                }
-            }
-            return null;
+            return this.users.Values.ToList().Find(i => i.User.Posicion.x == x && i.User.Posicion.y == y);
         }
         private ServerMessage getUserDataPackage(Session Session, ServerMessage server)
         {

@@ -1,4 +1,5 @@
 ﻿using Proyect_Base.app.Connection;
+using Proyect_Base.app.DAO;
 using Proyect_Base.app.Helpers;
 using Proyect_Base.app.Middlewares;
 using Proyect_Base.app.Pathfinding;
@@ -27,6 +28,7 @@ namespace Proyect_Base.app.Models
         public int timeToSendItemTresureChestSilver { get; set; }
         public int timeToSendNextItemTresureChestSilver { get; set; }
         public Dictionary<int, ItemArea> items { get; set; }
+        public List<AreaNpc> areaNpcs { get; set; }
         public PublicArea(DataRow row) : 
             base(row)
         {
@@ -35,6 +37,7 @@ namespace Proyect_Base.app.Models
             setTresureChestGold();
             setTresureChestSilver();
             this.items = new Dictionary<int, ItemArea>();
+            setAreaNpc();
         }
         //MODEL SETTERS
         private void setTresureChestGold()
@@ -50,6 +53,10 @@ namespace Proyect_Base.app.Models
             this.timeToSendNextItemTresureChestSilver = this.timeToSendItemTresureChestSilver;
         }
         //MODEL GETTERS
+        private void setAreaNpc()
+        {
+            this.areaNpcs = AreaNpcDAO.getAreaNpc(this.id);
+        }
         private Point getLocationForItem()
         {
             Point itemLocation = this.MapaBytes.GetRandomPlace();
@@ -67,6 +74,14 @@ namespace Proyect_Base.app.Models
                 key = new Random().Next(1, 50000);
             }
             return key;
+        }
+        public bool npcOcupedPoint(int x, int y)
+        {
+            if (areaNpcs.Find(i => i.poster_model == 0 && i.poster_type == 0 && i.Posicion.x == x && i.Posicion.y == y) != null)
+            {
+                return true;
+            }
+            return false;
         }
         //FUNCTIONS
         public void addItem(ItemArea Item)
@@ -198,7 +213,28 @@ namespace Proyect_Base.app.Models
         }
         private ServerMessage loadAreaNpcHandler(ServerMessage server)
         {
-            server.AppendParameter(0);
+            if (this.areaNpcs.Count > 0)
+            {
+                server.AppendParameter(this.areaNpcs.Count);
+                foreach (AreaNpc areaNpc in this.areaNpcs)
+                {
+                    server.AppendParameter(new object[] {
+                        areaNpc.id,
+                        areaNpc.xml_text_id,
+                        areaNpc.modelo,
+                        areaNpc.name,
+                        areaNpc.Posicion.x,
+                        areaNpc.Posicion.y,
+                        areaNpc.Posicion.z,
+                        areaNpc.poster_type,
+                        areaNpc.poster_model
+                    });
+                }
+            }
+            else
+            {
+                server.AppendParameter(0);
+            }
             return server;
         }
     }

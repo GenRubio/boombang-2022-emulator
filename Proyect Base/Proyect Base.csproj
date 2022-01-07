@@ -66,6 +66,7 @@
     <Compile Include="app\Connection\Session.cs" />
     <Compile Include="app\Controllers\ThreadsController.cs" />
     <Compile Include="app\DAO\AreaMapDAO.cs" />
+    <Compile Include="app\DAO\AreaNpcDAO.cs" />
     <Compile Include="app\DAO\GameAreaDAO.cs" />
     <Compile Include="app\DAO\IslandAreaDAO.cs" />
     <Compile Include="app\DAO\IslandDAO.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="app\Handlers\IslandHandler.cs" />
     <Compile Include="app\Handlers\LoginHandler.cs" />
     <Compile Include="app\Handlers\NavigationHandler.cs" />
+    <Compile Include="app\Handlers\NpcHandler.cs" />
     <Compile Include="app\Handlers\PingHandler.cs" />
     <Compile Include="app\Handlers\ShopHandler.cs" />
     <Compile Include="app\Helpers\CharactersHelper.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="app\Models\ApiModelExemple.cs" />
     <Compile Include="app\Models\Area.cs" />
     <Compile Include="app\Models\AreaMap.cs" />
+    <Compile Include="app\Models\AreaNpc.cs" />
     <Compile Include="app\Models\GameArea.cs" />
     <Compile Include="app\Models\Island.cs" />
     <Compile Include="app\Models\IslandArea.cs" />
@@ -121,6 +124,7 @@
     <Compile Include="app\Pathfinding\Posicion.cs" />
     <Compile Include="app\Pathfinding\Trayectoria.cs" />
     <Compile Include="app\Threads\ItemAreaThread.cs" />
+    <Compile Include="app\Threads\NpcPathfindingThread.cs" />
     <Compile Include="app\Threads\PathfindingThread.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="database\mysql\SqlClient.cs" />

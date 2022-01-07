@@ -19,6 +19,7 @@ namespace Proyect_Base.app.Pathfinding.A_Star
         private SearchParameters searchParameters;
         private Area Sala;
         private Session Session;
+        private AreaNpc areaNpc;
         public PathFinder(SearchParameters searchParameters, Session Session)
         {
             this.searchParameters = searchParameters;
@@ -28,6 +29,16 @@ namespace Proyect_Base.app.Pathfinding.A_Star
             this.endNode = this.nodes[searchParameters.EndLocation.X, searchParameters.EndLocation.Y];
             this.Sala = searchParameters.Sala;
             this.Session = Session;
+        }
+        public PathFinder(SearchParameters searchParameters, AreaNpc areaNpc)
+        {
+            this.searchParameters = searchParameters;
+            InitializeNodes(searchParameters.Map);
+            this.startNode = this.nodes[searchParameters.StartLocation.X, searchParameters.StartLocation.Y];
+            this.startNode.State = NodeState.Open;
+            this.endNode = this.nodes[searchParameters.EndLocation.X, searchParameters.EndLocation.Y];
+            this.Sala = searchParameters.Sala;
+            this.areaNpc = areaNpc;
         }
         public List<Point> FindPath()
         {
