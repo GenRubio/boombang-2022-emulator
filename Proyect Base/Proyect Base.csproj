@@ -67,6 +67,8 @@
     <Compile Include="app\Controllers\ThreadsController.cs" />
     <Compile Include="app\DAO\AreaMapDAO.cs" />
     <Compile Include="app\DAO\AreaNpcDAO.cs" />
+    <Compile Include="app\DAO\AreaNpcObjectDAO.cs" />
+    <Compile Include="app\DAO\AreaNpcObjectRequirementDAO.cs" />
     <Compile Include="app\DAO\GameAreaDAO.cs" />
     <Compile Include="app\DAO\IslandAreaDAO.cs" />
     <Compile Include="app\DAO\IslandDAO.cs" />
@@ -102,6 +104,8 @@
     <Compile Include="app\Models\Area.cs" />
     <Compile Include="app\Models\AreaMap.cs" />
     <Compile Include="app\Models\AreaNpc.cs" />
+    <Compile Include="app\Models\AreaNpcObject.cs" />
+    <Compile Include="app\Models\AreaNpcObjectRequirement.cs" />
     <Compile Include="app\Models\GameArea.cs" />
     <Compile Include="app\Models\Island.cs" />
     <Compile Include="app\Models\IslandArea.cs" />
@@ -175,6 +179,7 @@
     <Content Include="database\backups\boombang %281%29.sql" />
     <Content Include="database\backups\boombang %282%29.sql" />
     <Content Include="database\backups\boombang %283%29.sql" />
+    <Content Include="database\backups\boombang %285%29.sql" />
     <Content Include="Reviews.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

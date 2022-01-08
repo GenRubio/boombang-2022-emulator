@@ -52,10 +52,18 @@ namespace Proyect_Base.app.Models
             this.timeToSendItemTresureChestSilver = ItemAreaHelper.getRandomTimeNextItem(); //In seconds
             this.timeToSendNextItemTresureChestSilver = this.timeToSendItemTresureChestSilver;
         }
-        //MODEL GETTERS
         private void setAreaNpc()
         {
             this.areaNpcs = AreaNpcDAO.getAreaNpc(this.id);
+        }
+        //MODEL GETTERS
+        public AreaNpc getAreaNpcWithOutMoviments()
+        {
+            if (this.areaNpcs.Count > 0)
+            {
+                return this.areaNpcs.Find(i => i.isNpcWithMoviment() == false);
+            }
+            return null;
         }
         private Point getLocationForItem()
         {

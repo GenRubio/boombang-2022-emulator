@@ -1,5 +1,6 @@
 ﻿using Proyect_Base.app.Collections;
 using Proyect_Base.app.Connection;
+using Proyect_Base.app.DAO;
 using Proyect_Base.app.Pathfinding;
 using Proyect_Base.app.Pathfinding.A_Star;
 using Proyect_Base.forms;
@@ -39,6 +40,7 @@ namespace Proyect_Base.app.Models
         public PreLocks Bloqueos { get; set; }
         public UltraLocks Ultra_Bloqueos { get; set; }
         #endregion
+        public List<AreaNpcObject> areaNpcObjects { get; set; }
         public AreaNpc(DataRow row)
         {
             this.id = (int)row["id"];
@@ -54,6 +56,7 @@ namespace Proyect_Base.app.Models
             this.pos_z = (int)row["pos_z"];
             this.active = bool.Parse(row["active"].ToString());
             this.Posicion = new Posicion((int)row["pos_x"], (int)row["pos_y"], (int)row["pos_z"]);
+            this.areaNpcObjects = AreaNpcObjectDAO.getAreaNpcObjects(this.public_area_id);
         }
         //FUNCTIONS
 
@@ -97,6 +100,45 @@ namespace Proyect_Base.app.Models
             server.AppendParameter(750);
             server.AppendParameter(1);
             publicArea.SendData(server);
+        }
+        public void loadNpcContentHandler(Session Session)
+        {
+            ServerMessage server = new ServerMessage(new byte[] { 123, 120 });
+            server.AppendParameter(this.poster_model);
+            foreach(AreaNpcObject areaNpcObject in this.areaNpcObjects)
+            {
+                server.AppendParameter(areaNpcObject.id);
+                server.AppendParameter(0);
+                server.AppendParameter(areaNpcObject.price_gold);
+                server.AppendParameter(areaNpcObject.price_silver);
+                server.AppendParameter(areaNpcObject.shop_object_id);
+
+                getRequirementObjectsHandler(server, areaNpcObject);
+            }
+            Session.SendData(server);
+        }
+        private ServerMessage getRequirementObjectsHandler(ServerMessage server, AreaNpcObject areaNpcObject)
+        {
+            string objectIds = "-1";
+            string amounts = "-1";
+            if (areaNpcObject.areaNpcObjectRequirements.Count > 0)
+            {
+                objectIds = "";
+                amounts = "";
+                foreach (AreaNpcObjectRequirement areaNpcObjectRequirement in areaNpcObject.areaNpcObjectRequirements)
+                {
+                    objectIds += areaNpcObjectRequirement.shop_object_id + "³";
+                    amounts += areaNpcObjectRequirement.amount + "³";
+                }
+                if (objectIds.Length != 0)
+                {
+                    objectIds = objectIds.Remove(objectIds.Length - 1, 1);
+                }
+            }
+            server.AppendParameter(objectIds);
+            server.AppendParameter(amounts);
+
+            return server;
         }
     }
 }

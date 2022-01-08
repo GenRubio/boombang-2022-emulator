@@ -1,4 +1,7 @@
 ﻿using Proyect_Base.app.Connection;
+using Proyect_Base.app.Middlewares;
+using Proyect_Base.app.Models;
+using Proyect_Base.logs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,19 +14,25 @@ namespace Proyect_Base.app.Handlers
     {
         public static void init()
         {
-            //HandlerManager.RegisterHandler(123120, new ProcessHandler(loadObjects), true);
+            HandlerManager.RegisterHandler(123120, new ProcessHandler(loadObjects), true);
         }
         private static void loadObjects(Session Session, ClientMessage Message)
         {
-            ServerMessage server = new ServerMessage(new byte[] { 123, 120 });
-            server.AppendParameter(1);
-
-            server.AppendParameter(1);
-            server.AppendParameter(0);
-            server.AppendParameter(100);
-            server.AppendParameter(100);
-            server.AppendParameter(1);
-            Session.SendData(server);
+            try
+            {
+                if (UserMiddleware.userInArea(Session) && Session.User.Area is PublicArea publicArea)
+                {
+                    AreaNpc areaNpc = publicArea.getAreaNpcWithOutMoviments();
+                    if (areaNpc != null)
+                    {
+                        areaNpc.loadNpcContentHandler(Session);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.error(ex);
+            }
         }
     }
 }
