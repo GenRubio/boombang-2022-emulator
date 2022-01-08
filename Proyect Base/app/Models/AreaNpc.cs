@@ -88,6 +88,10 @@ namespace Proyect_Base.app.Models
         {
             return PublicAreaCollection.getPublicAreaById(this.public_area_id);
         }
+        public AreaNpcObject getObjectById(int id)
+        {
+            return this.areaNpcObjects.Find(i => i.id == id);
+        }
         //HANDLERS
         public void sendWalkHandler(PublicArea publicArea)
         {
