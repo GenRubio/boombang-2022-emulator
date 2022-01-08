@@ -21,7 +21,7 @@ namespace Proyect_Base.app.DAO
                 SqlClient client = SqlManager.GetClient();
                 client.SetParameter("UserID", User.id);
                 client.SetParameter("sala_id", 0);
-                string query = "SELECT * FROM boombang_buyitems " +
+                string query = "SELECT * FROM user_objects " +
                     "WHERE UserID = @UserID " +
                     "AND sala_id = @sala_id";
                 foreach (DataRow row in client.ExecuteQueryTable(query).Rows)
@@ -45,7 +45,7 @@ namespace Proyect_Base.app.DAO
             {
                 SqlClient client = SqlManager.GetClient();
                 client.SetParameter("UserID", User.id);
-                string query = "SELECT * FROM boombang_buyitems " +
+                string query = "SELECT * FROM user_objects " +
                     "WHERE UserID = @UserID";
                 foreach (DataRow row in client.ExecuteQueryTable(query).Rows)
                 {
@@ -72,7 +72,7 @@ namespace Proyect_Base.app.DAO
             client.SetParameter("userid", User.id);
             client.SetParameter("ocupe", userObject.ocupe);
             client.SetParameter("rotation", userObject.rotation);
-            client.ExecuteNonQuery("UPDATE boombang_buyitems " +
+            client.ExecuteNonQuery("UPDATE user_objects " +
                 "SET sala_id = @ds, x = @sd, y = @y, height = @height, UserID = @userid, ocupe = @ocupe, rotation = @rotation  " +
                 "WHERE id = @id");
         }
@@ -81,7 +81,7 @@ namespace Proyect_Base.app.DAO
             SqlClient client = SqlManager.GetClient();
             client.SetParameter("id", userObject.id);
             client.SetParameter("userid", User.id);
-            client.ExecuteNonQuery("DELETE FROM boombang_buyitems " +
+            client.ExecuteNonQuery("DELETE FROM user_objects " +
                "WHERE id = @id AND UserID = @userid");
         }
         public static void rotateUserObjectInArea(UserObject userObject)
@@ -92,7 +92,7 @@ namespace Proyect_Base.app.DAO
             client.SetParameter("x", userObject.Posicion.x);
             client.SetParameter("y", userObject.Posicion.y);
             client.SetParameter("ocupe", userObject.ocupe);
-            client.ExecuteNonQuery("UPDATE boombang_buyitems " +
+            client.ExecuteNonQuery("UPDATE user_objects " +
                 "SET rotation = @r, x = @x, y = @y, ocupe = @ocupe " +
                 "WHERE id = @id");
         }
@@ -103,7 +103,7 @@ namespace Proyect_Base.app.DAO
             client.SetParameter("itemid", userObject.ObjetoID);
             client.SetParameter("color", userObject.Color_1);
             client.SetParameter("rgb", userObject.Color_2);
-            client.ExecuteNonQuery("UPDATE boombang_buyitems " +
+            client.ExecuteNonQuery("UPDATE user_objects " +
                 "SET color = @color, rgb_ratio = @rgb " +
                 "WHERE id = @id AND ItemID = @itemid");
         }
@@ -115,7 +115,7 @@ namespace Proyect_Base.app.DAO
             client.SetParameter("y", userObject.Posicion.y);
             client.SetParameter("size", userObject.size);
             client.SetParameter("coor", userObject.ocupe);
-            client.ExecuteNonQuery("UPDATE boombang_buyitems " +
+            client.ExecuteNonQuery("UPDATE user_objects " +
                 "SET X = @x, Y = @y, size = @size, ocupe = @coor " +
                 "WHERE id = @id");
         }
@@ -124,7 +124,7 @@ namespace Proyect_Base.app.DAO
             SqlClient client = SqlManager.GetClient();
             client.SetParameter("ItemID", itemId);
             client.SetParameter("UserID", userId);
-            DataRow row = client.ExecuteQueryRow("SELECT * FROM boombang_buyitems " +
+            DataRow row = client.ExecuteQueryRow("SELECT * FROM user_objects " +
                 "WHERE ItemID = @ItemID AND UserID = @UserID ORDER BY id DESC LIMIT 1");
             if (row != null)
             {
@@ -145,7 +145,7 @@ namespace Proyect_Base.app.DAO
                 client.SetParameter("size", tam);
                 client.SetParameter("rotation", 0);
                 client.SetParameter("something_4", string.Empty);
-                client.ExecuteNonQuery("INSERT INTO boombang_buyitems " +
+                client.ExecuteNonQuery("INSERT INTO user_objects " +
                     "(ItemID,swf,color,rgb_ratio,size,rotation,something_4,UserID,ocupe,data) " +
                     "VALUES (@ItemID, @swf, @color, @rgb_ratio, @size, @rotation, @something_4, @UserIDe,'','');");
 

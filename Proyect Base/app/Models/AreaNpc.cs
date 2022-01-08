@@ -144,5 +144,39 @@ namespace Proyect_Base.app.Models
 
             return server;
         }
+        public void loadInscriptionGamePanel(Session Session)
+        {
+            ServerMessage server = new ServerMessage(new byte[] { 210, 127, 120 });
+            server.AppendParameter(1);
+            switch (Session.User.Area.model)
+            {
+                case 102:
+                    server.AppendParameter(2);
+                    break;
+            }
+
+            server.AppendParameter(0);
+
+            server.AppendParameter(100);
+            server.AppendParameter(1);
+            server.AppendParameter(1);
+            server.AppendParameter(1);
+            server.AppendParameter(1);
+            server.AppendParameter(1);
+            server.AppendParameter(-1);
+            server.AppendParameter(100);
+            server.AppendParameter(2);
+            server.AppendParameter(3);
+            server.AppendParameter(0);
+            server.AppendParameter(0);
+            server.AppendParameter(1);
+            server.AppendParameter(1);
+            server.AppendParameter(0);
+            server.AppendParameter(1);
+            server.AppendParameter(2);
+            server.AppendParameter(-1);
+            server.AppendParameter(10);
+            Session.SendData(server);
+        }
     }
 }

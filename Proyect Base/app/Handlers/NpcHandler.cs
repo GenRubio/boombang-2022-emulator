@@ -18,6 +18,35 @@ namespace Proyect_Base.app.Handlers
         {
             HandlerManager.RegisterHandler(123120, new ProcessHandler(loadObjects), true);
             HandlerManager.RegisterHandler(123121, new ProcessHandler(buyObject), true);
+            HandlerManager.RegisterHandler(210127120, new ProcessHandler(openGamePanel));
+            HandlerManager.RegisterHandler(120148, new ProcessHandler(gamePanelUnknown));
+        }
+        private static void openGamePanel(Session Session, ClientMessage Message)
+        {
+            try
+            {
+                if (UserMiddleware.userInArea(Session) && Session.User.Area is GameArea gameArea)
+                {
+                    AreaNpc areaNpc = gameArea.getAreaNpcWithOutMoviments();
+                    if (areaNpc != null)
+                    {
+                        areaNpc.loadInscriptionGamePanel(Session);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.error(ex);
+            }
+        }
+        private static void gamePanelUnknown(Session Session, ClientMessage Message)
+        {
+            ServerMessage server = new ServerMessage(new byte[] { 120, 148 });
+            server.AppendParameter(Message.Parameters[0, 0]);
+            server.AppendParameter(Message.Parameters[1, 0]);
+            server.AppendParameter(93);
+            server.AppendParameter(1122);
+            Session.SendData(server);
         }
         private static void buyObject(Session Session, ClientMessage Message)
         {

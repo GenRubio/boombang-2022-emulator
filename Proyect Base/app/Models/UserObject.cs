@@ -24,7 +24,6 @@ namespace Proyect_Base.app.Models
         public string height{ get; set; }
         public string ocupe{ get; set; }
         public string data{ get; set; }
-        public int open { get; set; }
         public string swf{ get; set; }
         public UserObject(DataRow row)
         {
@@ -41,7 +40,6 @@ namespace Proyect_Base.app.Models
             this.height = (string)row["height"];
             this.ocupe = (string)row["ocupe"];
             this.data = (string)row["data"];
-            this.open = (int)row["open"];
             this.swf = (string)row["swf"];
         }
         //FUNCTIONS

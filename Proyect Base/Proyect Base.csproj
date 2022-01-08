@@ -53,6 +53,7 @@
     <Compile Include="app\ApiControllers\ApiExempleController.cs" />
     <Compile Include="app\Api\API.cs" />
     <Compile Include="app\Collections\ItemAreaCollection.cs" />
+    <Compile Include="app\Collections\MiniGameAreaCollection.cs" />
     <Compile Include="app\Collections\ShopObjectCollection.cs" />
     <Compile Include="app\Collections\SpecialAreaCollection.cs" />
     <Compile Include="app\Controllers\CollectionsController.cs" />
@@ -180,6 +181,8 @@
     <Content Include="database\backups\boombang %282%29.sql" />
     <Content Include="database\backups\boombang %283%29.sql" />
     <Content Include="database\backups\boombang %285%29.sql" />
+    <Content Include="database\backups\boombang %286%29.sql" />
+    <Content Include="database\backups\boombang %287%29.sql" />
     <Content Include="Reviews.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

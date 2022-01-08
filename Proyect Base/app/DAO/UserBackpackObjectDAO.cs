@@ -20,7 +20,7 @@ namespace Proyect_Base.app.DAO
                 SqlClient client = SqlManager.GetClient();
                 client.SetParameter("sala_id", 0);
                 client.SetParameter("UserID", User.id);
-                string query = "SELECT ItemID, COUNT(ItemID) AS total FROM boombang_buyitems " +
+                string query = "SELECT ItemID, COUNT(ItemID) AS total FROM user_objects " +
                     "WHERE sala_id = @sala_id " +
                     "AND UserID = @UserID " +
                     "GROUP BY ItemID";
