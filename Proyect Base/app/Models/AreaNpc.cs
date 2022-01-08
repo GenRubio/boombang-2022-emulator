@@ -56,10 +56,31 @@ namespace Proyect_Base.app.Models
             this.Posicion = new Posicion((int)row["pos_x"], (int)row["pos_y"], (int)row["pos_z"]);
         }
         //FUNCTIONS
-        
+
         //MODEL SETTERS
 
         //MODEL GETTERS
+        public string getNewPatchCoordenates(Random random)
+        {
+            List<string> positions = new List<string>();
+            positions.Add("11127111371114711157111671117711187111971120711217");
+            positions.Add("101240913408144071540615805158");
+            positions.Add("1212113125141251512516125");
+            positions.Add("121211313113147");
+            positions.Add("12103131051410515105");
+            positions.Add("10124091340814407154071670717707187");
+            positions.Add("10102090920908609076");
+
+            return positions[random.Next(0, positions.Count())];
+        }
+        public bool isNpcWithMoviment()
+        {
+            if (this.poster_type == 0 && this.poster_model == 0)
+            {
+                return true;
+            }
+            return false;
+        }
         public PublicArea getArea()
         {
             return PublicAreaCollection.getPublicAreaById(this.public_area_id);

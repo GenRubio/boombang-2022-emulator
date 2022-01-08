@@ -17,6 +17,7 @@ namespace Proyect_Base.app.Threads
 {
     class NpcPathfindingThread
     {
+        private static Random random = new Random();
         public static void init()
         {
             new Thread(Pathfinding).Start();
@@ -30,7 +31,7 @@ namespace Proyect_Base.app.Threads
                 {
                     foreach (PublicArea publicArea in publicAreas)
                     {
-                        List<AreaNpc> npcs = publicArea.areaNpcs.Where(i => i.poster_model == 0 && i.poster_type == 0).ToList();
+                        List<AreaNpc> npcs = publicArea.areaNpcs.Where(i => i.isNpcWithMoviment()).ToList();
                         foreach(AreaNpc areaNpc in npcs)
                         {
                             moveNpcToNextPoint(publicArea, areaNpc);
@@ -41,7 +42,7 @@ namespace Proyect_Base.app.Threads
                 {
                     Log.error(ex);
                 }
-                Thread.Sleep(1);
+                Thread.Sleep(680);
             }
         }
         private static List<PublicArea> getAreasWithNpcWalk()
@@ -49,7 +50,7 @@ namespace Proyect_Base.app.Threads
             List<PublicArea> publicAreas = new List<PublicArea>();
             foreach(PublicArea publicArea in PublicAreaCollection.publicAreas.Values)
             {
-                if (publicArea.areaNpcs.Find(i => i.poster_model == 0 && i.poster_type == 0) != null)
+                if (publicArea.areaNpcs.Find(i => i.isNpcWithMoviment()) != null)
                 {
                     publicAreas.Add(publicArea);
                 }
@@ -88,7 +89,7 @@ namespace Proyect_Base.app.Threads
         }
         private static bool validateNextMoviment(AreaNpc areaNpc, Posicion NewPoint)
         {
-            if (areaNpc.Movimientos.MovementIsVerifieldNpc(NewPoint)
+            if (NewPoint != null && areaNpc.Movimientos.MovementIsVerifieldNpc(NewPoint)
                 && !areaNpc.Bloqueos.IsBlock(Bloqueo.Block)
                 && !areaNpc.Bloqueos.IsBlock(Bloqueo.Caminando))
             {
@@ -104,26 +105,13 @@ namespace Proyect_Base.app.Threads
             }
             return false;
         }
-        private static List<string> npcWalkCoordenates()
-        {
-            List<string> positions = new List<string>();
-            positions.Add("11127111371114711157111671117711187111971120711217");
-            positions.Add("101240913408144071540615805158");
-            positions.Add("1212113125141251512516125");
-            positions.Add("121211313113147");
-            positions.Add("12103131051410515105");
-            positions.Add("10124091340814407154071670717707187");
-            positions.Add("10102090920908609076");
-            return positions;
-        }
         private static void nexWalkPositions(AreaNpc areaNpc)
         {
             areaNpc.Bloqueos = new PreLocks();
             areaNpc.Ultra_Bloqueos = new UltraLocks();
             areaNpc.Movimientos = new Trayectoria(areaNpc);
             List<Posicion> ListPositions = new List<Posicion>();
-            List<string> positions = npcWalkCoordenates();
-            string path = positions[new Random().Next(0, positions.Count())];
+            string path = areaNpc.getNewPatchCoordenates(random);
             while (path != "")
             {
                 int x = int.Parse(path.Substring(0, 2));
@@ -132,7 +120,6 @@ namespace Proyect_Base.app.Threads
                 ListPositions.Add(new Posicion(x, y, z));
                 path = path.Substring(5);
             }
-
             ListPositions.Reverse();
             areaNpc.Movimientos.EndLocation = new Point(ListPositions[0].x, ListPositions[0].y);
             areaNpc.Movimientos.IniciarCaminadoNpc();

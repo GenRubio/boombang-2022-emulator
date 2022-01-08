@@ -1,6 +1,7 @@
 ﻿using Proyect_Base.app.Connection;
 using Proyect_Base.app.Models;
 using Proyect_Base.app.Pathfinding.A_Star;
+using Proyect_Base.forms;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -164,15 +165,15 @@ namespace Proyect_Base.app.Pathfinding
         public Posicion SiguienteMovimientoNpc()
         {
             Posicion NextStep = Movimientos[0];
-            if (!areaNpc.getArea().MapaBytes.IsWalkable(NextStep.x, NextStep.y) || areaNpc.getArea().getSession(NextStep.x, NextStep.y) != null)
+            if (areaNpc.getArea().MapaBytes.IsWalkable(NextStep.x, NextStep.y) == false || areaNpc.getArea().npcOcupedPoint(NextStep.x, NextStep.y))
             {
-                if (areaNpc.getArea().npcOcupedPoint(NextStep.x, NextStep.y))
-                {
-                    if (Movimientos.Count >= 1) Movimientos.Clear();
-                    IniciarCaminadoNpc();
-                    NextStep = Movimientos[0];
-                }
-             
+                Movimientos.Clear();
+                return null;
+            }
+            else if (areaNpc.getArea().getSession(NextStep.x, NextStep.y) != null)
+            {
+                Movimientos.Clear();
+                return null;
             }
             IsMovementCorruptNpc(NextStep);
             return NextStep;
