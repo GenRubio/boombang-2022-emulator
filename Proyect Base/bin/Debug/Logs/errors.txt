@@ -1,2 +1,31 @@
 
 The logs file was created successfully.
+-----------------------------------------------------------------------------
+Date : 10/01/2022 13:19:22
+
+System.Net.Sockets.SocketException
+Message : Se ha forzado la interrupción de una conexión existente por el host remoto
+StackTrace :    en System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   en Proyect_Base.app.socket.WebSocketServer.reciveData(Socket client) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\web_socket\WebSocketServer.cs:línea 50
+-----------------------------------------------------------------------------
+Date : 10/01/2022 13:21:03
+
+System.Net.Sockets.SocketException
+Message : Se ha forzado la interrupción de una conexión existente por el host remoto
+StackTrace :    en System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   en Proyect_Base.app.socket.WebSocketServer.reciveData(Socket client) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\web_socket\WebSocketServer.cs:línea 53
+-----------------------------------------------------------------------------
+Date : 10/01/2022 13:22:45
+
+System.Net.Sockets.SocketException
+Message : Se ha forzado la interrupción de una conexión existente por el host remoto
+StackTrace :    en System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   en Proyect_Base.app.socket.WebSocketServer.reciveData(Socket client) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\web_socket\WebSocketServer.cs:línea 54
+-----------------------------------------------------------------------------
+Date : 10/01/2022 15:48:19
+
+System.NullReferenceException
+Message : Referencia a objeto no establecida como instancia de un objeto.
+StackTrace :    en Proyect_Base.web_socket.WebServerMessage.SendToWeb(Session Session) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\web_socket\WebServerMessage.cs:línea 27
+   en Proyect_Base.app.Connection.Session.setUID() en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Connection\Session.cs:línea 48
+   en Proyect_Base.app.Handlers.LoginHandler.login(Session Session, ClientMessage Message) en C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\app\Handlers\LoginHandler.cs:línea 44

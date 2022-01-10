@@ -3,6 +3,7 @@ using Proyect_Base.app.Connection;
 using Proyect_Base.app.Controllers;
 using Proyect_Base.app.Handlers;
 using Proyect_Base.app.Threads;
+using Proyect_Base.web_socket;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace Proyect_Base.forms
         {
             FlashSocket.Initialize();
             HandlerManager.Initialize();
+            WebSocketHandler.Initialize();
             CollectionsController.initCollections();
             ThreadsController.initThreads();
         }

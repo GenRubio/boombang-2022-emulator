@@ -95,7 +95,7 @@ namespace Proyect_Base.forms
         {
             Thread thread = new Thread(() =>
             {
-                SocketServer.Initialize();
+                WebSocketServer.Initialize();
             });
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();

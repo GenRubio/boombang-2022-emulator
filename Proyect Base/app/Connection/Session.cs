@@ -5,6 +5,7 @@ using Proyect_Base.app.Middlewares;
 using Proyect_Base.app.Models;
 using Proyect_Base.forms;
 using Proyect_Base.logs;
+using Proyect_Base.web_socket;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace Proyect_Base.app.Connection
         public User User { get; set; }
         public Encryption Encryption { get; set; }
         public double ping { get; set; }
+        public string UID { get; set; }
         public Session(int key, Socket client)
         {
             this.ID = key;
@@ -37,6 +39,13 @@ namespace Proyect_Base.app.Connection
             this.User = null;
             this.ping = 0;
             this.WaitForData();
+        }
+        public void setUID()
+        {
+            this.UID = UserHelper.makeSessionUID();
+
+            WebServerMessage webServerMessage = new WebServerMessage("user-login");
+            webServerMessage.SendToWeb(this);
         }
         private void WaitForData()
         {

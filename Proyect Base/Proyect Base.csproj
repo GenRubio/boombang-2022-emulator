@@ -32,6 +32,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data, Version=6.4.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -81,6 +87,7 @@
     <Compile Include="app\DAO\UserBackpackObjectDAO.cs" />
     <Compile Include="app\DAO\UserDAO.cs" />
     <Compile Include="app\DAO\UserObjectDAO.cs" />
+    <Compile Include="app\Events\TestWebEvent.cs" />
     <Compile Include="app\Handlers\AreaHandler.cs" />
     <Compile Include="app\Handlers\BackpackHandler.cs" />
     <Compile Include="app\Handlers\FlowerPowerHandler.cs" />
@@ -145,18 +152,18 @@
     <Compile Include="forms\AppInit.cs" />
     <Compile Include="logs\Log.cs" />
     <Compile Include="mails\mailtrap\Mailtrap.cs" />
-    <Compile Include="web_socket\SocketServer.cs" />
-    <Compile Include="web_socket\SocketController.cs" />
-    <Compile Include="web_socket\SocketData.cs" />
+    <Compile Include="web_socket\WebMessage.cs" />
+    <Compile Include="web_socket\WebServerMessage.cs" />
+    <Compile Include="web_socket\WebSocketServer.cs" />
+    <Compile Include="web_socket\WebSocketController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="web_socket\WebSocketHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="app\Events\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="forms\App.resx">
       <DependentUpon>App.cs</DependentUpon>
@@ -183,6 +190,7 @@
     <Content Include="database\backups\boombang %285%29.sql" />
     <Content Include="database\backups\boombang %286%29.sql" />
     <Content Include="database\backups\boombang %287%29.sql" />
+    <Content Include="favicon.ico" />
     <Content Include="Reviews.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

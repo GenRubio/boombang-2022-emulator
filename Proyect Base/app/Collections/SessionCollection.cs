@@ -33,5 +33,9 @@ namespace Proyect_Base.app.Collections
             }
             return null;
         }
+        public static Session getSessionByUID(string uid, string IP)
+        {
+            return onlineUsers.Values.ToList().Find(i => i.UID == uid && i.IP == IP);
+        }
     }
 }

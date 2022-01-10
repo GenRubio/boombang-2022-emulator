@@ -51,7 +51,7 @@ namespace Proyect_Base.app.Handlers
                     }
                     if (Config.APP_SEND_NOT_PROGRAMMED_PACKETS)
                     {
-                        App.Form.WriteLine("Falta: " + Message.GetInteger() + " -> " + Message.GetData());
+                        App.Form.WriteLine("Falta: " + Message.GetInteger() + " -> " + Message.GetData(), "warning");
                     }
                 }
             }
