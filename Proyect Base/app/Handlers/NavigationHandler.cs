@@ -128,6 +128,7 @@ namespace Proyect_Base.app.Handlers
             {
                 if (UserMiddleware.userInArea(Session))
                 {
+                    Session.User.Area.userLeavingAreaWebHandler(Session);
                     Session.User.Area.removeUserByCompassHandler(Session);
                     initLoadGameArea(Session, gameArea);
                     Session.User.Area.userEntringAreaWebHandler(Session);
@@ -154,6 +155,7 @@ namespace Proyect_Base.app.Handlers
             {
                 if (UserMiddleware.userInArea(Session))
                 {
+                    Session.User.Area.userLeavingAreaWebHandler(Session);
                     Session.User.Area.removeUserByCompassHandler(Session);
                     initLoadPublicArea(Session, publicArea);
                     Session.User.Area.userEntringAreaWebHandler(Session);
@@ -186,6 +188,7 @@ namespace Proyect_Base.app.Handlers
             {
                 if (UserMiddleware.userInArea(Session))
                 {
+                    Session.User.Area.userLeavingAreaWebHandler(Session);
                     Session.User.Area.removeUserByCompassHandler(Session);
                     initLoadSpecialArea(Session, specialArea);
                     Session.User.Area.userEntringAreaWebHandler(Session);
