@@ -32,14 +32,21 @@ namespace Proyect_Base.web_socket
         public List<string> GetParameters()
         {
             List<string> parameters = new List<string>();
-            string data = Regex.Split(this.data, "³²")[1];
-            if (data.Contains("³"))
+            try
             {
-                string[] positions = Regex.Split(this.data, "³²")[1].Split('³');
-                for (int i = 0; i < positions.Count(); i++)
+                string data = Regex.Split(this.data, "³²")[1];
+                if (data.Contains("³"))
                 {
-                    parameters.Add(positions[i]);
+                    string[] positions = Regex.Split(this.data, "³²")[1].Split('³');
+                    for (int i = 0; i < positions.Count(); i++)
+                    {
+                        parameters.Add(positions[i]);
+                    }
                 }
+            }
+            catch
+            {
+                App.Form.WriteLine("El paquete tiene estructura incorrecta.", "error");
             }
             return parameters;
         }
