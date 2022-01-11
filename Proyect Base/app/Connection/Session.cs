@@ -45,6 +45,7 @@ namespace Proyect_Base.app.Connection
             this.UID = UserHelper.makeSessionUID();
 
             WebServerMessage webServerMessage = new WebServerMessage("user-login");
+            webServerMessage.addParameter(this.User.id.ToString());
             webServerMessage.SendToWeb(this);
         }
         private void WaitForData()

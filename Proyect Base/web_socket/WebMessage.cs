@@ -11,7 +11,7 @@ namespace Proyect_Base.web_socket
     public class WebMessage
     {
         private string data { get; set; }
-        public string [] Parameters { get; set; }
+        public List<string> Parameters { get; set; }
         public WebMessage(string data)
         {
             this.data = data;
@@ -19,11 +19,29 @@ namespace Proyect_Base.web_socket
         }
         public string GetKey()
         {
-            return Regex.Split(this.data, "³²")[0];
+            try
+            {
+                return Regex.Split(this.data, "³²")[0];
+            }
+            catch
+            {
+                App.Form.WriteLine("El paquete tiene estructura incorrecta.", "error");
+            }
+            return "-1";
         }
-        public string[] GetParameters()
+        public List<string> GetParameters()
         {
-            return Regex.Split(this.data, "³²")[1].Split('³');
+            List<string> parameters = new List<string>();
+            string data = Regex.Split(this.data, "³²")[1];
+            if (data.Contains("³"))
+            {
+                string[] positions = Regex.Split(this.data, "³²")[1].Split('³');
+                for (int i = 0; i < positions.Count(); i++)
+                {
+                    parameters.Add(positions[i]);
+                }
+            }
+            return parameters;
         }
         public string GetData()
         {
@@ -31,7 +49,15 @@ namespace Proyect_Base.web_socket
         }
         public string GetIP()
         {
-            return this.Parameters[this.Parameters.Length -1];
+            try
+            {
+                return this.Parameters[this.Parameters.Count - 1];
+            }
+            catch
+            {
+                App.Form.WriteLine("El paquete tiene estructura incorrecta.", "error");
+            }
+            return "-1";
         }
         public string GetUID()
         {

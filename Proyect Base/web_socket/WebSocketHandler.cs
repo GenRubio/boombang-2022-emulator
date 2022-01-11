@@ -19,7 +19,7 @@ namespace Proyect_Base.web_socket
         public static void Initialize()
         {
             WebSocketController.initListeners();
-            App.Form.WriteLine("Se han cargado " + webHandlers.Count + " Web handlers.");
+            App.Form.WriteLine("Se han cargado " + webHandlers.Count + " web handlers.");
         }
         public WebSocketHandler(Session Session)
         {

@@ -87,7 +87,7 @@
     <Compile Include="app\DAO\UserBackpackObjectDAO.cs" />
     <Compile Include="app\DAO\UserDAO.cs" />
     <Compile Include="app\DAO\UserObjectDAO.cs" />
-    <Compile Include="app\Events\TestWebEvent.cs" />
+    <Compile Include="app\WebEvents\TestWebEvent.cs" />
     <Compile Include="app\Handlers\AreaHandler.cs" />
     <Compile Include="app\Handlers\BackpackHandler.cs" />
     <Compile Include="app\Handlers\FlowerPowerHandler.cs" />
