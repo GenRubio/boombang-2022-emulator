@@ -43,6 +43,7 @@ namespace Proyect_Base.app.Handlers
         {
             if (UserMiddleware.userInArea(Session))
             {
+                Session.User.Area.userLeavingAreaWebHandler(Session);
                 Session.User.Area.removeUserByCompassHandler(Session);
             }
         }

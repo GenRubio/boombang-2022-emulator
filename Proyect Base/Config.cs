@@ -42,7 +42,7 @@ namespace Proyect_Base
         public static string MAILTRAP_TO = "elizabeth@westminster.co.uk";
 
         //WebSocket config
-        public static bool WEB_SOCKET_ACTIVE = false;
+        public static bool WEB_SOCKET_ACTIVE = true;
         public static readonly string WEB_SOCKET_HOST = "127.0.0.1";
         public static readonly int WEB_SOCKET_PORT = 3300;
     }

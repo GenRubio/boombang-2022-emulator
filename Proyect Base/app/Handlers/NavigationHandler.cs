@@ -130,10 +130,12 @@ namespace Proyect_Base.app.Handlers
                 {
                     Session.User.Area.removeUserByCompassHandler(Session);
                     initLoadGameArea(Session, gameArea);
+                    Session.User.Area.userEntringAreaWebHandler(Session);
                 }
                 else
                 {
                     initLoadGameArea(Session, gameArea);
+                    Session.User.Area.userEntringAreaWebHandler(Session);
                 }
                 return true;
             }
@@ -154,10 +156,12 @@ namespace Proyect_Base.app.Handlers
                 {
                     Session.User.Area.removeUserByCompassHandler(Session);
                     initLoadPublicArea(Session, publicArea);
+                    Session.User.Area.userEntringAreaWebHandler(Session);
                 }
                 else
                 {
                     initLoadPublicArea(Session, publicArea);
+                    Session.User.Area.userEntringAreaWebHandler(Session);
                 }
                 return true;
             }
@@ -184,10 +188,12 @@ namespace Proyect_Base.app.Handlers
                 {
                     Session.User.Area.removeUserByCompassHandler(Session);
                     initLoadSpecialArea(Session, specialArea);
+                    Session.User.Area.userEntringAreaWebHandler(Session);
                 }
                 else
                 {
                     initLoadSpecialArea(Session, specialArea);
+                    Session.User.Area.userEntringAreaWebHandler(Session);
                 }
             }
             else

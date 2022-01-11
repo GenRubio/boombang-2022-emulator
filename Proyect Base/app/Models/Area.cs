@@ -2,6 +2,7 @@
 using Proyect_Base.app.DAO;
 using Proyect_Base.app.Middlewares;
 using Proyect_Base.forms;
+using Proyect_Base.web_socket;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -221,6 +222,17 @@ namespace Proyect_Base.app.Models
                     }
                 }
             }
+        }
+        //WEB HANDLERS
+        public void userEntringAreaWebHandler(Session Session)
+        {
+            WebServerMessage webServerMessage = new WebServerMessage("user-entering-area");
+            webServerMessage.SendToWeb(Session);
+        }
+        public void userLeavingAreaWebHandler(Session Session)
+        {
+            WebServerMessage webServerMessage = new WebServerMessage("user-leaving-area");
+            webServerMessage.SendToWeb(Session);
         }
     }
 }
