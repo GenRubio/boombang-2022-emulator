@@ -63,7 +63,7 @@ namespace Proyect_Base.web_socket
         {
             try
             {
-                return Regex.Split(this.data, "³²")[1].Split('³')[0];
+                return this.Parameters[0];
             }
             catch
             {
