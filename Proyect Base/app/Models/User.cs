@@ -4,6 +4,7 @@ using Proyect_Base.app.Helpers;
 using Proyect_Base.app.Pathfinding;
 using Proyect_Base.app.Pathfinding.A_Star;
 using Proyect_Base.forms;
+using Proyect_Base.web_socket;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -465,6 +466,12 @@ namespace Proyect_Base.app.Models
                                     false,
                                     1
                                 }));
+        }
+        //WEB HANDLERS
+        public void userInFlowePowerHandler(Session Session)
+        {
+            WebServerMessage webServerMessage = new WebServerMessage("user-in-flowepower");
+            webServerMessage.SendToWeb(Session);
         }
     }
 }

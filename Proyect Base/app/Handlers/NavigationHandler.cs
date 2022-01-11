@@ -90,6 +90,7 @@ namespace Proyect_Base.app.Handlers
                     islandArea.loadAreaObjectsHandler(Session);
                     islandArea.loadAreaParametersHandler(Session);
                 }
+                Session.User.Area.userWithinAreaWebHandler(Session);
             }
         }
         private static void goToArea(Session Session, ClientMessage Message)

@@ -234,5 +234,10 @@ namespace Proyect_Base.app.Models
             WebServerMessage webServerMessage = new WebServerMessage("user-leaving-area");
             webServerMessage.SendToWeb(Session);
         }
+        public void userWithinAreaWebHandler(Session Session)
+        {
+            WebServerMessage webServerMessage = new WebServerMessage("user-within-area");
+            webServerMessage.SendToWeb(Session);
+        }
     }
 }
