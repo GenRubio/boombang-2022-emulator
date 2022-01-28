@@ -15,6 +15,7 @@ namespace Proyect_Base.app.Collections
             ItemAreaCollection.init();
             ShopObjectCollection.init();
             SpecialAreaCollection.init();
+            MiniGameAreaCollection.init();
         }
     }
 }

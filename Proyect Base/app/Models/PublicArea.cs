@@ -153,7 +153,7 @@ namespace Proyect_Base.app.Models
                 if (itemInArea(Item.keyInArea))
                 {
                     removeItemHandler(Item.keyInArea);
-                    Thread.Sleep(new TimeSpan(0, 0, 0, 0, 3000));
+                    Thread.Sleep(new TimeSpan(0, 0, 0, 0, 5000));
                     this.items.Remove(Item.keyInArea);
                 }
             }

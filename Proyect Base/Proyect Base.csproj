@@ -5,9 +5,9 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{54E9417C-EE28-4A27-BBAA-32E4B68261AA}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>Proyect_Base</RootNamespace>
-    <AssemblyName>Proyect Base</AssemblyName>
+    <AssemblyName>BoomBang Server</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -38,6 +38,9 @@
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data, Version=6.4.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -60,6 +63,7 @@
     <Compile Include="app\Api\API.cs" />
     <Compile Include="app\Collections\ItemAreaCollection.cs" />
     <Compile Include="app\Collections\MiniGameAreaCollection.cs" />
+    <Compile Include="app\Collections\MiniGamesCollections.cs" />
     <Compile Include="app\Collections\ShopObjectCollection.cs" />
     <Compile Include="app\Collections\SpecialAreaCollection.cs" />
     <Compile Include="app\Controllers\CollectionsController.cs" />
@@ -80,6 +84,7 @@
     <Compile Include="app\DAO\IslandAreaDAO.cs" />
     <Compile Include="app\DAO\IslandDAO.cs" />
     <Compile Include="app\DAO\ItemAreaDAO.cs" />
+    <Compile Include="app\DAO\MiniGameAreaDAO.cs" />
     <Compile Include="app\DAO\OpenObjectDAO.cs" />
     <Compile Include="app\DAO\PublicAreaDAO.cs" />
     <Compile Include="app\DAO\ShopObjectDAO.cs" />
@@ -87,6 +92,10 @@
     <Compile Include="app\DAO\UserBackpackObjectDAO.cs" />
     <Compile Include="app\DAO\UserDAO.cs" />
     <Compile Include="app\DAO\UserObjectDAO.cs" />
+    <Compile Include="app\Models\MiniGame.cs" />
+    <Compile Include="app\Models\MiniGameCallUsers.cs" />
+    <Compile Include="app\Models\MiniGameInscription.cs" />
+    <Compile Include="app\Threads\MiniGamesThread.cs" />
     <Compile Include="app\WebEvents\TestWebEvent.cs" />
     <Compile Include="app\Handlers\AreaHandler.cs" />
     <Compile Include="app\Handlers\BackpackHandler.cs" />

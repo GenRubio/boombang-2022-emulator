@@ -88,6 +88,8 @@ namespace Proyect_Base.app.Models
         public List<UserBackpackObject> backpackObjects { get; set; }
         public Dictionary<int, UserObject> objects { get; set; }
         public Dictionary<int, Island> islands { get; set; }
+        public bool inMiniGame { get; set; }
+        public List<MiniGameInscription> miniGameInscriptions { get; set; }
         public User(DataRow row)
         {
             this.id = int.Parse(row["id"].ToString());
@@ -148,6 +150,8 @@ namespace Proyect_Base.app.Models
             this.backpackObjects = new List<UserBackpackObject>();
             this.objects = setObjects();
             this.islands = setIslands();
+            this.inMiniGame = false;
+            this.miniGameInscriptions = new List<MiniGameInscription>();
         }
         //MODEL SETTERS
         public void CargarDatosNinja()

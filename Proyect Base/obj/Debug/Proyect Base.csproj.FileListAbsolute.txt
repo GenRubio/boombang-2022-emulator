@@ -26,3 +26,18 @@ C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\bin\Debug\Newtonsoft.Json
 C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\bin\Debug\SqlKata.dll
 C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\bin\Debug\SqlKata.Execution.dll
 C:\Users\Gen\source\repos\BoomBang Server\Proyect Base\obj\Debug\Proyect Base.csproj.CopyComplete
+D:\C#\BoomBang-Server\Proyect Base\bin\Debug\Dapper.dll
+D:\C#\BoomBang-Server\Proyect Base\bin\Debug\Humanizer.dll
+D:\C#\BoomBang-Server\Proyect Base\bin\Debug\Newtonsoft.Json.dll
+D:\C#\BoomBang-Server\Proyect Base\bin\Debug\SqlKata.dll
+D:\C#\BoomBang-Server\Proyect Base\bin\Debug\SqlKata.Execution.dll
+D:\C#\BoomBang-Server\Proyect Base\obj\Debug\Proyect Base.csproj.AssemblyReference.cache
+D:\C#\BoomBang-Server\Proyect Base\obj\Debug\Proyect_Base.forms.App.resources
+D:\C#\BoomBang-Server\Proyect Base\obj\Debug\Proyect Base.csproj.GenerateResource.cache
+D:\C#\BoomBang-Server\Proyect Base\obj\Debug\Proyect Base.csproj.CoreCompileInputs.cache
+D:\C#\BoomBang-Server\Proyect Base\obj\Debug\Proyect Base.csproj.CopyComplete
+D:\C#\BoomBang-Server\Proyect Base\bin\Debug\BoomBang Server.exe.config
+D:\C#\BoomBang-Server\Proyect Base\bin\Debug\BoomBang Server.exe
+D:\C#\BoomBang-Server\Proyect Base\bin\Debug\BoomBang Server.pdb
+D:\C#\BoomBang-Server\Proyect Base\obj\Debug\BoomBang Server.exe
+D:\C#\BoomBang-Server\Proyect Base\obj\Debug\BoomBang Server.pdb

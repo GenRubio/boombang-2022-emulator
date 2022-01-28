@@ -250,7 +250,7 @@ namespace Proyect_Base.app.Handlers
         }
         private static List<Island> getIslandsWithUsers()
         {
-            return IslandDAO.getIslandsAll().Where(i => i.getCountUsersInIsland() > 0).OrderBy(i => i.getCountUsersInIsland()).ToList();
+            return IslandDAO.getIslandsAll().Where(i => i.getCountUsersInIsland() > 0).OrderByDescending(i => i.getCountUsersInIsland()).ToList();
         }
         private static void loadGameAreas(Session Session)
         {

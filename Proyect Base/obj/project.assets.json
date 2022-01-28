@@ -461,25 +461,25 @@
   },
   "packageFolders": {
     "C:\\Users\\Gen\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Gen\\source\\repos\\BoomBang Server\\Proyect Base\\Proyect Base.csproj",
+      "projectUniqueName": "D:\\C#\\BoomBang-Server\\Proyect Base\\Proyect Base.csproj",
       "projectName": "Proyect Base",
-      "projectPath": "C:\\Users\\Gen\\source\\repos\\BoomBang Server\\Proyect Base\\Proyect Base.csproj",
+      "projectPath": "D:\\C#\\BoomBang-Server\\Proyect Base\\Proyect Base.csproj",
       "packagesPath": "C:\\Users\\Gen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Gen\\source\\repos\\BoomBang Server\\Proyect Base\\obj\\",
+      "outputPath": "D:\\C#\\BoomBang-Server\\Proyect Base\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
         "C:\\Users\\Gen\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net472"
