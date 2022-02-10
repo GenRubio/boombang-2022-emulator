@@ -1,9 +1,9 @@
 
 The logs file was created successfully.
 -----------------------------------------------------------------------------
-Date : 28/01/2022 7:17:08
+Date : 06/02/2022 21:57:01
 
 System.Net.Sockets.SocketException
 Message : Se ha forzado la interrupción de una conexión existente por el host remoto
 StackTrace :    en System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
-   en Proyect_Base.app.socket.WebSocketServer.reciveData(Socket client) en D:\C#\BoomBang-Server\Proyect Base\web_socket\WebSocketServer.cs:línea 50
+   en Proyect_Base.app.socket.WebSocketServer.reciveData(Socket client)
