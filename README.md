@@ -1,2 +1,2 @@
-# BoomBang-Server-2022
+# BoomBang-Emulator-2022
 
