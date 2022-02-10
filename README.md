@@ -1,5 +1,9 @@
 # BoomBang-Emulator-2022
 
+Este proyecto forma parte de otro proyecto "BoomBang-Launcher-2022" que puedes encontrar en mi repositorio.
+BoomBang Emulador emula los archivos Flash que se encuentran en proyecto BoomBang-Launcher-2022.
+De esta manera puedes personalizar este juego y desarrollar nuevas funcionalidades.
+
 # Base de datos
 
 - La base de datos utilizada en el proyecto es SQL
