@@ -96,6 +96,7 @@
     <Compile Include="app\Models\MiniGameCallUsers.cs" />
     <Compile Include="app\Models\MiniGameInscription.cs" />
     <Compile Include="app\Threads\MiniGamesThread.cs" />
+    <Compile Include="app\WebEvents\ChatWebEvent.cs" />
     <Compile Include="app\WebEvents\TestWebEvent.cs" />
     <Compile Include="app\Handlers\AreaHandler.cs" />
     <Compile Include="app\Handlers\BackpackHandler.cs" />

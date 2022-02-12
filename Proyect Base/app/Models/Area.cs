@@ -125,6 +125,14 @@ namespace Proyect_Base.app.Models
             return server;
         }
         //HANDLERS
+        public void sendUserMessageHandler(Session Session, string message)
+        {
+            ServerMessage server = new ServerMessage(new byte[] { 186 });
+            server.AppendParameter(Session.User.areaKey);
+            server.AppendParameter(message);
+            server.AppendParameter(1);
+            SendData(server);
+        }
         public void removeUserByCompassHandler(Session Session)
         {
             if (removeUser(Session))

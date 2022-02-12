@@ -1,4 +1,5 @@
 ﻿using Proyect_Base.app.Events;
+using Proyect_Base.app.WebEvents;
 using Proyect_Base.logs;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace Proyect_Base.app.socket
             try
             {
                 TestWebEvent.init();
+                ChatWebEvent.init();
             }
             catch (Exception ex)
             {
