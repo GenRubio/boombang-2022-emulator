@@ -4,16 +4,6 @@ Este proyecto forma parte de otro proyecto "BoomBang-Launcher-2022" que puedes e
 BoomBang Emulador emula los archivos Flash que se encuentran en proyecto BoomBang-Launcher-2022.
 De esta manera puedes personalizar este juego y desarrollar nuevas funcionalidades.
 
-## Base de datos
-- La base de datos utilizada en el proyecto es SQL
-- El archivo con la última actualización está ubicado en la carpeta /database/backups
-
-## Configuración
-- En el archivo Config.cs cambiamos las variables de configuración
-
-## Arquitectura
-- MVC con la capa DAO
-
 ## Contenido
 
  - API connection
@@ -22,3 +12,27 @@ De esta manera puedes personalizar este juego y desarrollar nuevas funcionalidad
  - Integración interna de .dll para desplegué en servidores Ubuntu.
  - Log system para visualizar las excepciones durante la ejecución.
  - Mailtrap
+
+## Configuración
+- En el archivo Config.cs cambiamos las variables de configuración
+
+
+## Base de datos
+- La base de datos utilizada en el proyecto es SQL
+- El archivo con la última actualización está ubicado en la carpeta /database/backups
+
+## Arquitectura
+- MVC con la capa DAO
+
+## Web Socket System
+
+Web Socket System es un sistema que he inventado para poder conectar mediante Sockets la página web con el emulador del juego.
+El sistema está formado por librería Socket.io y .NET Socket.
+Flujo del sistema de los packetes:
+
+Mensajes desde HTML al Emulador
+
+Socket.io Client -> Node - Socket.io ->  C# - .NET Socket
+Mensajes desde Emulador a HTML
+
+C# - .NET Socket -> Node - .NET Socket  -> Socket.io Client
