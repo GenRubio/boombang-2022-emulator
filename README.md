@@ -4,6 +4,8 @@ Este proyecto forma parte de otro proyecto "BoomBang-Launcher-2022" que puedes e
 BoomBang Emulador emula los archivos Flash que se encuentran en proyecto BoomBang-Launcher-2022.
 De esta manera puedes personalizar este juego y desarrollar nuevas funcionalidades.
 
+BoomBang Game Launcher: https://github.com/GenRubio/boombang-2022-app
+
 ## Contenido
 
  - API connection
