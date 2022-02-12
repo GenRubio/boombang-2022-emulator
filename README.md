@@ -28,10 +28,8 @@ De esta manera puedes personalizar este juego y desarrollar nuevas funcionalidad
 
 Web Socket System es un sistema que he inventado para poder conectar mediante Sockets la página web con el emulador del juego y viceversa.
 
-El sistema está formado por librería Socket.io y .NET Socket.
-
-Flujo del sistema de los packetes:
-
+El sistema está formado por librería Socket.io y .NET Socket. >
+Flujo del sistema de los packetes: >
 Mensajes desde HTML al Emulador
 
 ```sh
