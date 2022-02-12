@@ -18,4 +18,4 @@ De esta manera puedes personalizar este juego y desarrollar nuevas funcionalidad
 
  - API connection
  - Web Socket connection (Handler System)
- - Flash Socket connection
+ - Flash Socket connection (Handler System)
