@@ -33,6 +33,7 @@ Flujo del sistema de los packetes:
 Mensajes desde HTML al Emulador
 
 Socket.io Client -> Node - Socket.io ->  C# - .NET Socket
+
 Mensajes desde Emulador a HTML
 
 C# - .NET Socket -> Node - .NET Socket  -> Socket.io Client
