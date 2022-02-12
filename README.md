@@ -6,7 +6,7 @@ De esta manera puedes personalizar este juego y desarrollar nuevas funcionalidad
 
 ## Base de datos
 - La base de datos utilizada en el proyecto es SQL
-- El archivo con la última actualización está ubicado en la carpeta /database/mysql/backups
+- El archivo con la última actualización está ubicado en la carpeta /database/backups
 
 ## Configuración
 - En el archivo Config.cs cambiamos las variables de configuración
@@ -17,5 +17,8 @@ De esta manera puedes personalizar este juego y desarrollar nuevas funcionalidad
 ## Contenido
 
  - API connection
- - Web Socket connection (Handler System)
- - Flash Socket connection (Handler System)
+ - Web Socket connection (Handler System).
+ - Flash Socket connection (Handler System).
+ - Integración interna de .dll para desplegué en servidores Ubuntu.
+ - Log system para visualizar las excepciones durante la ejecución.
+ - Mailtrap
