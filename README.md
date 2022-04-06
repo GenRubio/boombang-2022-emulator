@@ -45,3 +45,16 @@ Mensajes desde Emulador a HTML
 ```sh
 C# - .NET Socket -> Node - .NET Socket  -> Socket.io Client
 ```
+
+## Ubuntu Server
+Instalamos Mono en nuestro Servidor de Ubuntu
+
+```sh
+sudo apt install mono-complete
+```
+
+Para ejecutar el emulador usaremos el siguente comando
+
+```sh
+sudo mono BoomBang.exe
+```
